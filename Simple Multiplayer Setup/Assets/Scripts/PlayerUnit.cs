@@ -5,14 +5,14 @@ using UnityEngine.Networking;
 
 public class PlayerUnit : NetworkBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Use this for initialization
+    void Start () {
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (!hasAuthority)
         {
@@ -21,7 +21,8 @@ public class PlayerUnit : NetworkBehaviour {
 
         }
 
-
+        this.GetComponentInChildren<Renderer>().material.color = Color.blue;
+        
         if (Input.GetKey(KeyCode.W))
         {
             this.transform.Translate(0, 0, 1);
