@@ -60,8 +60,10 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //creates the object on the server
         GameObject go = Instantiate(PlayerUnitPrefab);
 
+        myPlayerUnit = go;
+
         //propagate the object to all clients
-        NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+        NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
 
     }
 
