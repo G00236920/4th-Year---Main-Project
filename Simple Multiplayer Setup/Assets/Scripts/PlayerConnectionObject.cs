@@ -12,8 +12,7 @@ public class PlayerConnectionObject : NetworkBehaviour {
     // Use this for initialization
     void Start () {
 
-        if (!hasAuthority) {
-
+        if (!isLocalPlayer) {
             return;
         }
 
@@ -25,11 +24,9 @@ public class PlayerConnectionObject : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (!hasAuthority)
+        if (!isLocalPlayer)
         {
 
-            //This will prevent the command from affecting any object not owned by the client
-            //as it will end the method here
             return;
 
         }
@@ -63,44 +60,34 @@ public class PlayerConnectionObject : NetworkBehaviour {
         //creates the object on the server
         GameObject go = Instantiate(PlayerUnitPrefab);
 
-        myPlayerUnit = go;
-
         //propagate the object to all clients
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
 
     }
 
-
     [Command]
     void CmdMoveUnitUp()
     {
-
-        this.transform.Translate(0, 0, 1);
-
+        myPlayerUnit.transform.Translate(0, 0, 1);
     }
 
     [Command]
     void CmdMoveUnitDown()
     {
-
-        this.transform.Translate(0, 0, -1);
-
+        myPlayerUnit.transform.Translate(0, 0, -1);
     }
 
     [Command]
     void CmdMoveUnitleft()
     {
-
-        this.transform.Translate(-1, 0, 0);
-
+        myPlayerUnit.transform.Translate(-1, 0, 0);
     }
 
     [Command]
     void CmdMoveUnitRight()
     {
-
-        this.transform.Translate(1, 0, 0);
-
+        myPlayerUnit.transform.Translate(1, 0, 0);
     }
+
 
 }
