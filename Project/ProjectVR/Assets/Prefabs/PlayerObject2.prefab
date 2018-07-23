@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29eb0f7b0b5bbe946869cb1c10886ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1790312051995436, guid: 94f3ace79c7f8ab4a89b529147588348,
+  PlayerUnitPrefab: {fileID: 1790312051995436, guid: e1bb33ddc6fb71840a3547466397374e,
     type: 2}
 --- !u!114 &114477702889824202
 MonoBehaviour:
@@ -68,21 +68,21 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 230
-    i1: 108
-    i2: 15
-    i3: 22
-    i4: 199
-    i5: 113
-    i6: 120
-    i7: 212
-    i8: 104
-    i9: 204
-    i10: 47
-    i11: 176
-    i12: 54
-    i13: 242
-    i14: 162
-    i15: 4
+    i0: 133
+    i1: 231
+    i2: 157
+    i3: 143
+    i4: 79
+    i5: 253
+    i6: 151
+    i7: 36
+    i8: 201
+    i9: 56
+    i10: 176
+    i11: 216
+    i12: 78
+    i13: 0
+    i14: 80
+    i15: 90
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0

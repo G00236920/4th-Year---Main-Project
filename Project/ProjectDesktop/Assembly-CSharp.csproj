@@ -62,8 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\PlayerBody.cs" />
-    <Compile Include="Assets\Scripts\PlayerConnectionObject2.cs" />
-    <Compile Include="Assets\Scripts\PlayerUnit2.cs" />
+    <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
+    <Compile Include="Assets\Scripts\PlayerUnit.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/nltes/Desktop/4th-Year-Project/Project/ProjectDesktop/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
