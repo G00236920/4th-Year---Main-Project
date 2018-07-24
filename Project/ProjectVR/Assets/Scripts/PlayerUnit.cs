@@ -1,28 +1,36 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerUnit : NetworkBehaviour {
 
+public class PlayerUnit : NetworkBehaviour
+{
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
         if (!hasAuthority)
         {
-
             return;
+        }
+        if (hasAuthority)
+        {
 
+            GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
         }
 
+
         this.GetComponentInChildren<Renderer>().material.color = Color.blue;
-        
+
         if (Input.GetKey(KeyCode.W))
         {
             this.transform.Translate(0, 0, 1);
@@ -46,3 +54,4 @@ public class PlayerUnit : NetworkBehaviour {
     }
 
 }
+

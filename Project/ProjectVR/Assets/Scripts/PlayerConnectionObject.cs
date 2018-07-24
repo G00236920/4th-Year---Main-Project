@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.XR;
 
 public class PlayerConnectionObject : NetworkBehaviour {
 
@@ -13,14 +12,18 @@ public class PlayerConnectionObject : NetworkBehaviour {
     // Use this for initialization
     void Start () {
 
-        if (!isLocalPlayer) {
+        if (!isLocalPlayer)
+        {
+            
             return;
         }
 
-        CmdSpawnMyUnit();
-        InputTracking.Recenter();
 
-    }
+        Camera.main.gameObject.SetActive(false);
+
+        CmdSpawnMyUnit();
+		
+	}
 
 
 	// Update is called once per frame
