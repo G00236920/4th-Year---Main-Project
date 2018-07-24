@@ -18,6 +18,7 @@ public class PlayerUnit : NetworkBehaviour
     void Update()
     {
 
+
         if (!hasAuthority)
         {
             return;
@@ -26,6 +27,8 @@ public class PlayerUnit : NetworkBehaviour
         {
 
             GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
+            GetComponent<Transform>().GetChild(2).gameObject.AddComponent<TouchControllerLeft>(); 
+            GetComponent<Transform>().GetChild(3).gameObject.AddComponent<TouchControllerRight>();
         }
 
 

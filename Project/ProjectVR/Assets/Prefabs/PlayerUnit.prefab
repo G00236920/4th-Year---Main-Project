@@ -1315,7 +1315,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4454281634837040}
   - component: {fileID: 111844583990702582}
-  - component: {fileID: 114689140396959352}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -1424,7 +1423,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4671371788548570}
   - component: {fileID: 111411084107887302}
-  - component: {fileID: 114064415436700964}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -3986,17 +3984,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114064415436700964
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1999857608921594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cf029dc9d8313429f159dbc19a2c00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114389053460863796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4029,17 +4016,6 @@ MonoBehaviour:
     i15: 72
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114689140396959352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1894878432563716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0329df66ca368f14eb7d9f0aeb2596e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114743380872030194
 MonoBehaviour:
   m_ObjectHideFlags: 1
