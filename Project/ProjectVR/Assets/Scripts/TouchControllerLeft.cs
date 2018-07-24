@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TouchControllerLeft : NetworkBehaviour {
+public class TouchControllerLeft : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

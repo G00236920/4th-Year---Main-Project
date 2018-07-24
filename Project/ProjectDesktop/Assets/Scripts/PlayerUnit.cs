@@ -24,7 +24,6 @@ public class PlayerUnit : NetworkBehaviour
         }
         if (hasAuthority)
         {
-            Debug.Log("YAY");
             GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
         }
 

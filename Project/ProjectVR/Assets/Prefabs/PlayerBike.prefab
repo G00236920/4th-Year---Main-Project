@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 114743380872030194}
   - component: {fileID: 114869872263212852}
   m_Layer: 0
-  m_Name: PlayerUnit
+  m_Name: PlayerBike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

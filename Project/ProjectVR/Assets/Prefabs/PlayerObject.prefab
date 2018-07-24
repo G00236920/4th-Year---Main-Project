@@ -55,6 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerUnitPrefab: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
     type: 2}
+  PlayerUnitPrefab2: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
+    type: 2}
 --- !u!114 &114244714795412002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,4 +136,4 @@ MonoBehaviour:
     i14: 162
     i15: 4
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1

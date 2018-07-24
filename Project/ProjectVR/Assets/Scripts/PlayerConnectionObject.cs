@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -6,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerConnectionObject : NetworkBehaviour {
 
     public GameObject PlayerUnitPrefab;
+    public GameObject PlayerUnitPrefab2;
 
     GameObject myPlayerUnit;
 
@@ -18,16 +20,14 @@ public class PlayerConnectionObject : NetworkBehaviour {
             return;
         }
 
-
         Camera.main.gameObject.SetActive(false);
 
-        CmdSpawnMyUnit();
+        CmdSpawnMyBike();
 		
 	}
 
-
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 
         if (!isLocalPlayer)
         {
@@ -60,7 +60,20 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
     //Commands - only executed on the server
     [Command]
-    void CmdSpawnMyUnit() {
+    void CmdSpawnMyKart() {
+
+        //creates the object on the server
+        GameObject go = Instantiate(PlayerUnitPrefab2);
+
+        myPlayerUnit = go;
+
+        //propagate the object to all clients
+        NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+    }
+
+    [Command]
+    void CmdSpawnMyBike()
+    {
 
         //creates the object on the server
         GameObject go = Instantiate(PlayerUnitPrefab);
@@ -69,7 +82,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
 
         //propagate the object to all clients
         NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
-
     }
 
     [Command]
