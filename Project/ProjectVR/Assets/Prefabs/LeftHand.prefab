@@ -230,7 +230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4787561933493310}
   - component: {fileID: 111945310603282792}
-  - component: {fileID: 114970032988653928}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -869,17 +868,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114970032988653928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1616284286618210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cf029dc9d8313429f159dbc19a2c00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!137 &137146431363899088
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

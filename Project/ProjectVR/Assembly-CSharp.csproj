@@ -113,8 +113,6 @@
     <Compile Include="Assets\Scripts\CenterCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
-    <Compile Include="Assets\Scripts\TouchControllerLeft.cs" />
-    <Compile Include="Assets\Scripts\TouchControllerRight.cs" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRUnlitTransparent.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRChromaKey.cginc" />
     <None Include="Assets\Oculus\VR\Shaders\OVRColorRampAlpha.shader" />

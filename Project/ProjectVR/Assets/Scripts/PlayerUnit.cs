@@ -3,21 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.XR;
 
 public class PlayerUnit : NetworkBehaviour
 {
 
+    public GameObject HandLeft;
+    public GameObject HandRight;
+
     // Use this for initialization
     void Start()
     {
-
+        InputTracking.Recenter();
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
         if (!hasAuthority)
         {
@@ -25,14 +27,16 @@ public class PlayerUnit : NetworkBehaviour
         }
         if (hasAuthority)
         {
-
+            //Make Camera Active for Current Player Only
             GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
-            GetComponent<Transform>().GetChild(2).gameObject.AddComponent<TouchControllerLeft>(); 
-            GetComponent<Transform>().GetChild(3).gameObject.AddComponent<TouchControllerRight>();
+
         }
 
-
         this.GetComponentInChildren<Renderer>().material.color = Color.blue;
+
+        MoveLeftHand();
+        MoveRightHand();
+
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -54,6 +58,16 @@ public class PlayerUnit : NetworkBehaviour
             this.transform.Translate(0, 0, -1);
         }
 
+    }
+
+    public void MoveLeftHand() {
+        HandLeft.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
+        HandLeft.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
+    }
+
+    public void MoveRightHand() {
+        HandRight.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+        HandRight.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
     }
 
 }

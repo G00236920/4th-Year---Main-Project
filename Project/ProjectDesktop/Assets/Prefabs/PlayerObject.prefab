@@ -56,6 +56,8 @@ MonoBehaviour:
     type: 2}
   PlayerUnitPrefab2: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
     type: 2}
+  LeftHand: {fileID: 1999857608921594, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
+  RightHand: {fileID: 1894878432563716, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
 --- !u!114 &114477702889824202
 MonoBehaviour:
   m_ObjectHideFlags: 1
