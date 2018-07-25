@@ -939,6 +939,7 @@ GameObject:
   - component: {fileID: 114940121300801024}
   - component: {fileID: 114627749272135696}
   - component: {fileID: 114301375254213144}
+  - component: {fileID: 114474211374666092}
   m_Layer: 0
   m_Name: PlayerKart
   m_TagString: Untagged
@@ -1130,7 +1131,7 @@ Transform:
   m_LocalScale: {x: 0.17751649, y: 0.22518253, z: 0.14936236}
   m_Children: []
   m_Father: {fileID: 4264542491744200}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4069140794474434
 Transform:
@@ -1311,9 +1312,9 @@ Transform:
   m_LocalPosition: {x: 2.46, y: 2.25, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
+  - {fileID: 4370010047674582}
   - {fileID: 4563377873912366}
   - {fileID: 4053867277531846}
-  - {fileID: 4370010047674582}
   - {fileID: 4573390651344962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1390,11 +1391,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1539085750442536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5840094, y: -0.3951018, z: 0.25117}
+  m_LocalPosition: {x: -2.5840094, y: -0.3951018, z: 0.25116992}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4264542491744200}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4397243959763116
 Transform:
@@ -1524,7 +1525,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4264542491744200}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4573390651344962
 Transform:
@@ -4480,6 +4481,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114474211374666092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926729227547470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4573390651344962}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114627749272135696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4491,6 +4511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2493d12dc53cd53409935e000c1d4e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HandLeft: {fileID: 1999857608921594, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
+  HandRight: {fileID: 1894878432563716, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
 --- !u!114 &114940121300801024
 MonoBehaviour:
   m_ObjectHideFlags: 1

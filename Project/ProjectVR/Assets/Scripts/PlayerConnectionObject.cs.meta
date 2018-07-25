@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - PlayerUnitPrefab: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
       type: 2}
-  - PlayerUnitPrefab2: {fileID: 1790312051995436, guid: d9c916472fee84f4c8a6ba9f3bfc882e,
+  - PlayerUnitPrefab2: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

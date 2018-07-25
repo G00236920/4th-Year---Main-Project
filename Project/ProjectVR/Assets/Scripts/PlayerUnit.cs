@@ -7,7 +7,6 @@ using UnityEngine.XR;
 
 public class PlayerUnit : NetworkBehaviour
 {
-
     public GameObject HandLeft;
     public GameObject HandRight;
 

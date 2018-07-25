@@ -940,6 +940,7 @@ GameObject:
   - component: {fileID: 114627749272135696}
   - component: {fileID: 114301375254213144}
   - component: {fileID: 114183529526624780}
+  - component: {fileID: 114251633667137900}
   m_Layer: 0
   m_Name: PlayerKart
   m_TagString: Untagged
@@ -4471,6 +4472,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708b6cd5dcc238f4fa0692c095a6c793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114251633667137900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926729227547470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4573390651344962}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!114 &114301375254213144
 MonoBehaviour:
   m_ObjectHideFlags: 1

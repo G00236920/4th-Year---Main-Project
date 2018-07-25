@@ -134,7 +134,6 @@ dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 5ac20244acb4e7a75fc2122588cff0d1 Assembly-CSharp.dll:.OVROverlay
 b600e29c06d553ef06c1417720d99a7d Assembly-CSharp.dll:.OVRProgressIndicator
 5ae171671ebd709c59c6c4f7a875ceb9 Assembly-CSharp.dll:.OVRPlatformMenu
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.TouchControllerRight
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.OVRDebugInfo
 167742deffda96b61118213d41b7cb2a Assembly-CSharp.dll:.OVRResetOrientation
@@ -190,9 +189,8 @@ aac9c55ae7ba4b95b852a7d9c191acd1 Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 e29b82c8bf28b8e4fdcc14242aa8879d Assembly-CSharp.dll:.OVRGridCube
 bf9092984e391e854436c93547ae117f Assembly-CSharp.dll:.OVRLint
 d1e8ed93b5353b4bdbd86d474ab618b5 Assembly-CSharp.dll:UnityEngine.EventSystems.OVRInputModule
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.PlayerUnit
+263efa5c08b54070aab4a9af45edf3ca Assembly-CSharp.dll:.PlayerUnit
 e7264fa9ee3a8a07bb0d50abc40c07a0 Assembly-CSharp.dll:.OVRGrabber
-486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:.TouchControllerLeft
 e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
