@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4611071497479808}
   - component: {fileID: 114477702889824202}
   - component: {fileID: 114124701356708788}
-  - component: {fileID: 114244714795412002}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -53,60 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 809a161479a9247489a5e5966e8c3881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
+  PlayerUnitPrefab: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba,
     type: 2}
-  PlayerUnitPrefab2: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
+  PlayerUnitPrefab2: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
     type: 2}
-  LeftHand: {fileID: 1999857608921594, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
-  RightHand: {fileID: 1894878432563716, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
---- !u!114 &114244714795412002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1470402042721132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e933e81d3c20c74ea6fdc708a67e3a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  queueAhead: 1
-  useRecommendedMSAALevel: 0
-  _monoscopic: 0
-  enableAdaptiveResolution: 0
-  minRenderScale: 0.7
-  maxRenderScale: 1
-  expandMixedRealityCapturePropertySheet: 0
-  enableMixedReality: 0
-  compositionMethod: 0
-  extraHiddenLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  capturingCameraDevice: 0
-  flipCameraFrameHorizontally: 0
-  flipCameraFrameVertically: 0
-  handPoseStateLatency: 0
-  sandwichCompositionRenderLatency: 0
-  sandwichCompositionBufferedFrames: 8
-  chromaKeyColor: {r: 0, g: 1, b: 0, a: 1}
-  chromaKeySimilarity: 0.6
-  chromaKeySmoothRange: 0.03
-  chromaKeySpillRange: 0.06
-  useDynamicLighting: 0
-  depthQuality: 1
-  dynamicLightingSmoothFactor: 8
-  dynamicLightingDepthVariationClampingValue: 0.001
-  virtualGreenScreenType: 0
-  virtualGreenScreenTopY: 10
-  virtualGreenScreenBottomY: -10
-  virtualGreenScreenApplyDepthCulling: 0
-  virtualGreenScreenDepthTolerance: 0.2
-  _trackingOriginType: 0
-  usePositionTracking: 1
-  useRotationTracking: 1
-  useIPDInPositionTracking: 1
-  resetTrackerOnLoad: 0
-  AllowRecenter: 1
+  PlayerUnitPrefab3: {fileID: 1378305339284720, guid: 1fa553f3faab6b04db4e3419f65bce1c,
+    type: 2}
 --- !u!114 &114477702889824202
 MonoBehaviour:
   m_ObjectHideFlags: 1

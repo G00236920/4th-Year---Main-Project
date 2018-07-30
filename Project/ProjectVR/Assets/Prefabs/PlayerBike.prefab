@@ -992,6 +992,7 @@ GameObject:
   - component: {fileID: 4401355659070482}
   - component: {fileID: 20680078541887442}
   - component: {fileID: 81627274125889630}
+  - component: {fileID: 114500747647562088}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Player
@@ -1103,13 +1104,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4310273046594078}
-  - component: {fileID: 114756611482325554}
   - component: {fileID: 114389053460863796}
-  - component: {fileID: 114743380872030194}
   - component: {fileID: 114869872263212852}
-  - component: {fileID: 114478638597821296}
-  - component: {fileID: 114371892264667512}
-  - component: {fileID: 114158722651828180}
+  - component: {fileID: 114832097198394064}
+  - component: {fileID: 114593047481642448}
+  - component: {fileID: 114255471938277108}
+  - component: {fileID: 114952515212127398}
+  - component: {fileID: 65341017027331276}
+  - component: {fileID: 54558899423877620}
   m_Layer: 0
   m_Name: PlayerBike
   m_TagString: Untagged
@@ -1348,8 +1350,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4343040588428798}
+  - component: {fileID: 64606241521187600}
   m_Layer: 0
-  m_Name: Brat Stand up Set (1)
+  m_Name: Brat Stand up Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1743,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1752363321412236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.46, y: 2.25, z: 0}
+  m_LocalPosition: {x: 2.46, y: 2.391, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4401355659070482}
@@ -3950,6 +3953,47 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534622435158552}
   m_Mesh: {fileID: 4300000, guid: c36f4d80accdbe247933c63dfefb5384, type: 3}
+--- !u!54 &54558899423877620
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752363321412236}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &64606241521187600
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922891665652774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
+--- !u!65 &65341017027331276
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752363321412236}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.81391203, y: 0.5698767, z: 1.9158382}
+  m_Center: {x: 0.004241407, y: -0.8525226, z: 0.31207967}
 --- !u!81 &81627274125889630
 AudioListener:
   m_ObjectHideFlags: 1
@@ -3987,7 +4031,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114158722651828180
+--- !u!114 &114255471938277108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4000,25 +4044,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4343040588428798}
   m_ChildIndex: 2
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.5
-  m_InterpolateMovement: 0.5
---- !u!114 &114371892264667512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752363321412236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4454281634837040}
-  m_ChildIndex: 1
   m_SendInterval: 0.1
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
@@ -4057,7 +4082,37 @@ MonoBehaviour:
     i15: 72
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114478638597821296
+--- !u!114 &114500747647562088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686876723805458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fbe41cb633cc248a0f210bbd4cdf18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114593047481642448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752363321412236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4454281634837040}
+  m_ChildIndex: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
+--- !u!114 &114832097198394064
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4076,30 +4131,6 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
---- !u!114 &114743380872030194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752363321412236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2493d12dc53cd53409935e000c1d4e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HandLeft: {fileID: 1999857608921594}
-  HandRight: {fileID: 1894878432563716}
---- !u!114 &114756611482325554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752363321412236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05fbe41cb633cc248a0f210bbd4cdf18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114869872263212852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4121,6 +4152,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114952515212127398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752363321412236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2493d12dc53cd53409935e000c1d4e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandLeft: {fileID: 1999857608921594}
+  HandRight: {fileID: 1894878432563716}
 --- !u!136 &136415620789499836
 CapsuleCollider:
   m_ObjectHideFlags: 1

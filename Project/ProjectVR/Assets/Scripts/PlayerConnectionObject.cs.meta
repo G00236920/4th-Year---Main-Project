@@ -4,9 +4,11 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - PlayerUnitPrefab: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
+  - PlayerUnitPrefab: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
       type: 2}
-  - PlayerUnitPrefab2: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
+  - PlayerUnitPrefab2: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
+      type: 2}
+  - PlayerUnitPrefab3: {fileID: 1378305339284720, guid: 72a07fc0278437942bd98f4b81897c48,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

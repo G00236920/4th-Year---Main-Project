@@ -52,12 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29eb0f7b0b5bbe946869cb1c10886ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUnitPrefab: {fileID: 1926729227547470, guid: c2f89e4ddd7a916438d09f155a2472cb,
+  PlayerUnitPrefab: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba,
     type: 2}
   PlayerUnitPrefab2: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348,
     type: 2}
-  LeftHand: {fileID: 1999857608921594, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
-  RightHand: {fileID: 1894878432563716, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
+  PlayerUnitPrefab3: {fileID: 1378305339284720, guid: 1fa553f3faab6b04db4e3419f65bce1c,
+    type: 2}
 --- !u!114 &114477702889824202
 MonoBehaviour:
   m_ObjectHideFlags: 1
