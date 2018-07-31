@@ -9,6 +9,7 @@ public class PlayerUnit : NetworkBehaviour
 {
     [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.        
 
+    private bool isGrounded;
     private Rigidbody rigidBody;
 
     private void Start()
@@ -27,10 +28,10 @@ public class PlayerUnit : NetworkBehaviour
         if (hasAuthority)
         {
             ActivateCameraForCurrentPlayer();
+            IdentifyCurrentPlayer();
         }
 
         CheckForUserInput();
-
     }
 
     void CheckForUserInput()
@@ -38,27 +39,27 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 2f), false);
+            Move(new Vector3(0f, 0f, 2f));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-2f, 0f, 1f), false);
+            Move(new Vector3(-2f, 0f, 1f));
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -2f), false);
+            Move(new Vector3(0f, 0f, -2f));
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(2f, 0f, 1f), false);
+            Move(new Vector3(2f, 0f, 1f));
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-           
+            Jump();
         }
 
     }
@@ -73,13 +74,23 @@ public class PlayerUnit : NetworkBehaviour
         GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Move(Vector3 moveDirection, bool jump)
+    public void Move(Vector3 moveDirection)
     {
-
         // add force in the move direction.
         rigidBody.AddForce(moveDirection * MovePower);
-
     }
+
+    void OnCollisionStay()
+    {
+       isGrounded = true;
+    }
+
+    void Jump()
+    {
+        rigidBody.AddForce(new Vector3(0.0f, 4.0f, 0.0f), ForceMode.Impulse);
+        isGrounded = false;
+    }
+
 }
 
 

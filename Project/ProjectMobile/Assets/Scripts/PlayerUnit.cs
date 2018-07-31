@@ -11,6 +11,7 @@ public class PlayerUnit : NetworkBehaviour
     [SerializeField] private readonly bool UseTorque = true;            // Whether or not to use torque to move the Object.
     [SerializeField] private readonly float MaxAngularVelocity = 25;      // The maximum velocity the Object can rotate at.
 
+    private bool isGrounded;
     private Rigidbody rigidBody;
 
     private void Start()
@@ -31,10 +32,10 @@ public class PlayerUnit : NetworkBehaviour
         if (hasAuthority)
         {
             ActivateCameraForCurrentPlayer();
+            IdentifyCurrentPlayer();
         }
 
         CheckForUserInput();
-
     }
 
     void CheckForUserInput()
@@ -42,27 +43,28 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 1f), false);
+            Move(new Vector3(0f, 0f, 1f));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-1f, 0f, 1f), false);
+            Move(new Vector3(-1f, 0f, 1f));
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -1f), false);
+            Move(new Vector3(0f, 0f, -1f));
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(1f, 0f, 1f), false);
+            Move(new Vector3(1f, 0f, 1f));
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            Move(new Vector3(0f, 0f, 0f), true);
+            Debug.Log("Space Pressed");
+            Jump();
         }
 
     }
@@ -77,7 +79,7 @@ public class PlayerUnit : NetworkBehaviour
         GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Move(Vector3 moveDirection, bool jump)
+    public void Move(Vector3 moveDirection)
     {
 
         // If using torque to rotate the ball...
@@ -93,5 +95,18 @@ public class PlayerUnit : NetworkBehaviour
         }
 
     }
+
+    void OnCollisionStay()
+    {
+        isGrounded = true;
+    }
+
+    void Jump()
+    {
+        Debug.Log("Should Jump");
+        this.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0.0f, 10.0f, 0.0f), ForceMode.Impulse);
+        isGrounded = false;
+    }
+
 }
 

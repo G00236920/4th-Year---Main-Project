@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 public class PlayerConnectionObject : NetworkBehaviour
 {
 
-    public GameObject PlayerUnitPrefab;
-    public GameObject PlayerUnitPrefab2;
-    public GameObject PlayerUnitPrefab3;
+    public GameObject Kart;
+    public GameObject Bike;
+    public GameObject Ball;
 
-    GameObject myPlayerUnit;
+    private GameObject myPlayerUnit;
 
     // Use this for initialization
     void Start()
@@ -22,9 +22,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         }
 
         Camera.main.gameObject.SetActive(false);
-
         CmdSpawnMyKart();
-
     }
 
 
@@ -34,9 +32,7 @@ public class PlayerConnectionObject : NetworkBehaviour
 
         if (!isLocalPlayer)
         {
-
             return;
-
         }
 
     }
@@ -47,7 +43,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
 
         //creates the object on the server
-        GameObject go = Instantiate(PlayerUnitPrefab);
+        GameObject go = Instantiate(Kart);
 
         myPlayerUnit = go;
 
@@ -60,7 +56,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
 
         //creates the object on the server
-        GameObject go = Instantiate(PlayerUnitPrefab2);
+        GameObject go = Instantiate(Bike);
 
         myPlayerUnit = go;
 
@@ -73,7 +69,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
 
         //creates the object on the server
-        GameObject go = Instantiate(PlayerUnitPrefab3);
+        GameObject go = Instantiate(Ball);
 
         myPlayerUnit = go;
 

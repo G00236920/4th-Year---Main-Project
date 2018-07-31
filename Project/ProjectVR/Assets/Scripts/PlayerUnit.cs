@@ -9,9 +9,8 @@ using UnityEngine.XR;
 public class PlayerUnit : NetworkBehaviour
 {
     [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.        
-    [SerializeField] private readonly float JumpPower = 1f;            // The force added to the Object when it jumps.
 
-    private const float groundRayLength = 1;                           // The length of the ray to check if the Object is grounded.
+    private bool isGrounded;
     private Rigidbody rigidBody;
 
     public GameObject HandLeft;
@@ -35,6 +34,7 @@ public class PlayerUnit : NetworkBehaviour
         if (hasAuthority)
         {
             ActivateCameraForCurrentPlayer();
+            IdentifyCurrentPlayer();
         }
 
         CheckForUserInput();
@@ -48,27 +48,27 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 2f), false);
+            Move(new Vector3(0f, 0f, 2f));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-2f, 0f, 1f), false);
+            Move(new Vector3(-2f, 0f, 1f));
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -2f), false);
+            Move(new Vector3(0f, 0f, -2f));
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(2f, 0f, 1f), false);
+            Move(new Vector3(2f, 0f, 1f));
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            Move(new Vector3(0f, 0f, 0f), true);
+            Jump();
         }
 
     }
@@ -83,30 +83,33 @@ public class PlayerUnit : NetworkBehaviour
         GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Move(Vector3 moveDirection, bool jump)
+    public void Move(Vector3 moveDirection)
     {
-
         //add force in the move direction.
         rigidBody.AddForce(moveDirection * MovePower);
-
     }
 
     public void MoveLeftHand()
     {
-
         HandLeft.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch);
-
         HandLeft.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch);
-
     }
 
     public void MoveRightHand()
     {
-
-        HandRight.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         HandRight.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         HandRight.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
+    }
 
+    void OnCollisionStay()
+    {
+        isGrounded = true;
+    }
+
+    void Jump()
+    {
+        rigidBody.AddForce(new Vector3(0.0f, 8.0f, 0.0f), ForceMode.Impulse);
+        isGrounded = false;
     }
 }
 
