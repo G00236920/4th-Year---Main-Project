@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 4105314283211890}
   - component: {fileID: 20930706248237376}
   - component: {fileID: 81246006351905522}
+  - component: {fileID: 114884427424794296}
+  - component: {fileID: 114896178421943018}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Player
@@ -57,8 +59,8 @@ GameObject:
   - component: {fileID: 4945426582254364}
   - component: {fileID: 33144120300456506}
   - component: {fileID: 23856327717511808}
-  - component: {fileID: 135122176482085390}
-  - component: {fileID: 54861190410937366}
+  - component: {fileID: 135851655871686454}
+  - component: {fileID: 54346913881132966}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -73,7 +75,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378305339284720}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59, z: 0}
+  m_LocalPosition: {x: 0, y: 0.755, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4105314283211890}
@@ -188,15 +190,15 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655959835234536}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54861190410937366
+  m_Mesh: {fileID: 4300000, guid: 5ee3e129c1d0b4042994d9954728eb0c, type: 3}
+--- !u!54 &54346913881132966
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655959835234536}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -223,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.04
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -277,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Target: {fileID: 4945426582254364}
   m_ChildIndex: 0
-  m_SendInterval: 0.1
+  m_SendInterval: 0.04
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_MovementThreshold: 0.001
@@ -294,7 +296,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2385170bf48034149950f44f0ad44ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135122176482085390
+--- !u!114 &114884427424794296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429265250112214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 31
+    i1: 165
+    i2: 83
+    i3: 243
+    i4: 250
+    i5: 171
+    i6: 107
+    i7: 4
+    i8: 219
+    i9: 78
+    i10: 52
+    i11: 25
+    i12: 246
+    i13: 91
+    i14: 206
+    i15: 28
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114896178421943018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429265250112214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b055bc83a023d041b9ffcd352583633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1655959835234536}
+--- !u!135 &135851655871686454
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,5 +350,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49921805
   m_Center: {x: 0, y: 0, z: 0}

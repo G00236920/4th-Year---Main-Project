@@ -9,10 +9,8 @@ public class PlayerUnit : NetworkBehaviour
 {
     [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.
     [SerializeField] private readonly bool UseTorque = true;            // Whether or not to use torque to move the Object.
-    [SerializeField] private readonly float MaxAngularVelocity = 25;    // The maximum velocity the Object can rotate at.
-    [SerializeField] private readonly float JumpPower = 1f;             // The force added to the Object when it jumps.
+    [SerializeField] private readonly float MaxAngularVelocity = 25;      // The maximum velocity the Object can rotate at.
 
-    private const float groundRayLength = 3;                           // The length of the ray to check if the Object is grounded.
     private Rigidbody rigidBody;
 
     private void Start()
@@ -81,15 +79,6 @@ public class PlayerUnit : NetworkBehaviour
 
     public void Move(Vector3 moveDirection, bool jump)
     {
-
-
-        // If on the ground and jump is pressed...
-        if (Physics.Raycast(transform.position, -Vector3.up, groundRayLength) && jump)
-        {
-            // ... add force in upwards.
-            this.GetComponentInChildren<Rigidbody>().AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
-            jump = false;
-        }
 
         // If using torque to rotate the ball...
         if (UseTorque)

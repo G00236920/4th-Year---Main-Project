@@ -9,11 +9,10 @@ using UnityEngine.XR;
 public class PlayerUnit : NetworkBehaviour
 {
     [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.        
-    [SerializeField] private readonly float JumpPower = .1f;             // The force added to the Object when it jumps.
+    [SerializeField] private readonly float JumpPower = 1f;            // The force added to the Object when it jumps.
 
-    private const float groundRayLength = 1f;                           // The length of the ray to check if the Object is grounded.
+    private const float groundRayLength = 1;                           // The length of the ray to check if the Object is grounded.
     private Rigidbody rigidBody;
-
 
     public GameObject HandLeft;
     public GameObject HandRight;
@@ -46,10 +45,6 @@ public class PlayerUnit : NetworkBehaviour
 
     void CheckForUserInput()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Move(new Vector3(0f, 0f, 0f), true);
-        }
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -71,6 +66,11 @@ public class PlayerUnit : NetworkBehaviour
             Move(new Vector3(2f, 0f, 1f), false);
         }
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Move(new Vector3(0f, 0f, 0f), true);
+        }
+
     }
 
     public void IdentifyCurrentPlayer()
@@ -86,17 +86,9 @@ public class PlayerUnit : NetworkBehaviour
     public void Move(Vector3 moveDirection, bool jump)
     {
 
-        // Otherwise add force in the move direction.
+        //add force in the move direction.
         rigidBody.AddForce(moveDirection * MovePower);
 
-        // If on the ground and jump is pressed...
-        if (Physics.Raycast(transform.position, -Vector3.up, groundRayLength) && jump)
-        {
-
-            // ... add force upwards.
-            rigidBody.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
-            jump = false;
-        }
     }
 
     public void MoveLeftHand()
@@ -112,7 +104,7 @@ public class PlayerUnit : NetworkBehaviour
     {
 
         HandRight.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
-
+        HandRight.transform.localPosition = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
         HandRight.transform.localRotation = OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch);
 
     }

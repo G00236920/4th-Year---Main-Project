@@ -4530,7 +4530,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1004448, y: 0.46243727, z: 1.9289932}
-  m_Center: {x: -2.624072, y: -0.7478364, z: 0.33177102}
+  m_Center: {x: -2.624072, y: -0.7530268, z: 0.33177102}
 --- !u!81 &81725519893244782
 AudioListener:
   m_ObjectHideFlags: 1
