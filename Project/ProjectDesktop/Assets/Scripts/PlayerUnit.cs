@@ -7,10 +7,11 @@ using UnityEngine.Networking;
 
 public class PlayerUnit : NetworkBehaviour
 {
-    [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.        
+    [SerializeField] private readonly float MovePower = 100;              // The force added to the Object to move it.        
 
     private bool isGrounded;
     private Rigidbody rigidBody;
+    private float WheelRotation;
 
     private void Start()
     {
@@ -29,6 +30,8 @@ public class PlayerUnit : NetworkBehaviour
         {
             ActivateCameraForCurrentPlayer();
             IdentifyCurrentPlayer();
+
+            WheelRotation = GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.localRotation.eulerAngles.y;
         }
 
         CheckForUserInput();
@@ -39,22 +42,28 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 2f));
+            Move(transform.forward * MovePower);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-2f, 0f, 1f));
+            if (WheelRotation > 330 || WheelRotation <= 31)
+            {
+                TurnWheels(Vector3.back * (Time.deltaTime * 50));
+            }
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -2f));
+            Move(-transform.forward * MovePower);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(2f, 0f, 1f));
+            if (WheelRotation < 30 || WheelRotation >= 329)
+            {
+                TurnWheels(Vector3.forward * (Time.deltaTime * 50));
+            }
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
@@ -77,7 +86,7 @@ public class PlayerUnit : NetworkBehaviour
     public void Move(Vector3 moveDirection)
     {
         // add force in the move direction.
-        rigidBody.AddForce(moveDirection * MovePower);
+        rigidBody.AddForce(moveDirection);
     }
 
     void OnCollisionStay()
@@ -89,6 +98,11 @@ public class PlayerUnit : NetworkBehaviour
     {
         rigidBody.AddForce(new Vector3(0.0f, 4.0f, 0.0f), ForceMode.Impulse);
         isGrounded = false;
+    }
+
+    void TurnWheels(Vector3 ro) {
+            GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.Rotate(ro);
+            GetComponent<Transform>().GetChild(3).GetChild(1).gameObject.transform.Rotate(ro);
     }
 
 }

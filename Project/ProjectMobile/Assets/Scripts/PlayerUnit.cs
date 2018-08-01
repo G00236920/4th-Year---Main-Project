@@ -7,12 +7,14 @@ using UnityEngine.Networking;
 
 public class PlayerUnit : NetworkBehaviour
 {
-    [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.
+    [SerializeField] private readonly float MovePower = 10;             // The force added to the Object to move it.
     [SerializeField] private readonly bool UseTorque = true;            // Whether or not to use torque to move the Object.
-    [SerializeField] private readonly float MaxAngularVelocity = 25;      // The maximum velocity the Object can rotate at.
+    [SerializeField] private readonly float MaxAngularVelocity = 25;    // The maximum velocity the Object can rotate at.
+    [SerializeField] private readonly float JumpPower = 25;             // The force added to the ball when it jumps.
 
-    private bool isGrounded;
+    private const float GroundRayLength = 1f; // The length of the ray to check if the ball is grounded.
     private Rigidbody rigidBody;
+    private bool MidJump = false;
 
     private void Start()
     {
@@ -40,31 +42,35 @@ public class PlayerUnit : NetworkBehaviour
 
     void CheckForUserInput()
     {
+        if (rigidBody.velocity.y == 0)
+        {
+            MidJump = false;
+        }
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 1f));
+            Move(new Vector3(0f, 0f, 1f), false);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-1f, 0f, 1f));
+            Move(new Vector3(-1f, 0f, 1f), false);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -1f));
+            Move(new Vector3(0f, 0f, -1f), false);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(1f, 0f, 1f));
+            Move(new Vector3(1f, 0f, 1f), false);
         }
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && !MidJump)
         {
-            Debug.Log("Space Pressed");
-            Jump();
+            MidJump = true;
+            Move(new Vector3(0f, 0f, 0f), true);
         }
 
     }
@@ -79,33 +85,28 @@ public class PlayerUnit : NetworkBehaviour
         GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Move(Vector3 moveDirection)
+    public void Move(Vector3 moveDirection, bool jump)
     {
 
         // If using torque to rotate the ball...
         if (UseTorque)
         {
             // ... add torque around the axis defined by the move direction.
-            this.GetComponentInChildren<Rigidbody>().AddTorque(new Vector3(moveDirection.z, 0, -moveDirection.x) * MovePower);
+            rigidBody.AddTorque(new Vector3(moveDirection.z, 0, -moveDirection.x) * MovePower);
         }
         else
         {
             // Otherwise add force in the move direction.
-            this.GetComponentInChildren<Rigidbody>().AddForce(moveDirection * MovePower);
+            rigidBody.AddForce(moveDirection * MovePower);
+        }
+        // If on the ground and jump is pressed...
+        if (Physics.Raycast(transform.position, -Vector3.up, GroundRayLength) && jump)
+        {
+            // ... add force in upwards.
+            rigidBody.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
+
         }
 
-    }
-
-    void OnCollisionStay()
-    {
-        isGrounded = true;
-    }
-
-    void Jump()
-    {
-        Debug.Log("Should Jump");
-        this.GetComponentInChildren<Rigidbody>().AddForce(new Vector3(0.0f, 10.0f, 0.0f), ForceMode.Impulse);
-        isGrounded = false;
     }
 
 }

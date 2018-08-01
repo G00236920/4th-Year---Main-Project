@@ -8,9 +8,9 @@ namespace UnityStandardAssets.Vehicles.Ball
         [SerializeField] private float m_MovePower = 5; // The force added to the ball to move it.
         [SerializeField] private bool m_UseTorque = true; // Whether or not to use torque to move the ball.
         [SerializeField] private float m_MaxAngularVelocity = 25; // The maximum velocity the ball can rotate at.
-        [SerializeField] private float m_JumpPower = 2; // The force added to the ball when it jumps.
+        [SerializeField] private float m_JumpPower = 5; // The force added to the ball when it jumps.
 
-        private const float k_GroundRayLength = 1f; // The length of the ray to check if the ball is grounded.
+        private const float k_GroundRayLength = 2f; // The length of the ray to check if the ball is grounded.
         private Rigidbody m_Rigidbody;
 
 
