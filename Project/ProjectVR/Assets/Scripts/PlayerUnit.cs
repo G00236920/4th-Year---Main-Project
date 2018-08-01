@@ -8,7 +8,7 @@ using UnityEngine.XR;
 
 public class PlayerUnit : NetworkBehaviour
 {
-    [SerializeField] private readonly float MovePower = 10;              // The force added to the Object to move it.        
+    [SerializeField] private readonly float MovePower = 100;              // The force added to the Object to move it.        
 
     private bool isGrounded;
     private Rigidbody rigidBody;
@@ -48,22 +48,22 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 2f));
+            Move(transform.forward * MovePower);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-2f, 0f, 1f));
+
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -2f));
+            Move(-transform.forward * MovePower);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(2f, 0f, 1f));
+
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
@@ -86,7 +86,7 @@ public class PlayerUnit : NetworkBehaviour
     public void Move(Vector3 moveDirection)
     {
         //add force in the move direction.
-        rigidBody.AddForce(moveDirection * MovePower);
+        rigidBody.AddForce(moveDirection);
     }
 
     public void MoveLeftHand()

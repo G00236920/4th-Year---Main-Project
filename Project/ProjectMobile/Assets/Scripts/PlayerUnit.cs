@@ -49,22 +49,22 @@ public class PlayerUnit : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            Move(new Vector3(0f, 0f, 1f), false);
+            Move(transform.forward * MovePower, false);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            Move(new Vector3(-1f, 0f, 1f), false);
+
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            Move(new Vector3(0f, 0f, -1f), false);
+            Move(-transform.forward * MovePower, false);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Move(new Vector3(1f, 0f, 1f), false);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !MidJump)
@@ -97,7 +97,7 @@ public class PlayerUnit : NetworkBehaviour
         else
         {
             // Otherwise add force in the move direction.
-            rigidBody.AddForce(moveDirection * MovePower);
+            rigidBody.AddForce(moveDirection);
         }
         // If on the ground and jump is pressed...
         if (Physics.Raycast(transform.position, -Vector3.up, GroundRayLength) && jump)
