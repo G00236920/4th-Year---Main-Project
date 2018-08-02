@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.Networking;
+
 
 public class PlayerConnectionObject : NetworkBehaviour
 {
@@ -35,11 +37,18 @@ public class PlayerConnectionObject : NetworkBehaviour
             return;
         }
 
+        if (OVRInput.Get(OVRInput.RawButton.B))
+        {
+            CmdDestroyMyUnit();
+            CmdSpawnMyBike();
+        }
+
+
     }
 
     //Commands - only executed on the server
     [Command]
-    void CmdSpawnMyKart()
+    public void CmdSpawnMyKart()
     {
 
         //creates the object on the server
@@ -52,7 +61,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     }
 
     [Command]
-    void CmdSpawnMyBike()
+    public void CmdSpawnMyBike()
     {
 
         //creates the object on the server
@@ -65,7 +74,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     }
 
     [Command]
-    void CmdSpawnMyBall()
+    public void CmdSpawnMyBall()
     {
 
         //creates the object on the server
@@ -75,6 +84,14 @@ public class PlayerConnectionObject : NetworkBehaviour
 
         //propagate the object to all clients
         NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+    }
+
+    [Command]
+    public void CmdDestroyMyUnit()
+    {
+
+        Destroy(myPlayerUnit);
+
     }
 
 }

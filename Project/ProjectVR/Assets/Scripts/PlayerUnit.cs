@@ -34,7 +34,7 @@ public class PlayerUnit : NetworkBehaviour
         if (hasAuthority)
         {
             ActivateCameraForCurrentPlayer();
-            IdentifyCurrentPlayer();
+            //IdentifyCurrentPlayer();
         }
 
         CheckForUserInput();
@@ -46,24 +46,14 @@ public class PlayerUnit : NetworkBehaviour
     void CheckForUserInput()
     {
 
-        if (Input.GetKey(KeyCode.W))
+        if (OVRInput.Get(OVRInput.RawButton.RHandTrigger) && OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
             Move(transform.forward * MovePower);
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-
-        }
-
-        if (Input.GetKey(KeyCode.S))
+        if (OVRInput.Get(OVRInput.RawButton.LHandTrigger) && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))
         {
             Move(-transform.forward * MovePower);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
