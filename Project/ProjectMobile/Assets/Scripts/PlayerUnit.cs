@@ -52,19 +52,9 @@ public class PlayerUnit : NetworkBehaviour
             Move(transform.forward * MovePower, false);
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-
-        }
-
         if (Input.GetKey(KeyCode.S))
         {
             Move(-transform.forward * MovePower, false);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !MidJump)

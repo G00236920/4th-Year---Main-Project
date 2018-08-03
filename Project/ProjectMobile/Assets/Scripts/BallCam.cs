@@ -5,16 +5,16 @@ using UnityEngine;
 public class BallCam : MonoBehaviour {
 
     public GameObject Player;
-    Vector3 _offset;
+    Vector3 Offset;
 
     void Start()
     {
-        _offset = new Vector3(0, 1 ,-5);
+        Offset = new Vector3(0, 1 ,-5);
     }
 
     void FixedUpdate()
     {
-        transform.position = Player.transform.position + _offset;
+        transform.position = Player.transform.position + Offset;
     }
 
 }

@@ -35,6 +35,12 @@ public class PlayerConnectionObject : NetworkBehaviour
             return;
         }
 
+        if (Input.GetKey(KeyCode.R))
+        {
+            CmdDestroyMyUnit();
+            CmdSpawnMyKart();
+        }
+
     }
 
     //Commands - only executed on the server
@@ -77,5 +83,12 @@ public class PlayerConnectionObject : NetworkBehaviour
         NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
     }
 
+    [Command]
+    public void CmdDestroyMyUnit()
+    {
+
+        Destroy(myPlayerUnit);
+
+    }
 
 }
