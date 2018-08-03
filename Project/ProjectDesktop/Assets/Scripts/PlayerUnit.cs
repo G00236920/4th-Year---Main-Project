@@ -7,11 +7,11 @@ using UnityEngine.Networking;
 
 public class PlayerUnit : NetworkBehaviour
 {
-    [SerializeField] private readonly float MovePower = 100;              // The force added to the Object to move it.        
-
+    private readonly float MovePower = 100;              // The force added to the Object to move it.    
     private bool isGrounded;
     private Rigidbody rigidBody;
     private float WheelRotation;
+    private bool turning;
 
     private void Start()
     {
@@ -29,43 +29,47 @@ public class PlayerUnit : NetworkBehaviour
         if (hasAuthority)
         {
             ActivateCameraForCurrentPlayer();
-            IdentifyCurrentPlayer();
-
-            WheelRotation = GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.localRotation.eulerAngles.y;
         }
 
+        //Check the Current Rotation of the Vechiles front wheels
+        WheelRotation = GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.localRotation.eulerAngles.y;
+
+        //Check if the user is input Controls
         CheckForUserInput();
+
     }
 
     void CheckForUserInput()
     {
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && isGrounded)
         {
-            Move(transform.forward * MovePower);
+            ResetWheelPosition();
+            MoveVehicle(transform.forward * MovePower);
         }
-
         if (Input.GetKey(KeyCode.A))
         {
-            if (WheelRotation > 330 || WheelRotation <= 31)
-            {
-                TurnWheels(Vector3.back * (Time.deltaTime * 50));
-            }
+            turning = true;
+            TurnWheelsLeft();
+            TurnVehicle(Vector3.down * (Time.deltaTime * 40));
         }
-
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.A)) {
+            turning = false;
+        }
+        if (Input.GetKey(KeyCode.S) && isGrounded)
         {
-            Move(-transform.forward * MovePower);
+            MoveVehicle(-transform.forward * MovePower);
         }
-
         if (Input.GetKey(KeyCode.D))
         {
-            if (WheelRotation < 30 || WheelRotation >= 329)
-            {
-                TurnWheels(Vector3.forward * (Time.deltaTime * 50));
-            }
+            turning = true;
+            TurnWheelsRight();
+            TurnVehicle(Vector3.up * (Time.deltaTime * 40));
         }
-
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            turning = false;
+        }
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             Jump();
@@ -73,39 +77,86 @@ public class PlayerUnit : NetworkBehaviour
 
     }
 
-    public void IdentifyCurrentPlayer()
-    {
-        this.GetComponentInChildren<Renderer>().material.color = Color.blue;
-    }
-
     public void ActivateCameraForCurrentPlayer()
     {
         GetComponent<Transform>().GetChild(0).gameObject.SetActive(true);
     }
 
-    public void Move(Vector3 moveDirection)
+    public void MoveVehicle(Vector3 moveDirection)
     {
-        // add force in the move direction.
+        //Add force in the move direction.
         rigidBody.AddForce(moveDirection);
     }
 
-    void OnCollisionStay()
+    void TurnWheels(Vector3 ro)
     {
-       isGrounded = true;
+        GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().GetChild(3).GetChild(1).gameObject.transform.Rotate(ro);
+    }
+
+    void TurnVehicle(Vector3 ro)
+    {
+        GetComponent<Transform>().gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().gameObject.transform.Rotate(ro);
+    }
+
+    void RotateWheels(Vector3 ro)
+    {
+        GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().GetChild(3).GetChild(1).gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().GetChild(3).GetChild(2).gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().GetChild(3).GetChild(3).gameObject.transform.Rotate(ro);
     }
 
     void Jump()
     {
-        rigidBody.AddForce(new Vector3(0.0f, 4.0f, 0.0f), ForceMode.Impulse);
+        rigidBody.AddForce(new Vector3(0.0f, 20.0f, 0.0f), ForceMode.Impulse);
         isGrounded = false;
     }
 
-    void TurnWheels(Vector3 ro) {
-            GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.Rotate(ro);
-            GetComponent<Transform>().GetChild(3).GetChild(1).gameObject.transform.Rotate(ro);
+    void OnCollisionStay()
+    {
+        isGrounded = true;
+    }
+
+    private void OnCollisionExit()
+    {
+        isGrounded = false;
+    }
+
+    void ResetWheelPosition()
+    {
+
+        if (WheelRotation >= 329 && WheelRotation < 360 && !turning)
+        {
+            TurnWheels(Vector3.forward * (Time.deltaTime * 50));
+        }
+
+        if (WheelRotation < 31 && WheelRotation > 0 && !turning)
+        {
+            TurnWheels(Vector3.back * (Time.deltaTime * 50));
+        }
+
+    }
+
+    void TurnWheelsRight()
+    {
+
+        if (WheelRotation < 30 || WheelRotation >= 329)
+        {
+            TurnWheels(Vector3.forward * (Time.deltaTime * 50));
+        }
+
+    }
+
+    void TurnWheelsLeft()
+    {
+
+        if (WheelRotation > 330 || WheelRotation <= 31)
+        {
+            TurnWheels(Vector3.back * (Time.deltaTime * 50));
+        }
+
     }
 
 }
-
-
-

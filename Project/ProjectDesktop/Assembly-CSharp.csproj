@@ -61,8 +61,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssestStoreContent\AssestStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
+    <None Include="Assets\AssestStoreContent\AssestStoreLakeTrack\readmore.txt" />
+    <None Include="Assets\AssestStoreContent\AssestStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/nltes/Desktop/4th-Year-Project/Project/ProjectDesktop/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
