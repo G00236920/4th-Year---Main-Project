@@ -34,7 +34,7 @@ public class PlayerUnit : NetworkBehaviour
             ActivateCameraForCurrentPlayer();
         }
 
-        WheelRotation = GetComponent<Transform>().GetChild(3).GetChild(0).gameObject.transform.localRotation.eulerAngles.y;
+        WheelRotation = GetComponent<Transform>().GetChild(1).GetChild(0).gameObject.transform.localRotation.eulerAngles.y;
 
         RotateWheels();
 
@@ -60,18 +60,15 @@ public class PlayerUnit : NetworkBehaviour
     {
         float RotateY = Rig.velocity.magnitude;
 
-        GameObject wheel1 = GetComponent<Transform>().GetChild(3).GetChild(0).gameObject;
-        GameObject wheel2 = GetComponent<Transform>().GetChild(3).GetChild(1).gameObject;
-        GameObject wheel3 = GetComponent<Transform>().GetChild(3).GetChild(2).gameObject;
-        GameObject wheel4 = GetComponent<Transform>().GetChild(3).GetChild(3).gameObject;
+        GameObject wheel1 = GetComponent<Transform>().GetChild(1).GetChild(0).gameObject;
+        GameObject wheel2 = GetComponent<Transform>().GetChild(1).GetChild(1).gameObject;
+        GameObject wheel3 = GetComponent<Transform>().GetChild(1).GetChild(2).gameObject;
+        GameObject wheel4 = GetComponent<Transform>().GetChild(1).GetChild(3).gameObject;
 
         wheel1.transform.Rotate(0, RotateY, 0);
         wheel2.transform.Rotate(0, RotateY, 0);
         wheel3.transform.Rotate(0, RotateY, 0);
         wheel4.transform.Rotate(0, RotateY, 0);
-
-        Debug.Log(RotateZ);
-        Debug.Log(WheelRotation);
 
     }
 
