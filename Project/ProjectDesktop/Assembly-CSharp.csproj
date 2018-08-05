@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AssestStoreContent\AssestStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
     <None Include="Assets\AssestStoreContent\AssestStoreLakeTrack\readmore.txt" />
