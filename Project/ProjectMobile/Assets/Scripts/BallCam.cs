@@ -9,7 +9,7 @@ public class BallCam : MonoBehaviour {
 
     void Start()
     {
-        Offset = new Vector3(0, 1 ,-5);
+        Offset = new Vector3(0, 2 ,-7);
     }
 
     void FixedUpdate()
