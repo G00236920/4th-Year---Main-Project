@@ -62,11 +62,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetStoreContent\AssetStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\DraggablePanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyHook.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyMainMenu.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyPlayer.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyPlayerList.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyServerEntry.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyServerList.cs" />
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLobby\Scripts\Lobby\LobbyTopPanel.cs" />
     <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
+    <None Include="Assets\NetworkLobby_Third-PartyNotice.txt" />
+    <None Include="Assets\AssetStoreContent\AssetStoreLobby\Documentation.txt" />
+    <None Include="Assets\AssetStoreContent\AssetStoreLobby\Instruction.txt" />
     <None Include="Assets\AssetStoreContent\AssetStoreLakeTrack\readmore.txt" />
     <None Include="Assets\AssetStoreContent\AssetStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/nltes/Desktop/4th-Year-Project/Project/ProjectDesktop/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

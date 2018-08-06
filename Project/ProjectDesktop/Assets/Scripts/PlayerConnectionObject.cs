@@ -68,14 +68,20 @@ public class PlayerConnectionObject : NetworkBehaviour
     [Command]
     public void CmdSpawnMyKart()
     {
+        if (connectionToClient.isReady)
+        {
+            //creates the object on the server
+            GameObject go = Instantiate(Kart);
 
-        //creates the object on the server
-        GameObject go = Instantiate(Kart);
+            myPlayerUnit = go;
 
-        myPlayerUnit = go;
+            //propagate the object to all clients
+            NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+        }
+        else {
+            StartCoroutine(WaitForReady());
+        }
 
-        //propagate the object to all clients
-        NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
     }
 
     [Command]
@@ -109,6 +115,17 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
         //Destroy the Current version of the players Unit
         Destroy(myPlayerUnit);
+
+    }
+
+    IEnumerator WaitForReady()
+    {
+        while (!connectionToClient.isReady)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        CmdSpawnMyKart();
 
     }
 

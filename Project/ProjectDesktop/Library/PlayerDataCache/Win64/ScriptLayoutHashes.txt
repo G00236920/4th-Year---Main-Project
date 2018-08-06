@@ -1,8 +1,9 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/nltes/Desktop/BuildDesktop/Simple Multiplayer Setup.exe
+C:/Users/nltes/Desktop/BuildDesktop/KartGame.exe
 SceneListBegin?
-Assets/Scenes/SampleScene.unity
+Assets/Scenes/Lobby.unity
+Assets/Scenes/MultiplayerRaceTrack1.unity
 SceneListEnd?
 c422dd62785a6d0afa870fbd111886ce Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 7b803eb2910e9b4cd5e521ae07b9f7d6 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -167,3 +168,14 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 2f9af06a78208a67db480e9bfed4a076 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+809c545a156891b4a98ea6031460459c Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyMainMenu
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Prototype.NetworkLobby.EventSystemChecker
+a5bb8ffec32488c3a63a80725e1176a4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyInfoPanel
+15e18fbed4de58b10e738c9d5b2c39dc Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyServerEntry
+e6af79a0ae6c367d0f8146bf72248ea7 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyCountdownPanel
+5a8330495f832a18ed1c38d36bf0c80a Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyManager
+35ea0e60d511b3f96c509ec65e03467f Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyTopPanel
+a3fc5e52a89f379a7cc64fc54a416754 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyPlayer
+c15f1956386e52677bfbce62299a8902 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyPlayerList
+486cd95c82d8305219c352c06b776e1f Assembly-CSharp.dll:Prototype.NetworkLobby.DraggablePanel
+ba00c26d46eb27902b95b03117b85877 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyServerList
