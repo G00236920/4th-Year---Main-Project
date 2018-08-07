@@ -70,7 +70,7 @@ public class PlayerUnit : NetworkBehaviour
     public void TurnVehicle(Vector3 ro)
     {
         //Rotate the vehicle to turn the vehicle
-        GetComponent<Transform>().gameObject.transform.Rotate(ro);
+        GetComponent<Transform>().gameObject.transform.Rotate(ro.x, 0, 0);
     }
 
     void RotateWheels()
