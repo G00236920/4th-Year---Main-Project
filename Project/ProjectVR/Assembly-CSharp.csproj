@@ -61,6 +61,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetStoreContent\AssetStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\DraggablePanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyHook.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+    <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRCameraComposition.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRComposition.cs" />
     <Compile Include="Assets\Oculus\VR\Scripts\Composition\OVRCompositionUtil.cs" />
@@ -111,17 +124,23 @@
     <Compile Include="Assets\Oculus\VR\Scripts\Util\OVRWaitCursor.cs" />
     <Compile Include="Assets\PlayerBody.cs" />
     <Compile Include="Assets\Scripts\CenterCamera.cs" />
+    <Compile Include="Assets\Scripts\Controls.cs" />
     <Compile Include="Assets\Scripts\HandsVR.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRUnlitTransparent.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRChromaKey.cginc" />
+    <None Include="Assets\AssetStoreContent\Lobby\Documentation.txt" />
     <None Include="Assets\Oculus\VR\Shaders\OVRColorRampAlpha.shader" />
+    <None Include="Assets\AssetStoreContent\Lobby\Instruction.txt" />
+    <None Include="Assets\AssetStoreContent\AssetStoreLakeTrack\readmore.txt" />
     <None Include="Assets\Oculus\VR\Resources\Cubemap Blit.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRUnlit.shader" />
     <None Include="Assets\Oculus\VR\Shaders\Unlit Crosshair.shader" />
     <None Include="Assets\Oculus\VR\Resources\Unlit Transparent Color.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRCameraFrameLit.shader" />
+    <None Include="Assets\AssetStoreContent\AssetStoreLakeTrack\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+    <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
     <None Include="Assets\Oculus\VR\Resources\Underlay Transparent Occluder.shader" />
     <None Include="Assets\Oculus\VR\Resources\Texture2D Blit.shader" />
     <None Include="Assets\Oculus\VR\Resources\OVRMRCameraFrame.shader" />

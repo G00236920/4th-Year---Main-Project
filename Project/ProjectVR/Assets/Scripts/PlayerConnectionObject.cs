@@ -64,13 +64,20 @@ public class PlayerConnectionObject : NetworkBehaviour
     public void CmdSpawnMyBike()
     {
 
-        //creates the object on the server
-        GameObject go = Instantiate(Bike);
+        if (connectionToClient.isReady)
+        {
+            //creates the object on the server
+            GameObject go = Instantiate(Bike);
 
-        myPlayerUnit = go;
+            myPlayerUnit = go;
 
-        //propagate the object to all clients
-        NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+            //propagate the object to all clients
+            NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+        }
+        else
+        {
+            StartCoroutine(WaitForReady());
+        }
     }
 
     [Command]
@@ -91,6 +98,17 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
 
         Destroy(myPlayerUnit);
+
+    }
+
+    IEnumerator WaitForReady()
+    {
+        while (!connectionToClient.isReady)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        CmdSpawnMyBike();
 
     }
 

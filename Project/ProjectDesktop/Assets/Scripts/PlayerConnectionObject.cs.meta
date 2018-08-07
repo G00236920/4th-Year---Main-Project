@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - Kart: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 2}
   - Bike: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
-  - Ball: {fileID: 1378305339284720, guid: 1fa553f3faab6b04db4e3419f65bce1c, type: 2}
+  - Ball: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
