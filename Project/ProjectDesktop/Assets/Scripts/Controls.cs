@@ -67,7 +67,7 @@ public class Controls : NetworkBehaviour
             player.Turning = true;
 
             //Turn the vehicle using delta time, Turn left over time so its not instant
-            player.TurnVehicle(Vector3.down * (Time.deltaTime * 50));
+            player.TurnVehicle(Vector3.down * (Time.deltaTime * (player.MovePower*2)));
 
             //If the Wheels are within the turning range, this will stop the wheels from turning too much
             if (player.WheelRotation > 150 && player.WheelRotation <= 220 )
@@ -118,7 +118,7 @@ public class Controls : NetworkBehaviour
             //Set the turning to value, let other methods know the vehicle is turning
             player.Turning = true;
             //turn the vehicle right, by rotating the object vehicle
-            player.TurnVehicle(Vector3.up * (Time.deltaTime * 50));
+            player.TurnVehicle(Vector3.up * (Time.deltaTime * (player.MovePower*2)));
 
             //if the rotation is within the turn values, using about a 60 range, but larger number in case a thread is skipped
             if (player.WheelRotation > 150 && player.WheelRotation <= 220)

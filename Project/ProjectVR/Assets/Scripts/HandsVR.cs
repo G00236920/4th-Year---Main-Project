@@ -17,11 +17,17 @@ public class HandsVR : MonoBehaviour {
 
         LeftHand = GetComponent<Transform>().GetChild(1).gameObject;
         RightHand = GetComponent<Transform>().GetChild(2).gameObject;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+    }
+
+    void GrabHandleBars() {
 
         HandleBarsPositionL = GetComponent<Transform>().GetChild(5).GetChild(0).localPosition;
         HandleBarsPositionR = GetComponent<Transform>().GetChild(5).GetChild(1).localPosition;

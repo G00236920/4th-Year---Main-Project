@@ -9,7 +9,6 @@ public class Controls : NetworkBehaviour
 
     //Other scripts needed for the controls to call external methods
     PlayerUnit player;
-
     GameObject LeftHand;
     GameObject RightHand;
 

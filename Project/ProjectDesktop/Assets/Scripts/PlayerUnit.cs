@@ -69,8 +69,9 @@ public class PlayerUnit : NetworkBehaviour
 
     public void TurnVehicle(Vector3 ro)
     {
+        Debug.Log(ro.x);
         //Rotate the vehicle to turn the vehicle
-        GetComponent<Transform>().gameObject.transform.Rotate(ro.x, 0, 0);
+        this.GetComponent<Transform>().gameObject.transform.Rotate(0, ro.y, 0);
     }
 
     void RotateWheels()
