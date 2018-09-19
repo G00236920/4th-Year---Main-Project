@@ -14,9 +14,18 @@ public class PlayerConnectionObject : NetworkBehaviour
     //This players Vehicle
     private GameObject myPlayerUnit;
 
+    private List<Vector3> SpawnPoints = new List<Vector3>();
+
     // Use this for initialization
     void Start()
     {
+        //Collection of Spawn Points, Depending on how many people are playing
+        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
 
         //If the Player is not the local User
         if (!isLocalPlayer)
@@ -24,7 +33,6 @@ public class PlayerConnectionObject : NetworkBehaviour
             //Exit without running the Script
             return;
         }
-
 
         //Disable the main camera, this will allow the players camera to be activated
         //I intend to only have one camera active at a moment
@@ -68,15 +76,17 @@ public class PlayerConnectionObject : NetworkBehaviour
     [Command]
     public void CmdSpawnMyKart()
     {
+
         if (connectionToClient.isReady)
         {
             //creates the object on the server
             GameObject go = Instantiate(Kart);
-
+            
             myPlayerUnit = go;
 
             //propagate the object to all clients
             NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+
         }
         else {
             StartCoroutine(WaitForReady());
@@ -87,7 +97,6 @@ public class PlayerConnectionObject : NetworkBehaviour
     [Command]
     public void CmdSpawnMyBike()
     {
-
         //creates the object on the server
         GameObject go = Instantiate(Bike);
 
@@ -100,7 +109,6 @@ public class PlayerConnectionObject : NetworkBehaviour
     [Command]
     public void CmdSpawnMyBall()
     {
-
         //creates the object on the server
         GameObject go = Instantiate(Ball);
 
@@ -108,6 +116,7 @@ public class PlayerConnectionObject : NetworkBehaviour
 
         //propagate the object to all clients
         NetworkServer.SpawnWithClientAuthority(myPlayerUnit, connectionToClient);
+
     }
 
     [Command]
