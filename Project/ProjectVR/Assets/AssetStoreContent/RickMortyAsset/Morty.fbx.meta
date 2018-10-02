@@ -1,0 +1,315 @@
+fileFormatVersion: 2
+guid: 3bb72a8a022462546b93986ce8cf821c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bone
+    100002: Bone.001
+    100004: Bone.002
+    100006: Bone.002_end
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.006
+    100016: Bone.007
+    100018: Bone.008
+    100020: Bone.009
+    100022: Bone.010
+    100024: Bone.010_end
+    100026: Bone.011
+    100028: Bone.012
+    100030: Bone.013
+    100032: Bone.013_end
+    100034: Bone.014
+    100036: Bone.015
+    100038: Bone.015_end
+    100040: Bone.016
+    100042: Bone.017
+    100044: Bone.018
+    100046: Bone.018_end
+    100048: Bone.019
+    100050: Bone.020
+    100052: Bone.021
+    100054: Bone.021_end
+    100056: Bone.022
+    100058: Bone.023
+    100060: Bone.024
+    100062: Bone.024_end
+    100064: Bone.025
+    100066: Bone.026
+    100068: Bone.027
+    100070: Bone.027_end
+    100072: Bone.028
+    100074: Bone.029
+    100076: Bone.029_end
+    100078: Bone.030
+    100080: Bone.032
+    100082: Bone.033
+    100084: Bone.034
+    100086: Bone.035
+    100088: Bone.035_end
+    100090: Bone.036
+    100092: Bone.037
+    100094: Bone.038
+    100096: Bone.038_end
+    100098: Bone.039
+    100100: Bone.040
+    100102: Bone.041
+    100104: Bone.041_end
+    100106: Bone.042
+    100108: Bone.043
+    100110: Bone.044
+    100112: Bone.044_end
+    100114: Bone.045
+    100116: Bone.046
+    100118: Bone.047
+    100120: Bone.047_end
+    100122: Bone.048
+    100124: Bone.049
+    100126: Bone.049_end
+    100128: Camera
+    100130: Cube.002
+    100132: Cube.003
+    100134: eye brow
+    100136: eye brow.001
+    100138: eye lid bottmo L
+    100140: eye lid bottmo.R
+    100142: eye lid top L
+    100144: eye lid top.R
+    100146: eye R
+    100148: Head
+    100150: Lamp
+    100152: Lamp.001
+    100154: morty body
+    100156: Morty Smith
+    100158: Plane.002
+    100160: Plane.003
+    100162: //RootNode
+    100164: Sphere.001
+    400000: Bone
+    400002: Bone.001
+    400004: Bone.002
+    400006: Bone.002_end
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.006
+    400016: Bone.007
+    400018: Bone.008
+    400020: Bone.009
+    400022: Bone.010
+    400024: Bone.010_end
+    400026: Bone.011
+    400028: Bone.012
+    400030: Bone.013
+    400032: Bone.013_end
+    400034: Bone.014
+    400036: Bone.015
+    400038: Bone.015_end
+    400040: Bone.016
+    400042: Bone.017
+    400044: Bone.018
+    400046: Bone.018_end
+    400048: Bone.019
+    400050: Bone.020
+    400052: Bone.021
+    400054: Bone.021_end
+    400056: Bone.022
+    400058: Bone.023
+    400060: Bone.024
+    400062: Bone.024_end
+    400064: Bone.025
+    400066: Bone.026
+    400068: Bone.027
+    400070: Bone.027_end
+    400072: Bone.028
+    400074: Bone.029
+    400076: Bone.029_end
+    400078: Bone.030
+    400080: Bone.032
+    400082: Bone.033
+    400084: Bone.034
+    400086: Bone.035
+    400088: Bone.035_end
+    400090: Bone.036
+    400092: Bone.037
+    400094: Bone.038
+    400096: Bone.038_end
+    400098: Bone.039
+    400100: Bone.040
+    400102: Bone.041
+    400104: Bone.041_end
+    400106: Bone.042
+    400108: Bone.043
+    400110: Bone.044
+    400112: Bone.044_end
+    400114: Bone.045
+    400116: Bone.046
+    400118: Bone.047
+    400120: Bone.047_end
+    400122: Bone.048
+    400124: Bone.049
+    400126: Bone.049_end
+    400128: Camera
+    400130: Cube.002
+    400132: Cube.003
+    400134: eye brow
+    400136: eye brow.001
+    400138: eye lid bottmo L
+    400140: eye lid bottmo.R
+    400142: eye lid top L
+    400144: eye lid top.R
+    400146: eye R
+    400148: Head
+    400150: Lamp
+    400152: Lamp.001
+    400154: morty body
+    400156: Morty Smith
+    400158: Plane.002
+    400160: Plane.003
+    400162: //RootNode
+    400164: Sphere.001
+    2000000: Camera
+    2100000: Material.037
+    2100002: Material.036
+    2100004: Material.038
+    2100006: Material.027
+    2100008: Material.028
+    2100010: Material.029
+    2100012: Material.031
+    2100014: Material.032
+    2100016: Material.033
+    2100018: Material.034
+    2100020: Material.035
+    2100022: Material.002
+    2100024: Material.010
+    2100026: Material.009
+    2100028: lambert2SG.002
+    2100030: Material.005
+    2100032: Material.006
+    2100034: Material
+    2100036: Material.008
+    2300000: eye brow
+    2300002: eye brow.001
+    2300004: eye lid bottmo L
+    2300006: eye lid bottmo.R
+    2300008: eye lid top L
+    2300010: eye lid top.R
+    2300012: eye R
+    2300014: Plane.002
+    2300016: Plane.003
+    2300018: Sphere.001
+    3300000: eye brow
+    3300002: eye brow.001
+    3300004: eye lid bottmo L
+    3300006: eye lid bottmo.R
+    3300008: eye lid top L
+    3300010: eye lid top.R
+    3300012: eye R
+    3300014: Plane.002
+    3300016: Plane.003
+    3300018: Sphere.001
+    4300000: Head
+    4300002: Cube.002
+    4300004: Cube.003
+    4300006: eye brow
+    4300008: eye brow.001
+    4300010: eye lid bottmo L
+    4300012: eye lid bottmo.R
+    4300014: eye lid top L
+    4300016: eye lid top.R
+    4300018: eye R
+    4300020: Sphere.001
+    4300022: Plane.003
+    4300024: Plane.002
+    4300026: morty body
+    9500000: //RootNode
+    10800000: Lamp
+    10800002: Lamp.001
+    13700000: Cube.002
+    13700002: Cube.003
+    13700004: Head
+    13700006: morty body
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
