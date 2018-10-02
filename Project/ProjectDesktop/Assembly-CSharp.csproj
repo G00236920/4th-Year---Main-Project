@@ -74,6 +74,7 @@
     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyServerList.cs" />
     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
     <Compile Include="Assets\Scripts\Controls.cs" />
+    <Compile Include="Assets\Scripts\LoginScript.cs" />
     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
     <None Include="Assets\NetworkLobby_Third-PartyNotice.txt" />
