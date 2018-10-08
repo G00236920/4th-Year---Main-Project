@@ -53,25 +53,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\DraggablePanel.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\EventSystemChecker.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyHook.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyManager.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyServerList.cs" />
-     <Compile Include="Assets\AssetStoreContent\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
-     <Compile Include="Assets\Scripts\Controls.cs" />
-     <Compile Include="Assets\Scripts\LoginScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerConnectionObject.cs" />
-     <Compile Include="Assets\Scripts\PlayerUnit.cs" />
+     <Compile Include="Assets\Scripts\GameScripts\Controls.cs" />
+     <Compile Include="Assets\Scripts\GameScripts\PlayerConnectionObject.cs" />
+     <Compile Include="Assets\Scripts\GameScripts\PlayerUnit.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\DraggablePanel.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\EventSystemChecker.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyCountdownPanel.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyHook.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyInfoPanel.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyMainMenu.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyManager.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyPlayer.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyPlayerList.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyServerEntry.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyServerList.cs" />
+     <Compile Include="Assets\Scripts\LobbyScreen\LobbyTopPanel.cs" />
+     <Compile Include="Assets\Scripts\LoginScreen\LoginScript.cs" />
+     <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
      <None Include="Assets\NetworkLobby_Third-PartyNotice.txt" />
-     <None Include="Assets\AssetStoreContent\Lobby\Documentation.txt" />
-     <None Include="Assets\AssetStoreContent\Lobby\Instruction.txt" />
      <None Include="Assets\AssetStoreContent\Oculus Hands\LICENSE.txt" />
      <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
  <Reference Include="UnityEditor.StandardEvents">
