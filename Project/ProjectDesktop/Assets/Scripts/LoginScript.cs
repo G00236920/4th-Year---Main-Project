@@ -31,12 +31,10 @@ public class LoginScript : MonoBehaviour {
 
             TcpClient tcpclnt = new TcpClient();
 
-            tcpclnt.Connect("127.0.0.1", 5000);
+            tcpclnt.Connect("52.18.149.174", 5000);
             // use the ipaddress as in the server program
 
             Debug.Log("Connected");
-
-            Stream stm = tcpclnt.GetStream();
 
             SceneManager.LoadScene("Lobby", LoadSceneMode.Additive);
 
