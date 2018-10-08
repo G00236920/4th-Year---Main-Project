@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -323,34 +323,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/ScoreboardScreen
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/ScoreboardScreen
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\nltes\Documents\GitHub\4th-Year---Main-Project\Project\ProjectDesktop
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c42c0000
-    m_LastClickedID: 11460
-    m_ExpandedIDs: 00000000502a0000582d000050320000523200005432000056320000583200005a32000000ca9a3b
+    m_SelectedIDs: 9c2e0000
+    m_LastClickedID: 11932
+    m_ExpandedIDs: 00000000262a0000022d0000522d0000f4390000f6390000f8390000fa390000fc390000fe39000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scenes
-      m_OriginalName: Scenes
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 11460
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000502a0000922d000050320000523200005432000056320000583200005a320000
+    m_ExpandedIDs: 00000000262a0000022d0000f4390000f6390000f8390000fa390000fc390000fe390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,28 +480,28 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e2c80000
-    m_LastClickedID: 51426
-    m_ExpandedIDs: 2815f9ff421ef9ff3499f9ff9a9df9ffd00dfaffae0efaffd41afaffdcdcfaff4225fbffd227fbffd427fbffc828fbff142afbff202bfbffbe2cfbffae2dfbffcc2efbffc02ffbff6c31fbff9c32fbff5c34fbff7835fbffde36fbff3638fbff5639fbff403afbffd23bfbff3e3dfbff7a3efbffa63ffbff3641fbff9a42fbff1044fbff2c45fbff4446fbffe247fbff927efbffce9ffbff30a1fbff0adffbff10dffbff12dffbff38e0fbff8ae5fbffc4e6fbff9617fcffe8a2fcff7aa4fcff64b1fcffcac0fcffbaebfeffd4c7ffff0ec9ffff50e5ffffbae8ffffa8eaffffa4ecffff4cefffffccfbfffff4ffffff0000000002320000d43f00006c460000dc460000024700007e6b00005a6d0000a86e0000f46f0000ba8300000e8c0000d68d0000428e0000e6af000080b2000076bd0000bcbd0000fabd000014be000046be0000bec40000ecc80000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: bc78ffff667dffffea7effff5093ffff689cffff5ca5ffff82acffff9eadffff1aaeffff96aeffff12afffff9ab5ffff18b6ffff96b6ffff14b7ffff92b7ffffbcc4fffff0c9ffff82f7fffffcf7ffff76f8ffffe6fbffff00000000d43a0000dc3a0000ee3a0000b43d0000fa3d0000383e0000483e0000623e00006a3e00007c3e0000803e00001c41000062410000a04100005c4a0000644a0000764a00007a4a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Canvas
+      m_OriginalName: Canvas
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 19878
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - 2.Lobby
+  - 4.Scoreboard
   m_CurrenRootInstanceID: 0
   m_LockTracker:
     m_IsLocked: 0
@@ -532,14 +532,14 @@ MonoBehaviour:
     height: 552
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 4499.2819301
+  lastFramingTime: 367.22565069999996
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 561.9942, y: 267.5, z: 0}
+    m_Target: {x: 581.47546, y: 277.6753, z: 0.70306396}
     speed: 2
-    m_Value: {x: 561.9942, y: 267.5, z: 0}
+    m_Value: {x: 581.47546, y: 277.6753, z: 0.70306396}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -569,11 +569,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.0018096782, y: 0.0015045993, z: -0.0000027610486, w: -0.9999973}
     speed: 2
-    m_Value: {x: -0.0018096782, y: 0.0015045993, z: -0.0000027610486, w: -0.9999973}
+    m_Value: {x: -0.0018096782, y: 0.0015045992, z: -0.0000027610483, w: -0.99999726}
   m_Size:
-    m_Target: 537.9501
+    m_Target: 587.1376
     speed: 2
-    m_Value: 537.9501
+    m_Value: 587.1376
   m_Ortho:
     m_Target: 0
     speed: 2

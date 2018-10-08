@@ -12,7 +12,7 @@ public class ScoreboardScript : MonoBehaviour {
 
     public void ButtonClicked()
     {
-        SceneManager.LoadScene("2.Lobby", LoadSceneMode.Additive);
+        SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
     }
 	
 }

@@ -31,7 +31,7 @@ public class LoginScript : MonoBehaviour {
 
             Debug.Log("Connected");
 
-            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Additive);
+            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
 
             tcpclnt.Close();
 
