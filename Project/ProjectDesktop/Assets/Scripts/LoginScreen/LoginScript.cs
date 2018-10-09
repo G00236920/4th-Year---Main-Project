@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoginScript : MonoBehaviour {
 
@@ -29,7 +30,22 @@ public class LoginScript : MonoBehaviour {
             tcpclnt.Connect("52.18.149.174", 5000);
             // use the ipaddress as in the server program
 
-            Debug.Log("Connected");
+            Byte[] bytes = new Byte[1024];
+              
+            NetworkStream stream = tcpclnt.GetStream();
+
+			if (stream.CanWrite) {                 
+		
+                String username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
+                String password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
+
+                String data = username + " " + password;
+				             
+				byte[] serverMessageAsByteArray = Encoding.ASCII.GetBytes(data); 				
+				      
+				stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
+ 
+			}          
 
             SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
 
@@ -41,4 +57,5 @@ public class LoginScript : MonoBehaviour {
             Debug.Log("Failed to Connect to Server");
         }
     }
+
 }

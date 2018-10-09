@@ -629,8 +629,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 908545179}
   m_TextComponent: {fileID: 1083926571}
   m_Placeholder: {fileID: 352187243}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -1064,6 +1064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b498bb04425604d8c682f976c5abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UsernameField: {fileID: 1433109077}
+  PasswordField: {fileID: 1083926571}
 --- !u!1 &1319793399
 GameObject:
   m_ObjectHideFlags: 0
