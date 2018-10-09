@@ -1,6 +1,9 @@
 package ie.gmit.sw;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
  
@@ -20,6 +23,19 @@ public class Server
 			    	  
 			          System.out.println("A client has connected.");
 			          
+			          InputStream in = socket.getInputStream();
+			          
+			          BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			          
+			          String request = null;
+			          
+				          while ((request = br.readLine()) != null) {
+				        	  
+				        	  System.out.println( request );
+				        	  
+				          }
+			          
+				      in.close();
 			          socket.close();
 			          
 			       }
