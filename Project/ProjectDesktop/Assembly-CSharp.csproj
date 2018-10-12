@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\LobbyScreen\LobbyServerList.cs" />
      <Compile Include="Assets\Scripts\LobbyScreen\LobbyTopPanel.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\LoginScript.cs" />
+     <Compile Include="Assets\Scripts\LoginScreen\User.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\MatchMakingScript.cs" />
      <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
      <None Include="Assets\NetworkLobby_Third-PartyNotice.txt" />

@@ -8,6 +8,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 public class LoginScript : MonoBehaviour {
 
@@ -25,26 +27,35 @@ public class LoginScript : MonoBehaviour {
         {
             TcpClient tcpclnt = new TcpClient();
 
-            tcpclnt.Connect("52.18.149.174", 5000);
             // use the ipaddress as in the server program
+            tcpclnt.Connect("52.18.149.174", 5000);
               
+            //Get the network Stream
             NetworkStream stream = tcpclnt.GetStream();
 
 			if (stream.CanWrite) {                 
 		
+                //Get input from username Field
                 String username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
+                //Get password from password field
                 String password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
 
-                String data = username + " " + password;
-				             
-				byte[] serverMessageAsByteArray = Encoding.ASCII.GetBytes(data); 				
-				      
-				stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
+                //Create a User Object
+                User userLogin = new User(username, password);
+
+                BinaryFormatter bf = new BinaryFormatter();
+                
+                bf.Serialize(stream, userLogin);
+
+                //Send the message      
+				//stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
  
 			}          
-
+            
+            //Load the Lobby scene
             SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
 
+                        
             tcpclnt.Close();
 
         }
@@ -53,5 +64,4 @@ public class LoginScript : MonoBehaviour {
             Debug.Log("Failed to Connect to Server");
         }
     }
-
 }
