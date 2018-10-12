@@ -10,26 +10,25 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
-    const int PORT_NO = 5000;
-    const string SERVER_IP = "52.18.149.174";
+    const int PORT_NO = 5001;
+    const string SERVER_IP = "127.0.0.1";
+    private Socket _clientSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
 
-    public void ButtonClicked()
-    {
+    public void ButtonClicked(){
 
-        //---create a TCPClient object at the IP and port no.---
-            TcpClient client = new TcpClient();
+        try
+        {
+            _clientSocket.Connect(SERVER_IP,PORT_NO);
 
-            client.Connect("52.18.149.174", 5001);
-            // use the ipaddress as in the server program
+            byte[] data = Encoding.ASCII.GetBytes("RequestList");
 
-        NetworkStream stream = client.GetStream();
-        
-        byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes("Hi from Unity");
+            _clientSocket.Send(data);
 
-        stream.Write(bytesToSend, 0, bytesToSend.Length);
-
-        stream.Close();
-        client.Close();
+        }
+        catch(SocketException ex)
+        {
+            Debug.Log(ex.Message);
+        }
 
     }
 
