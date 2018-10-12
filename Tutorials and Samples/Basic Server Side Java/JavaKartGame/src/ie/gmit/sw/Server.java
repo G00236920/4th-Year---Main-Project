@@ -25,15 +25,7 @@ public class Server
 			          
 			          InputStream in = socket.getInputStream();
 			          
-			          BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			          
-			          String request = null;
-			          
-				          while ((request = br.readLine()) != null) {
-				        	  
-				        	  System.out.println( request );
-				        	  
-				          }
+			          //Get Object being sent and De-serialize
 			          
 				      in.close();
 			          socket.close();
