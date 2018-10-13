@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,54 +17,38 @@ public class MatchMakingScript : MonoBehaviour {
 
     public void ButtonClicked() { 
 
-        // Data buffer for incoming data.  
-        byte[] bytes = new byte[1024];  
+      Debug.Log("Connecting.....");
 
-        // Connect to a remote device.  
-        try {  
+        try
+        {
+            TcpClient tcpclnt = new TcpClient();
 
-            IPEndPoint remoteEP = new IPEndPoint(SERVER_IP, PORT_NO);
+            // use the ipaddress as in the server program
+            tcpclnt.Connect(SERVER_IP, PORT_NO);
+              
+            //Get the network Stream
+            NetworkStream stream = tcpclnt.GetStream();
 
-            // Create a TCP/IP  socket.  
-            Socket sender = new Socket(SERVER_IP.AddressFamily,   
-                SocketType.Stream, ProtocolType.Tcp );  
+			if (stream.CanWrite) {                 
 
-            // Connect the socket to the remote endpoint. Catch any errors.  
-            try {  
-                sender.Connect(remoteEP);  
+                //Create a User Object
+                Server server = new Server(IPAddress.Parse("52.18.149.174"), "me");
 
-                Console.WriteLine("Socket connected to {0}",  
-                    sender.RemoteEndPoint.ToString());  
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(stream, server);
+ 
+			}          
+            
+            //Load the Lobby scene
+            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
 
-                // Encode the data string into a byte array.  
-                byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");  
+                        
+            tcpclnt.Close();
 
-                // Send the data through the socket.  
-                int bytesSent = sender.Send(msg);  
-
-                // Receive the response from the remote device.
-                    
-                /* int bytesRec = sender.Receive(bytes);  
-                    Console.WriteLine("Echoed test = {0}",  
-                        Encoding.ASCII.GetString(bytes,0,bytesRec)); 
-                */ 
-
-                // Release the socket.  
-                sender.Shutdown(SocketShutdown.Both);  
-                sender.Close();  
-
-            } catch (ArgumentNullException ane) {  
-                Console.WriteLine("ArgumentNullException : {0}",ane.ToString());  
-            } catch (SocketException se) {  
-                Console.WriteLine("SocketException : {0}",se.ToString());  
-            } catch (Exception e) {  
-                Console.WriteLine("Unexpected exception : {0}", e.ToString());  
-            }  
-
-        } catch (Exception e) { 
-
-            Console.WriteLine( e.ToString());
-
-        }  
-    }  
+        }
+        catch (Exception)
+        {
+            Debug.Log("Failed to Connect to Server");
+        }
+    }
 }

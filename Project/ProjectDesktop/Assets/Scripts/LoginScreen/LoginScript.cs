@@ -13,10 +13,8 @@ using System.Xml.Serialization;
 
 public class LoginScript : MonoBehaviour {
 
-    //Using UDP Client
-    private UdpClient Client;
-    //Use the Ip and port as End Point
-    private IPEndPoint Ep;
+    const int PORT_NO = 5000;
+    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
 
     public void ButtonClicked()
     {
@@ -28,8 +26,8 @@ public class LoginScript : MonoBehaviour {
             TcpClient tcpclnt = new TcpClient();
 
             // use the ipaddress as in the server program
-            tcpclnt.Connect("52.18.149.174", 5000);
-              
+            tcpclnt.Connect(SERVER_IP, PORT_NO);
+
             //Get the network Stream
             NetworkStream stream = tcpclnt.GetStream();
 
@@ -43,12 +41,13 @@ public class LoginScript : MonoBehaviour {
                 //Create a User Object
                 User userLogin = new User(username, password);
 
-                BinaryFormatter bf = new BinaryFormatter();
-                
-                bf.Serialize(stream, userLogin);
+                stream.Write(Encoding.Default.GetBytes(userLogin.ToString()), 0, userLogin.ToString().Length);
 
-                //Send the message      
-				//stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
+                /*
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(stream, userLogin);
+                Debug.Log(bf);
+                */
  
 			}          
             
@@ -64,4 +63,5 @@ public class LoginScript : MonoBehaviour {
             Debug.Log("Failed to Connect to Server");
         }
     }
+    
 }
