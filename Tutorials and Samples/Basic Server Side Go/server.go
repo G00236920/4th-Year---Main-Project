@@ -10,10 +10,12 @@ func main() {
   fmt.Println("Launching server...")
 
   // listen on all interfaces
-  ln, _ := net.Listen("tcp", ":5000")
+  ln, _ := net.Listen("tcp", ":5001")
 
   // accept connection on port
   conn, _ := ln.Accept()
+
+  fmt.Print("Client Connected:")
 
   // run loop forever (or until ctrl-c)
   for {

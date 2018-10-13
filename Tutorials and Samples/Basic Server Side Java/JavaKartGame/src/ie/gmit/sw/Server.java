@@ -1,15 +1,16 @@
 package ie.gmit.sw;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
  
 public class Server
 {
-	 public static void main(String[] args) throws IOException {
+	 public static void main(String[] args) throws IOException, ClassNotFoundException {
 		      
 		      ServerSocket serverSocket = new ServerSocket(5000);
 		      
@@ -23,21 +24,20 @@ public class Server
 		          
 		          InputStream in = socket.getInputStream();
 		          
-		          try {
-		        	  
-		        	  User currentUser = (User) deSerialization(in);
-		        	  
-		        	  System.out.println("USERNAME: " +currentUser.getUsername()
-		        	  					+"PASSWORD: " +currentUser.getPassword());
-		        	  
-					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		          BufferedReader incoming =
+		        	        new BufferedReader(
+		        	            new InputStreamReader(in));
+				  
+				  /*
+				  User currentUser = (User)deSerialization(in);
+				  
+				  System.out.println("USERNAME: " +currentUser.getUsername()
+				  					+"PASSWORD: " +currentUser.getPassword());
+				  */
+				  
+				  
+				  in.close();
 		          
-		          //Get Object being sent and De-serialize
-		          
-			      in.close();
 		          socket.close();
 		          
 		       }
@@ -48,10 +48,14 @@ public class Server
 	 
 		public static Object deSerialization(InputStream in) throws IOException, ClassNotFoundException {
 
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(in);
-			ObjectInputStream objectInputStream = new ObjectInputStream(bufferedInputStream);
-			Object object = objectInputStream.readObject();
-			objectInputStream.close();
+			DataInputStream  input = new DataInputStream (in);
+			
+			Object object = input.read();
+			
+			System.out.println(object);
+			
+			input.close();
+			
 			return object;
 		}
 	 
