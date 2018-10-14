@@ -3,10 +3,12 @@ package ie.gmit.sw;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import com.google.gson.Gson;
  
 public class Server
 {
@@ -23,41 +25,74 @@ public class Server
 		          System.out.println("A client has connected.");
 		          
 		          InputStream in = socket.getInputStream();
+		          OutputStream out = socket.getOutputStream();
 		          
-		          BufferedReader incoming =
-		        	        new BufferedReader(
-		        	            new InputStreamReader(in));
+		          StringBuilder sb = new StringBuilder();
+
+		          String response;
+		          
+		          BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		          
+		          while ((response = br.readLine()) != null) {
+		        	  
+		              sb.append(response);
+		              
+		          }
+          
+		          User currentUser = getUserFromJson(sb.toString());
+		          
+		          Boolean found = isUserInDatabase(currentUser);
+		          
+		          //convert the boolean to byte array
+		          byte [] result = new byte[]{(byte) (found?1:0)};
+
+		          //Send the Response back to Unity
+		          out.write(result, 0, result.length);
+		          
+		          System.out.println("Response Sent");
 				  
-				  /*
-				  User currentUser = (User)deSerialization(in);
-				  
-				  System.out.println("USERNAME: " +currentUser.getUsername()
-				  					+"PASSWORD: " +currentUser.getPassword());
-				  */
-				  
-				  
+		          //Close the streams
 				  in.close();
-		          
+				  out.close();
+				  
+		          //Close the sockets
 		          socket.close();
 		          
 		       }
 		      
 		      serverSocket.close();
 		      
-		  }
+	 }
 	 
-		public static Object deSerialization(InputStream in) throws IOException, ClassNotFoundException {
+	 public static User getUserFromJson(String response) {
+		 
+			 Gson gson = new Gson();
+			 User user = gson.fromJson(response, User.class);  
+			
+			return user;
+	 }
+	 
+	 public static boolean isUserInDatabase(User user) {
+		 
+		 boolean found = true;
+		 
+		 if(found) {
+			 found = isPasswordCorrect(user);
+		 }
+		 else {
+			 found = false;
+		 }
+		 
+		return found;
 
-			DataInputStream  input = new DataInputStream (in);
-			
-			Object object = input.read();
-			
-			System.out.println(object);
-			
-			input.close();
-			
-			return object;
-		}
+	 }
+	 
+	 public static boolean isPasswordCorrect(User user) {
+		 
+		 	boolean found = true;
+		 	//Check if the password matches the user name
+		 	return found;
+	 }
 	 
 }
 
