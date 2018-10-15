@@ -11,8 +11,8 @@ using System.Threading;
 public class LoginScript : MonoBehaviour {
 
     private const int PORT_NO = 5000;
-    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
-    private TcpClient tcpclnt = new TcpClient();
+    private const string SERVER_IP = "52.18.149.174";
+    
     private string username;
     private string password;
 
@@ -31,84 +31,56 @@ public class LoginScript : MonoBehaviour {
     void ConnectToServer(){
         
         Debug.Log("Connecting.....");
-        
-        try
-        {
+        IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(SERVER_IP), PORT_NO);
 
-            IPEndPoint remoteEP = new IPEndPoint(SERVER_IP,PORT_NO);  
+        Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        client.Connect(serverAddress);
 
-            // use the ipaddress as in the server program
-            tcpclnt.Connect(remoteEP);
+        SendLoginDetails(client);
 
-            //Get the network Stream
-            NetworkStream stream = tcpclnt.GetStream();
+        bool success = getResponse(client);
 
-            new Thread(() => 
-            {
-
-               //Send the username and password to the server
-                SendMessageToServer(stream);
-
-            }).Start();
-
-            //Listen for the server to give the result
-            bool response = listenForResponse(stream);
-
-            if(response == true){
-
-                LoadNextScene();
-            }else{
-                //Dont
-            }
-   
-            //Close the connection
-            tcpclnt.Close();
-
-        }
-        catch (Exception)
-        {
-            Debug.Log("Failed to Connect to Server");
+        if(success){
+            LoadNextScene();
+        } else{
+            //Show Error Asking to login again
         }
 
+        client.Close();
+
     }
-    
-    void SendMessageToServer(NetworkStream stream){
 
-        	if (stream.CanWrite) {                 
-
-                //Create a User Object
-                User userLogin = new User();
-
-                userLogin.username = username;
-                userLogin.password = password;
-
-                string userToJson = JsonUtility.ToJson(userLogin);
-                byte[] message = Encoding.UTF8.GetBytes(userToJson);
-
-                stream.Write(message, 0 ,message.Length);
-
-			}
-    }
 
     void LoadNextScene(){
         //Load the Lobby scene
         SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
     }
 
-    bool listenForResponse(NetworkStream stream){
-        
-        bool response = true;
+    void SendLoginDetails(Socket client){
 
-        byte[ ] buffer = new byte[tcpclnt.ReceiveBufferSize];
+        User userLogin = new User();
 
-        int bytesRead = stream.Read(buffer, 0, tcpclnt.ReceiveBufferSize);
-        stream.ReadTimeout = 1;
-        string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+        userLogin.username = username;
+        userLogin.password = password;
 
-        Debug.Log("DATA IN : "+dataReceived);
+        string userToJson = JsonUtility.ToJson(userLogin);
+        // Sending
+        int toSendLen = System.Text.Encoding.ASCII.GetByteCount(userToJson);
+        byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(userToJson);
+        byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+        client.Send(toSendLenBytes);
+        client.Send(toSendBytes);
+    }
 
-        return response;
+    bool getResponse(Socket client){
 
+        byte[] rcvLenBytes = new byte[4];
+        client.Receive(rcvLenBytes);
+        int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+        byte[] rcvBytes = new byte[rcvLen];
+        client.Receive(rcvBytes);
+
+        return BitConverter.ToBoolean(rcvBytes, 0);
     }
 
 }
