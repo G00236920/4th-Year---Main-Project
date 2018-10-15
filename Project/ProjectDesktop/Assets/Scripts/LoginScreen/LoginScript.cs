@@ -1,57 +1,86 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Text;
+using System.Threading;
 
 public class LoginScript : MonoBehaviour {
 
-    //Using UDP Client
-    private UdpClient Client;
-    //Use the Ip and port as End Point
-    private IPEndPoint Ep;
+    private const int PORT_NO = 5000;
+    private const string SERVER_IP = "52.18.149.174";
+    
+    private string username;
+    private string password;
 
     public void ButtonClicked()
     {
 
+        //Get input from username Field
+        username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
+        //Get password from password field
+        password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
+        //Connect
+        ConnectToServer();
+
+    }
+
+    void ConnectToServer(){
+        
         Debug.Log("Connecting.....");
+        IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(SERVER_IP), PORT_NO);
 
-        try
-        {
-            TcpClient tcpclnt = new TcpClient();
+        Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        client.Connect(serverAddress);
 
-            tcpclnt.Connect("52.18.149.174", 5000);
-            // use the ipaddress as in the server program
-              
-            NetworkStream stream = tcpclnt.GetStream();
+        SendLoginDetails(client);
 
-			if (stream.CanWrite) {                 
-		
-                String username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
-                String password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
+        bool success = getResponse(client);
 
-                String data = username + " " + password;
-				             
-				byte[] serverMessageAsByteArray = Encoding.ASCII.GetBytes(data); 				
-				      
-				stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
- 
-			}          
-
-            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-
-            tcpclnt.Close();
-
+        if(success){
+            LoadNextScene();
+        } else{
+            //Show Error Asking to login again
         }
-        catch (Exception)
-        {
-            Debug.Log("Failed to Connect to Server");
-        }
+
+        client.Close();
+
+    }
+
+
+    void LoadNextScene(){
+        //Load the Lobby scene
+        SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
+    }
+
+    void SendLoginDetails(Socket client){
+
+        User userLogin = new User();
+
+        userLogin.username = username;
+        userLogin.password = password;
+
+        string userToJson = JsonUtility.ToJson(userLogin);
+        // Sending
+        int toSendLen = System.Text.Encoding.ASCII.GetByteCount(userToJson);
+        byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(userToJson);
+        byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+        client.Send(toSendLenBytes);
+        client.Send(toSendBytes);
+    }
+
+    bool getResponse(Socket client){
+
+        byte[] rcvLenBytes = new byte[4];
+        client.Receive(rcvLenBytes);
+        int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+        byte[] rcvBytes = new byte[rcvLen];
+        client.Receive(rcvBytes);
+
+        return BitConverter.ToBoolean(rcvBytes, 0);
     }
 
 }
