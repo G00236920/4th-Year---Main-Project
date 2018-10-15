@@ -9,7 +9,8 @@ import com.google.gson.Gson;
 
 public class ServerConnection implements Runnable {
 
-	Socket csocket;
+	private Socket csocket;
+	private boolean isFound;
 
 	ServerConnection(Socket csocket) {
 		this.csocket = csocket;
@@ -17,7 +18,6 @@ public class ServerConnection implements Runnable {
 
 	public void run() {
 		
-
 		try {
 			
 	        InputStream is = csocket.getInputStream();
@@ -28,7 +28,11 @@ public class ServerConnection implements Runnable {
 	        //Convert login info to a User object
 	        User user = getUserFromJson(received);
 	        
-	        System.out.println(user.getUsername()+" " +user.getPassword());
+	        this.isFound = SearchDatabase.search();
+	        
+	        //Output a line to the console
+	        System.out.println(user.getUsername()+" Has Logged in");
+	        
 	        //Send a Reply to the Unity Client
 	        respond(os);
 			
@@ -42,7 +46,7 @@ public class ServerConnection implements Runnable {
 		}
 	}
 
-	public static User getUserFromJson(String response) {
+	public User getUserFromJson(String response) {
 
 		Gson gson = new Gson();
 		User user = gson.fromJson(response, User.class);
@@ -51,27 +55,29 @@ public class ServerConnection implements Runnable {
 
 	}
 
-	public static void respond(OutputStream os) {
+	public void respond(OutputStream os) {
 		
-        String toSend = "Echo: ";
-        byte[] toSendBytes = toSend.getBytes();
+        byte[] toSendBytes = new byte[]{(byte) (isFound?1:0)};
         int toSendLen = toSendBytes.length;
         byte[] toSendLenBytes = new byte[4];
+        
         toSendLenBytes[0] = (byte)(toSendLen & 0xff);
         toSendLenBytes[1] = (byte)((toSendLen >> 8) & 0xff);
         toSendLenBytes[2] = (byte)((toSendLen >> 16) & 0xff);
         toSendLenBytes[3] = (byte)((toSendLen >> 24) & 0xff);
         
         try {
-			os.write(toSendLenBytes);
+			
+        	os.write(toSendLenBytes);
 	        os.write(toSendBytes);
+	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
         
 	}
 	
-	public static String receiveMessage(InputStream is) {
+	public String receiveMessage(InputStream is) {
 		
 		byte[] receivedBytes = null;
 		int len = 0;
@@ -79,8 +85,10 @@ public class ServerConnection implements Runnable {
         try {
             byte[] lenBytes = new byte[4];
 			is.read(lenBytes, 0, 4);
-			len = (((lenBytes[3] & 0xff) << 24) | ((lenBytes[2] & 0xff) << 16) |
-						((lenBytes[1] & 0xff) << 8) | (lenBytes[0] & 0xff));
+			len = (((lenBytes[3] & 0xff) << 24) 
+				| ((lenBytes[2] & 0xff) << 16) 
+				| ((lenBytes[1] & 0xff) << 8) 
+				| (lenBytes[0] & 0xff));
 	        receivedBytes = new byte[len];
 	        is.read(receivedBytes, 0, len);
 		} catch (IOException e) {
