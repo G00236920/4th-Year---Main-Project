@@ -11,6 +11,7 @@ public class ServerConnection implements Runnable {
 
 	private Socket csocket;
 	private boolean isFound;
+	private DatabaseConnection db;
 
 	ServerConnection(Socket csocket) {
 		this.csocket = csocket;
@@ -28,7 +29,7 @@ public class ServerConnection implements Runnable {
 	        //Convert login info to a User object
 	        User user = getUserFromJson(received);
 	        
-	        this.isFound = SearchDatabase.search();
+	        this.isFound = verifyUser(user);
 	        
 	        //Output a line to the console
 	        System.out.println(user.getUsername()+" Has Logged in");
@@ -44,6 +45,28 @@ public class ServerConnection implements Runnable {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+	}
+
+	private boolean verifyUser(User user) {
+		
+		boolean userfound = db.findUserName(user.getUsername());
+		
+		if(userfound) {
+			
+			boolean passwordMatched = db.verifyPassword(user.getUsername(), user.getPassword());
+			
+			if(passwordMatched) {
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 	public User getUserFromJson(String response) {
