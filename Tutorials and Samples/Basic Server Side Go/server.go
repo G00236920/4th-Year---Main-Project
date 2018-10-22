@@ -1,51 +1,64 @@
 package main
 
-import "net"
-import "fmt"
-import "bufio"
+import (
+	"fmt"
+	"net"
+	"os"
+	"container/list"
+)
 
-// only needed below for sample processing
+const (
+	CONN_HOST = ""
+	CONN_PORT = "5002"
+	CONN_TYPE = "tcp"
+)
+
+	
+type server struct {
+	username string
+	ipAddress  string
+}
 
 func main() {
-
-	fmt.Println("Launching server...")
-
-	// listen on all interfaces
-	ln, _ := net.Listen("tcp", ":5001")
-
-<<<<<<< HEAD
-  // listen on all interfaces
-  ln, _ := net.Listen("tcp", ":5001")
-=======
-	// accept connection on port
-	conn, _ := ln.Accept()
->>>>>>> 48f970f733c9c5e75dca9cc82de59342623af259
-
-	// run loop forever (or until ctrl-c)
-	for {
-		// will listen for message to process ending in newline (\n)
-		message, _ := bufio.NewReader(conn).ReadString('\n')
-		// output message received
-		if len(string(message)) > 0 {
-
-<<<<<<< HEAD
-  fmt.Print("Client Connected:")
-
-  // run loop forever (or until ctrl-c)
-  for {
-    // will listen for message to process ending in newline (\n)
-    message, _ := bufio.NewReader(conn).ReadString('\n')
-    // output message received
-    fmt.Print("Message Received:", string(message))
-    // sample process for string received
-    newmessage := strings.ToUpper(message)
-    // send new string back to client
-    conn.Write([]byte(newmessage + "\n"))
-  }
-=======
-			fmt.Print("Message Received:", string(message))
-		}
->>>>>>> 48f970f733c9c5e75dca9cc82de59342623af259
-
+	// Listen for incoming connections.
+	l, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
+	if err != nil {
+		fmt.Println("Error listening:", err.Error())
+		os.Exit(1)
 	}
+	// Close the listener when the application closes.
+	defer l.Close()
+
+	fmt.Println("Listening on " + CONN_HOST + ":" + CONN_PORT)
+
+	for {
+		// Listen for an incoming connection.
+		conn, err := l.Accept()
+
+		if err != nil {
+			fmt.Println("Error accepting: ", err.Error())
+			os.Exit(1)
+		}
+
+		// Handle connections in a new goroutine(eg Thread)
+		go handleRequest(conn)
+	}
+}
+
+// Handles incoming requests.
+func handleRequest(conn net.Conn) {
+
+	serverList := list.New()
+
+	s := server{username: "Sean", ipAddress: "127.0.0.1"}
+	serverList.PushFront(s);
+	t := server{username: "John", ipAddress: "127.0.0.1"}
+	serverList.PushFront(t);
+	q := server{username: "paul", ipAddress: "127.0.0.1"}
+	serverList.PushFront(q);
+
+	fmt.Println(conn.RemoteAddr())
+
+	// Close the connection when you're done with it.
+	conn.Close()
 }
