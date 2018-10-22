@@ -11,9 +11,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
-
-    const int PORT_NO = 5001;
-    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
+    private const int PORT_NO = 5002;
+    private const string SERVER_IP = "52.18.149.174";
 
     public void ButtonClicked() { 
 
@@ -21,29 +20,16 @@ public class MatchMakingScript : MonoBehaviour {
 
         try
         {
-            TcpClient tcpclnt = new TcpClient();
 
-            // use the ipaddress as in the server program
-            tcpclnt.Connect(SERVER_IP, PORT_NO);
-              
-            //Get the network Stream
-            NetworkStream stream = tcpclnt.GetStream();
+            Debug.Log("Connecting.....");
+            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(SERVER_IP), PORT_NO);
 
-			if (stream.CanWrite) {                 
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client.Connect(serverAddress);
 
-                //Create a User Object
-                Server server = new Server(IPAddress.Parse("52.18.149.174"), "me");
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(stream, server);
- 
-			}          
-            
-            //Load the Lobby scene
-            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-
+            getResponse(client);
                         
-            tcpclnt.Close();
+            client.Close();
 
         }
         catch (Exception)
@@ -51,4 +37,15 @@ public class MatchMakingScript : MonoBehaviour {
             Debug.Log("Failed to Connect to Server");
         }
     }
+
+    private void getResponse(Socket client)
+    {
+        byte[] bytes = new byte[2048];
+        client.Receive(bytes);
+
+        String responseData = System.Text.Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+
+        Debug.Log(responseData);
+    }
+
 }
