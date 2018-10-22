@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net"
 	"os"
-	"container/list"
+	"log"
+	"encoding/json"
+	db "./db"
 )
 
 const (
@@ -14,9 +16,9 @@ const (
 )
 
 	
-type server struct {
-	username string
-	ipAddress  string
+type Server struct {
+	Username string
+	IpAddress  string
 }
 
 func main() {
@@ -48,16 +50,14 @@ func main() {
 // Handles incoming requests.
 func handleRequest(conn net.Conn) {
 
-	serverList := list.New()
+	serverList := db.GetUsers()
 
-	s := server{username: "Sean", ipAddress: "127.0.0.1"}
-	serverList.PushFront(s);
-	t := server{username: "John", ipAddress: "127.0.0.1"}
-	serverList.PushFront(t);
-	q := server{username: "paul", ipAddress: "127.0.0.1"}
-	serverList.PushFront(q);
+	serverJson, err := json.Marshal(serverList)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	fmt.Println(conn.RemoteAddr())
+	conn.Write(serverJson)
 
 	// Close the connection when you're done with it.
 	conn.Close()
