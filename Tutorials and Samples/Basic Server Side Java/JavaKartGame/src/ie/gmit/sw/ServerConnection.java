@@ -52,7 +52,7 @@ public class ServerConnection implements Runnable {
 		boolean userfound = db.findUserName(user.getUsername());
 		
 		if(userfound) {
-			
+			/*
 			boolean passwordMatched = db.verifyPassword(user.getUsername(), user.getPassword());
 			
 			if(passwordMatched) {
@@ -60,7 +60,9 @@ public class ServerConnection implements Runnable {
 			}
 			else {
 				return false;
-			}
+			}*/
+			
+			return true;
 			
 		}
 		else {
