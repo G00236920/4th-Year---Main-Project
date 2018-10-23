@@ -11,6 +11,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
+    public GameObject MainPanel;
+    public GameObject ServerPanel;
     private const int PORT_NO = 5002;
     private const string SERVER_IP = "52.18.149.174";
 
@@ -46,6 +48,10 @@ public class MatchMakingScript : MonoBehaviour {
         String responseData = System.Text.Encoding.ASCII.GetString(bytes, 0, bytes.Length);
 
         Debug.Log(responseData);
+
+        ServerPanel.gameObject.SetActive (true);
+        MainPanel.gameObject.SetActive (false);
+
     }
 
 }
