@@ -12,43 +12,30 @@ using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
 
-    const int PORT_NO = 5001;
-    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
+    
+    private const int PORT_NO = 5002;
+    private const string SERVER_IP = "52.18.149.174";
+    private string username;
+    private string password;
 
-    public void ButtonClicked() { 
+    public void ButtonClicked()
+    {
 
-      Debug.Log("Connecting.....");
+        //Connect
+        ConnectToServer();
 
-        try
-        {
-            TcpClient tcpclnt = new TcpClient();
-
-            // use the ipaddress as in the server program
-            tcpclnt.Connect(SERVER_IP, PORT_NO);
-              
-            //Get the network Stream
-            NetworkStream stream = tcpclnt.GetStream();
-
-			if (stream.CanWrite) {                 
-
-                //Create a User Object
-                Server server = new Server(IPAddress.Parse("52.18.149.174"), "me");
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(stream, server);
- 
-			}          
-            
-            //Load the Lobby scene
-            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-
-                        
-            tcpclnt.Close();
-
-        }
-        catch (Exception)
-        {
-            Debug.Log("Failed to Connect to Server");
-        }
     }
+
+    void ConnectToServer(){
+        
+        Debug.Log("Connecting.....");
+        IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(SERVER_IP), PORT_NO);
+
+        Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        client.Connect(serverAddress);
+
+        client.Close();
+
+    }
+
 }
