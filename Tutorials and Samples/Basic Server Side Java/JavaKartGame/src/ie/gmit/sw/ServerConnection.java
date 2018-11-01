@@ -11,7 +11,6 @@ public class ServerConnection implements Runnable {
 
 	private Socket csocket;
 	private boolean isFound;
-	private DatabaseConnection db;
 
 	ServerConnection(Socket csocket) {
 		this.csocket = csocket;
@@ -48,7 +47,9 @@ public class ServerConnection implements Runnable {
 	}
 
 	private boolean verifyUser(User user) {
-		
+
+		DatabaseConnection db = new VerifyLogin();
+        
 		boolean userfound = db.findUserName(user.getUsername());
 		
 		if(userfound) {
