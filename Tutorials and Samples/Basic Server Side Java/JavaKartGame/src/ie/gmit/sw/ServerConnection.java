@@ -50,18 +50,9 @@ public class ServerConnection implements Runnable {
 
 		DatabaseConnection db = new VerifyLogin();
         
-		boolean userfound = db.findUserName(user.getUsername());
+		boolean verified = db.verifyPassword(user.getUsername(), user.getPassword());
 		
-		if(userfound) {
-			/*
-			boolean passwordMatched = db.verifyPassword(user.getUsername(), user.getPassword());
-			
-			if(passwordMatched) {
-				return true;
-			}
-			else {
-				return false;
-			}*/
+		if(verified) {
 			
 			return true;
 			
