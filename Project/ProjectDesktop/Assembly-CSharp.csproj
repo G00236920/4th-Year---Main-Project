@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\LobbyScreen\LobbyTopPanel.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\LoginScript.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\User.cs" />
+     <Compile Include="Assets\Scripts\MatchMakingScreen\MatchMakingScript.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\Server.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\ServerListScript.cs" />
      <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
