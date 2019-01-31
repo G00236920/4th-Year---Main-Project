@@ -10,11 +10,7 @@ import com.mongodb.client.model.Filters;
 public class VerifyLogin implements DatabaseConnection{
 
 	public void add(User user) {
-<<<<<<< HEAD
-		//HERE
-=======
-		//Add a new Account to the Database
->>>>>>> parent of d21432f4... Fixing incorrect login on server
+
 		
 	}
 	
