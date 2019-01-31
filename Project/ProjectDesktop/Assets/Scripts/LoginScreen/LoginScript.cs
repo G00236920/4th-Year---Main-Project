@@ -43,11 +43,9 @@ public class LoginScript : MonoBehaviour {
         //Get password from password field to be used to verify
         String password2 = GameObject.Find ("Password2").GetComponent<InputField>().text;
 
-        if(password1.Equals(password2)){
+        if(password1.Equals(password2) && password1.Length >=8){
 
             bool success = getResponse(client);
-            
-            Debug.Log(success);
 
             if(success){
                 LoadNextScene();
