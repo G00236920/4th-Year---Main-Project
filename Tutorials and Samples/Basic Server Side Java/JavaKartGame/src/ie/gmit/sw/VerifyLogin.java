@@ -16,7 +16,6 @@ public class VerifyLogin implements DatabaseConnection{
 	
 	public boolean findUserName(String username) {
 		//returns true if the user is in the mongoDB
-		@SuppressWarnings("resource")
 		MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
         
 		MongoDatabase database = mongoClient.getDatabase("usersdb");

@@ -39,6 +39,28 @@ public class ServerConnection implements Runnable {
 	private void createAttempt() {
 		//Code to verify account creation
 		
+		try {
+			DatabaseConnection db = new VerifyLogin();
+			
+	        InputStream is = csocket.getInputStream();
+	        OutputStream os = csocket.getOutputStream();
+	        
+	        //Receive Login info from unity
+	        String received = receiveMessage(is);
+	        
+	        boolean nameTaken = db.findUserName(received);
+	        
+	        //Send a Reply to the Unity Client
+	        respond(os, !nameTaken);
+			
+	        //Close Streams and Sockets
+			is.close();
+			os.close();
+			csocket.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	private boolean verifyUser(User user) {
@@ -48,9 +70,7 @@ public class ServerConnection implements Runnable {
 		boolean verified = db.verifyPassword(user.getUsername(), user.getPassword());
 		
 		if(verified) {
-			
 			return true;
-			
 		}
 		else {
 			return false;
@@ -67,9 +87,9 @@ public class ServerConnection implements Runnable {
 
 	}
 
-	public void respond(OutputStream os) {
+	public void respond(OutputStream os, boolean b) {
 		
-        byte[] toSendBytes = new byte[]{(byte) (isFound?1:0)};
+        byte[] toSendBytes = new byte[]{(byte) (b?1:0)};
         int toSendLen = toSendBytes.length;
         byte[] toSendLenBytes = new byte[4];
         
@@ -128,7 +148,7 @@ public class ServerConnection implements Runnable {
         System.out.println(user.getUsername()+" Has Logged in");
         
         //Send a Reply to the Unity Client
-        respond(os);
+        respond(os, isFound);
 		
         //Close Streams and Sockets
 		is.close();
