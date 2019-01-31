@@ -1,39 +1,19 @@
 package ie.gmit.sw;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 public class Runner
 {
 	
 	 public static void main(String[] args) {
 		 
-	     start(); 
-	 }
-	 
-	 static void start() {
+		 Listener l1 = new Listener(5000);
+		 Listener l2 = new Listener(5001);
 		 
-		    ServerSocket socket = null;
-			
-		    try {
-				
-				socket = new ServerSocket(5000);
-			    
-				System.out.println("Listening");
-			      
-			      while (true) {
-			    	  
-			         Socket sock = socket.accept();
-			         System.out.println("Connected");
-			         new Thread(new ServerConnection(sock)).start();
-			        
-			      }
-			      
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
+		 Thread t1 = new Thread(l1);
+		 Thread t2 = new Thread(l2);
+		 
+		 t1.start();
+	     t2.start();
+	    
 	 }
 
 }
