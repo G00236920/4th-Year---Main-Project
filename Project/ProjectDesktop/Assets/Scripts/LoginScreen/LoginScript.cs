@@ -10,6 +10,9 @@ using System.Threading;
 
 public class LoginScript : MonoBehaviour {
 
+    public GameObject mainPanel;
+    public GameObject createPanel;
+    public GameObject errorPanel;
     private const int PORT_NO = 5000;
     private const string SERVER_IP = "52.18.149.174";
     
@@ -28,6 +31,31 @@ public class LoginScript : MonoBehaviour {
 
     }
 
+    public void CreatePanel()
+    {        
+        mainPanel.SetActive(false);
+        errorPanel.SetActive(false);
+        createPanel.SetActive(true);
+        Debug.Log("Create Account");
+    }
+
+    public void BackButton()
+    {
+        mainPanel.SetActive(true);
+        errorPanel.SetActive(false);
+        createPanel.SetActive(false);
+        Debug.Log("Back Button Pressed");
+    }
+
+    public void ShowError()
+    {
+        mainPanel.SetActive(false);
+        errorPanel.SetActive(true);
+        createPanel.SetActive(false);
+
+        Debug.Log("Error Message");
+    }
+
     void ConnectToServer(){
         
         Debug.Log("Connecting.....");
@@ -43,7 +71,7 @@ public class LoginScript : MonoBehaviour {
         if(success){
             LoadNextScene();
         } else{
-            //Show Error Asking to login again
+            Debug.Log("Failed");
         }
 
         client.Close();
