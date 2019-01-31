@@ -50,11 +50,11 @@ public class LoginScript : MonoBehaviour {
             if(success){
                 LoadNextScene();
             } else {
-                ShowError();
+                ShowError("Username is Already Taken");
             }
         }
         else{
-            ShowError();
+            ShowError("Password must be 8 or More characters, Passwords must match");
         }
 
     }
@@ -79,7 +79,7 @@ public class LoginScript : MonoBehaviour {
         if(success){
             LoadNextScene();
         } else{
-            ShowError();
+            ShowError("Invalid Login Details");
         }
 
         client.Close();
@@ -134,9 +134,11 @@ public class LoginScript : MonoBehaviour {
         PanelSwitch(true, false, false);
     }
 
-    public void ShowError()
+    public void ShowError(String errorMessage)
     {
         PanelSwitch(false, true, false);
+        Text t = GameObject.Find("ErrorMessage").GetComponent<Text>();
+        t.text = errorMessage;
     }
     
     public void CreatePanel()
