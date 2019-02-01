@@ -52,6 +52,10 @@ public class ServerConnection implements Runnable {
 	        
 	        //Send a Reply to the Unity Client
 	        respond(os, !nameTaken);
+	        
+	        String message = receiveMessage(is);
+	        
+	        db.add(message);
 			
 	        //Close Streams and Sockets
 			is.close();
