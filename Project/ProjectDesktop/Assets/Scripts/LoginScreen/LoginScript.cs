@@ -48,6 +48,16 @@ public class LoginScript : MonoBehaviour {
             bool success = getResponse(client);
 
             if(success){
+                
+                User userLogin = new User();
+
+                userLogin.username = username;
+                userLogin.password = password1;
+
+                string userToJson = JsonUtility.ToJson(userLogin);
+
+                Send(client, userToJson);
+                
                 LoadNextScene();
             } else {
                 ShowError("Username is Already Taken");
