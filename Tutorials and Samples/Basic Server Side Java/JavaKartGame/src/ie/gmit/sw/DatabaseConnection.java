@@ -2,7 +2,7 @@ package ie.gmit.sw;
 
 public interface DatabaseConnection{
 	
-	public void add(User user);
+	public void add(String message);
 	
 	public boolean findUserName(String username);
 	
