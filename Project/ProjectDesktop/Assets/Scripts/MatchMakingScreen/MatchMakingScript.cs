@@ -12,18 +12,18 @@ using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
 
-    const int PORT_NO = 5002;
+    const int PORT_NO1 = 5002;
+    const int PORT_NO2 = 5003;
     private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
+    //private IPAddress SERVER_IP = IPAddress.Parse("127.0.0.1");
     private List<Server> ServerList;
 
-    public void ButtonClicked() { 
-
-      Debug.Log("Connecting.....");
+    public void Host() {
 
         try
         {
             Debug.Log("Connecting.....");
-            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO);
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);
 
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(serverAddress);
@@ -31,12 +31,33 @@ public class MatchMakingScript : MonoBehaviour {
             getResponse(client);
                         
             client.Close();
-
         }
         catch (Exception)
         {
             Debug.Log("Failed to Connect to Server");
         }
+        
+    }
+
+    public void ButtonClicked() {
+
+        try
+        {
+            Debug.Log("Connecting.....");
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
+
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client.Connect(serverAddress);
+            
+            getResponse(client);
+                        
+            client.Close();
+        }
+        catch (Exception)
+        {
+            Debug.Log("Failed to Connect to Server");
+        }
+
     }
 
     void getResponse(Socket client){
@@ -49,4 +70,9 @@ public class MatchMakingScript : MonoBehaviour {
         Debug.Log(messageString);
 
     }
+
+    void send(Socket client){    
+
+    }
+
 }
