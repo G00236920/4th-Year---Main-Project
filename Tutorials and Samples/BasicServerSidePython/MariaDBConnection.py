@@ -1,3 +1,5 @@
+#python 3.5  other versions can't use mysql.connector without getting error
+
 import mysql.connector
 import socket
 import xml.etree.cElementTree as etree
@@ -8,7 +10,7 @@ except ImportError:
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = "localhost"
-port = "5004"
+port = 5006
 addr = (host,port)
 s.connect(addr)
 
