@@ -13,20 +13,7 @@ host = "localhost"
 port = 5006
 addr = (host,port)
 s.connect(addr)
-
-def iparse(packet):
-    for _, element in etree.iterparse(packet):
-        print ("%s, %s" %(element.tag, element.text))
-        element.clear()
-    #if complete <event> node received, publish node
-
-data = "<feeds>"
-while 1:
-    chunk = s.recv(1024)
-    #replace the xml doc declarations as comments
-    data += (chunk.replace("<?","<!--")).replace("?>","-->")
-    iparse(StringIO(data))
-
+print ("Got connection from Python", addr)
 
 #MariaDB Connection
 con = mysql.connector.connect(port=5006,user='root',password='password',host='localhost',database='pythontest')
