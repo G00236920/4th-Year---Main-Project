@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net"
 	"os"
@@ -23,8 +24,8 @@ type Server struct {
 }
 
 func main() {
-	go listen(CONN_PORT1)
-	listen(CONN_PORT2)
+	go listen(CONN_PORT2)
+	listen(CONN_PORT1)
 }
 
 func listen(port string) {
@@ -75,12 +76,21 @@ func SendList(conn net.Conn) {
 
 	// Close the connection when you're done with it.
 	conn.Close()
+
 }
 
 // Handles incoming requests.
 func addToList(conn net.Conn) {
+	
+	ip, _ , _ := net.SplitHostPort(conn.RemoteAddr().String())
 
+	message, _ := bufio.NewReader(conn).ReadString('\n')
+
+	fmt.Println(message)
+
+	db.AddOne("stan", ip)
 
 	// Close the connection when you're done with it.
 	conn.Close()
+	
 }
