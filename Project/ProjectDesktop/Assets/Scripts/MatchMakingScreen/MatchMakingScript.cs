@@ -16,14 +16,12 @@ public class MatchMakingScript : MonoBehaviour {
     const int PORT_NO2 = 5003;
     private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
     private List<Server> ServerList;
-
-
+    public LobbyManager lobbyManager;
 
     public void ButtonClicked() {
 
         try
         {
-            Debug.Log("Connecting.....");
             IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
 
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -31,7 +29,6 @@ public class MatchMakingScript : MonoBehaviour {
             
             getResponse(client);
                         
-            client.Close();
         }
         catch (Exception)
         {
@@ -44,15 +41,13 @@ public class MatchMakingScript : MonoBehaviour {
 
         try
         {
-            Debug.Log("Connecting.....");
             IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);
 
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(serverAddress);
             
-            getResponse(client);
-                        
-            client.Close();
+            send(client);
+
         }
         catch (Exception)
         {
@@ -61,7 +56,7 @@ public class MatchMakingScript : MonoBehaviour {
         
     }
 
-    void getResponse(Socket client){
+    void getResponse(Socket client) {
 
         byte[] messageBytes = new byte[2048];
         int messageInt = client.Receive(messageBytes);
@@ -70,10 +65,17 @@ public class MatchMakingScript : MonoBehaviour {
 
         Debug.Log(messageString);
 
+        client.Close();
     }
 
-    void send(Socket client){    
+    void send(Socket client) {
 
+        string str = "text";
+
+        byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(str);
+        client.Send(toSendBytes);
+
+        client.Close();
     }
 
 }

@@ -8,7 +8,6 @@ namespace Prototype.NetworkLobby
     public class LobbyMainMenu : MonoBehaviour 
     {
         public LobbyManager lobbyManager;
-
         public RectTransform lobbyServerList;
         public RectTransform lobbyPanel;
 
@@ -24,11 +23,6 @@ namespace Prototype.NetworkLobby
             
         }
 
-        public void OnClickHost()
-        {
-            lobbyManager.StartHost();
-        }
-
         public void OnClickJoin()
         {
             lobbyManager.ChangeTo(lobbyPanel);
@@ -40,11 +34,6 @@ namespace Prototype.NetworkLobby
             lobbyManager.DisplayIsConnecting();
 
             lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
-        }
-
-        public void OnClickMatchMaker()
-        {
-
         }
 
         public void OnClickCreateMatchmakingGame()
