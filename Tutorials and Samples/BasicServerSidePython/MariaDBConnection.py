@@ -1,7 +1,10 @@
 import mysql.connector
 import socket
 import xml.etree.cElementTree as etree
-from io.StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = "localhost"
