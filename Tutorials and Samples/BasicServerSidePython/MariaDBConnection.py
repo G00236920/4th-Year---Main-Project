@@ -11,7 +11,9 @@ def main():
     addr = (host,port)
     s.connect(addr)
     print ("Got connection from Python", addr)
-    readXML()
+   
+   # readXML()
+    readDB()
 
 def readXML():
     from xml.dom import minidom
@@ -51,7 +53,6 @@ def writeToDB(playerNames,playerScore):
         
         records_to_insert = [ (playerNames[0],playerScore[0]) ,
                             (playerNames[1],playerScore[1])
-                            
                             ]
         sql_insert_query = " INSERT INTO test (playerName, score) VALUES (%s,%s) "
         myCursor = con.cursor()
@@ -67,6 +68,35 @@ def writeToDB(playerNames,playerScore):
     myCursor.close()
     con.close()
 
+def readDB():
+    playerNames = []
+    playerScore = []
+    con = mysql.connector.connect(port=5006,user='root',password='password',host='localhost',database='pythontest')
+
+    cursor = con.cursor()
+    query = ("SELECT playerName , score FROM test")
+
+    cursor.execute(query)
+
+    for (playerName,score) in cursor:
+        playerNames.append(playerName)
+        playerScore.append(score)
+    print(playerNames ,playerScore )
+    writeToXML(playerNames ,playerScore )
+
+def writeToXML(playerNames ,playerScore ):
+    import xml.etree.ElementTree as ET
+
+
+    usrconfig = ET.Element("data")
+    usrconfig = ET.SubElement(usrconfig,"results")
+    for name in range(len( playerNames)):
+            usr = ET.SubElement(usrconfig,"name")
+            usr.text = str(playerNames[name])
+    tree = ET.ElementTree(usrconfig)
+    tree.write("details.xml",encoding='utf-8', xml_declaration=True)
+
+    
 
 
 def mariaConn():
