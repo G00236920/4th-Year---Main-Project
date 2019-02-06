@@ -51,6 +51,7 @@ def writeToDB(playerNames,playerScore):
         
         records_to_insert = [ (playerNames[0],playerScore[0]) ,
                             (playerNames[1],playerScore[1])
+                            
                             ]
         sql_insert_query = " INSERT INTO test (playerName, score) VALUES (%s,%s) "
         myCursor = con.cursor()
