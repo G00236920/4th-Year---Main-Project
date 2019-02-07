@@ -19,7 +19,6 @@ public class ServerConnection implements Runnable {
 	public void run() {
 		
 		try {
-
 				switch(this.csocket.getLocalPort()) {
 				case 5000:
 					loginAttempt();
@@ -55,16 +54,21 @@ public class ServerConnection implements Runnable {
 	        
 	        String message = receiveMessage(is);
 	        
-	        db.add(message);
-			
-	        //Close Streams and Sockets
+			Gson gson = new Gson();
+			User user = gson.fromJson(message, User.class);
+	        
+			//Close Streams and Sockets
+			csocket.close();
 			is.close();
 			os.close();
-			csocket.close();
+			
+	        db.add(gson.toJson(user));
+			
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
+
 	}
 
 	private boolean verifyUser(User user) {
@@ -147,9 +151,6 @@ public class ServerConnection implements Runnable {
         User user = getUserFromJson(received);
         
         this.isFound = verifyUser(user);
-        
-        //Output a line to the console
-        System.out.println(user.getUsername()+" Has Logged in");
         
         //Send a Reply to the Unity Client
         respond(os, isFound);

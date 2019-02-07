@@ -3,6 +3,7 @@ package ie.gmit.sw;
 import org.bson.Document;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
@@ -14,12 +15,19 @@ public class VerifyLogin implements DatabaseConnection{
 		MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
         
 		MongoDatabase database = mongoClient.getDatabase("usersdb");
-        
+
         MongoCollection<Document> collection = database.getCollection("users");
         
         Document doc = Document.parse( user );
         
-        collection.insertOne(doc);
+        try {
+        	
+        	System.out.println(user);
+        	collection.insertOne(doc);
+        }
+        catch(MongoException e) {
+        	System.out.println(e);
+        }
         
         System.out.println("New User Added to Database");
         
@@ -33,7 +41,7 @@ public class VerifyLogin implements DatabaseConnection{
 		MongoDatabase database = mongoClient.getDatabase("usersdb");
         
         MongoCollection<Document> collection = database.getCollection("users");
-        Document myDoc = collection.find(Filters.eq("uname", username)).first();
+        Document myDoc = collection.find(Filters.eq("username", username)).first();
         
         mongoClient.close();
         
@@ -54,7 +62,7 @@ public class VerifyLogin implements DatabaseConnection{
 		MongoDatabase database = mongoClient.getDatabase("usersdb");
         
         MongoCollection<Document> collection = database.getCollection("users");
-        Document myDoc = collection.find(Filters.eq("uname", username)).first();
+        Document myDoc = collection.find(Filters.eq("username", username)).first();
         
         mongoClient.close();
         
