@@ -12,43 +12,70 @@ using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
 
-    const int PORT_NO = 5001;
+    const int PORT_NO1 = 5002;
+    const int PORT_NO2 = 5003;
     private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
+    private List<Server> ServerList;
+    public LobbyManager lobbyManager;
 
-    public void ButtonClicked() { 
-
-      Debug.Log("Connecting.....");
+    public void ButtonClicked() {
 
         try
         {
-            TcpClient tcpclnt = new TcpClient();
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
 
-            // use the ipaddress as in the server program
-            tcpclnt.Connect(SERVER_IP, PORT_NO);
-              
-            //Get the network Stream
-            NetworkStream stream = tcpclnt.GetStream();
-
-			if (stream.CanWrite) {                 
-
-                //Create a User Object
-                Server server = new Server(IPAddress.Parse("52.18.149.174"), "me");
-
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(stream, server);
- 
-			}          
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client.Connect(serverAddress);
             
-            //Load the Lobby scene
-            SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-
+            getResponse(client);
                         
-            tcpclnt.Close();
+        }
+        catch (Exception)
+        {
+            Debug.Log("Failed to Connect to Server");
+        }
+
+    }
+    
+    public void Host() {
+
+        try
+        {
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);
+
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client.Connect(serverAddress);
+            
+            send(client);
 
         }
         catch (Exception)
         {
             Debug.Log("Failed to Connect to Server");
         }
+        
     }
+
+    void getResponse(Socket client) {
+
+        byte[] messageBytes = new byte[2048];
+        int messageInt = client.Receive(messageBytes);
+        
+        string messageString = Encoding.ASCII.GetString(messageBytes,0,messageInt);
+
+        Debug.Log(messageString);
+
+        client.Close();
+    }
+
+    void send(Socket client) {
+
+        string str = "text";
+
+        byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(str);
+        client.Send(toSendBytes);
+
+        client.Close();
+    }
+
 }

@@ -1,51 +1,96 @@
 package main
 
-import "net"
-import "fmt"
-import "bufio"
+import (
+	"bufio"
+	"fmt"
+	"net"
+	"os"
+	"log"
+	"encoding/json"
+	db "./db"
+)
 
-// only needed below for sample processing
+const (
+	CONN_HOST = ""
+	CONN_PORT1 = "5002"
+	CONN_PORT2 = "5003"
+	CONN_TYPE = "tcp"
+)
+
+	
+type Server struct {
+	Username string
+	IpAddress  string
+}
 
 func main() {
+	go listen(CONN_PORT2)
+	listen(CONN_PORT1)
+}
 
-	fmt.Println("Launching server...")
+func listen(port string) {
 
-	// listen on all interfaces
-	ln, _ := net.Listen("tcp", ":5001")
+	// Listen for incoming connections.
+	l, err := net.Listen(CONN_TYPE, CONN_HOST+":"+port)
+	if err != nil {
+		fmt.Println("Error listening:", err.Error())
+		os.Exit(1)
+	}
+	
+	// Close the listener when the application closes.
+	defer l.Close()
 
-<<<<<<< HEAD
-  // listen on all interfaces
-  ln, _ := net.Listen("tcp", ":5001")
-=======
-	// accept connection on port
-	conn, _ := ln.Accept()
->>>>>>> 48f970f733c9c5e75dca9cc82de59342623af259
+	fmt.Println("Listening on " + CONN_HOST + ":" + port)
 
-	// run loop forever (or until ctrl-c)
 	for {
-		// will listen for message to process ending in newline (\n)
-		message, _ := bufio.NewReader(conn).ReadString('\n')
-		// output message received
-		if len(string(message)) > 0 {
+		// Listen for an incoming connection.
+		conn, err := l.Accept()
 
-<<<<<<< HEAD
-  fmt.Print("Client Connected:")
-
-  // run loop forever (or until ctrl-c)
-  for {
-    // will listen for message to process ending in newline (\n)
-    message, _ := bufio.NewReader(conn).ReadString('\n')
-    // output message received
-    fmt.Print("Message Received:", string(message))
-    // sample process for string received
-    newmessage := strings.ToUpper(message)
-    // send new string back to client
-    conn.Write([]byte(newmessage + "\n"))
-  }
-=======
-			fmt.Print("Message Received:", string(message))
+		if err != nil {
+			fmt.Println("Error accepting: ", err.Error())
+			os.Exit(1)
 		}
->>>>>>> 48f970f733c9c5e75dca9cc82de59342623af259
+
+		// Handle connections in a new goroutine(eg Thread)
+		switch port {
+		case "5002":
+			go SendList(conn)
+		case "5003":
+			go addToList(conn)
+		}
 
 	}
+}
+
+// Handles incoming requests.
+func SendList(conn net.Conn) {
+
+	serverList := db.GetUsers()
+
+	serverJson, err := json.Marshal(serverList)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	conn.Write(serverJson)
+
+	// Close the connection when you're done with it.
+	conn.Close()
+
+}
+
+// Handles incoming requests.
+func addToList(conn net.Conn) {
+	
+	ip, _ , _ := net.SplitHostPort(conn.RemoteAddr().String())
+
+	message, _ := bufio.NewReader(conn).ReadString('\n')
+
+	fmt.Println(message)
+
+	db.AddOne("stan", ip)
+
+	// Close the connection when you're done with it.
+	conn.Close()
+	
 }
