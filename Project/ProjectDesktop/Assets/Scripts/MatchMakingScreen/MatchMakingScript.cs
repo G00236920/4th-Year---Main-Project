@@ -11,51 +11,52 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MatchMakingScript : MonoBehaviour {
-<<<<<<< HEAD
 
-    const int PORT_NO = 5002;
+    const int PORT_NO1 = 5002;
+    const int PORT_NO2 = 5003;
     private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
     private List<Server> ServerList;
-=======
-    private const int PORT_NO = 5002;
-    private const string SERVER_IP = "52.18.149.174";
->>>>>>> master
+    public LobbyManager lobbyManager;
 
-    public void ButtonClicked() { 
-
-      Debug.Log("Connecting.....");
+    public void ButtonClicked() {
 
         try
         {
-<<<<<<< HEAD
-            Debug.Log("Connecting.....");
-            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO);
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
 
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(serverAddress);
             
-=======
+            getResponse(client);
+                        
+        }
+        catch (Exception)
+        {
+            Debug.Log("Failed to Connect to Server");
+        }
 
-            Debug.Log("Connecting.....");
-            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse(SERVER_IP), PORT_NO);
+    }
+    
+    public void Host() {
+
+        try
+        {
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);
 
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             client.Connect(serverAddress);
-
->>>>>>> master
-            getResponse(client);
-                        
-            client.Close();
+            
+            send(client);
 
         }
         catch (Exception)
         {
             Debug.Log("Failed to Connect to Server");
         }
+        
     }
 
-<<<<<<< HEAD
-    void getResponse(Socket client){
+    void getResponse(Socket client) {
 
         byte[] messageBytes = new byte[2048];
         int messageInt = client.Receive(messageBytes);
@@ -64,17 +65,17 @@ public class MatchMakingScript : MonoBehaviour {
 
         Debug.Log(messageString);
 
-    }
-=======
-    private void getResponse(Socket client)
-    {
-        byte[] bytes = new byte[2048];
-        client.Receive(bytes);
-
-        String responseData = System.Text.Encoding.ASCII.GetString(bytes, 0, bytes.Length);
-
-        Debug.Log(responseData);
+        client.Close();
     }
 
->>>>>>> master
+    void send(Socket client) {
+
+        string str = "text";
+
+        byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(str);
+        client.Send(toSendBytes);
+
+        client.Close();
+    }
+
 }

@@ -1,7 +1,6 @@
 package db
 
 import (
-    "fmt"
 	"github.com/mediocregopher/radix.v2/redis"
 	"log"
 )
@@ -49,7 +48,7 @@ func GetUsers() []User {
 
 }
 
-func addOne(user string, ip string){
+func AddOne(user string, ip string){
 
 	conn, err := redis.Dial(protocol, address)
 	if err != nil {
@@ -62,7 +61,8 @@ func addOne(user string, ip string){
     // Check the Err field of the *Resp object for any errors.
     if resp.Err != nil {
         log.Fatal(resp.Err)
-    }
+	}
 
-    fmt.Println("Address Added!")
+	conn.Close()
+
 }

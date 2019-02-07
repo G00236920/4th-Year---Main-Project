@@ -19,30 +19,51 @@ public class ServerConnection implements Runnable {
 	public void run() {
 		
 		try {
+
+				switch(this.csocket.getLocalPort()) {
+				case 5000:
+					loginAttempt();
+					break;
+				case 5001:
+					createAttempt();
+					break;
+					default:
+				}
+
+
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	private void createAttempt() {
+		//Code to verify account creation
+		
+		try {
+			DatabaseConnection db = new VerifyLogin();
 			
 	        InputStream is = csocket.getInputStream();
 	        OutputStream os = csocket.getOutputStream();
 	        
 	        //Receive Login info from unity
 	        String received = receiveMessage(is);
-	        //Convert login info to a User object
-	        User user = getUserFromJson(received);
 	        
-	        this.isFound = verifyUser(user);
-	        
-	        //Output a line to the console
-	        System.out.println(user.getUsername()+" Has Logged in");
+	        boolean nameTaken = db.findUserName(received);
 	        
 	        //Send a Reply to the Unity Client
-	        respond(os);
+	        respond(os, !nameTaken);
+	        
+	        String message = receiveMessage(is);
+	        
+	        db.add(message);
 			
 	        //Close Streams and Sockets
 			is.close();
 			os.close();
 			csocket.close();
-
 		} catch (IOException e) {
-			System.out.println(e);
+			
+			e.printStackTrace();
 		}
 	}
 
@@ -50,21 +71,10 @@ public class ServerConnection implements Runnable {
 
 		DatabaseConnection db = new VerifyLogin();
         
-		boolean userfound = db.findUserName(user.getUsername());
+		boolean verified = db.verifyPassword(user.getUsername(), user.getPassword());
 		
-		if(userfound) {
-			/*
-			boolean passwordMatched = db.verifyPassword(user.getUsername(), user.getPassword());
-			
-			if(passwordMatched) {
-				return true;
-			}
-			else {
-				return false;
-			}*/
-			
+		if(verified) {
 			return true;
-			
 		}
 		else {
 			return false;
@@ -81,9 +91,9 @@ public class ServerConnection implements Runnable {
 
 	}
 
-	public void respond(OutputStream os) {
+	public void respond(OutputStream os, boolean b) {
 		
-        byte[] toSendBytes = new byte[]{(byte) (isFound?1:0)};
+        byte[] toSendBytes = new byte[]{(byte) (b?1:0)};
         int toSendLen = toSendBytes.length;
         byte[] toSendLenBytes = new byte[4];
         
@@ -124,6 +134,30 @@ public class ServerConnection implements Runnable {
         
         return new String(receivedBytes, 0, len);
         
+	}
+	
+	public void loginAttempt() throws IOException {
+		
+        InputStream is = csocket.getInputStream();
+        OutputStream os = csocket.getOutputStream();
+        
+        //Receive Login info from unity
+        String received = receiveMessage(is);
+        //Convert login info to a User object
+        User user = getUserFromJson(received);
+        
+        this.isFound = verifyUser(user);
+        
+        //Output a line to the console
+        System.out.println(user.getUsername()+" Has Logged in");
+        
+        //Send a Reply to the Unity Client
+        respond(os, isFound);
+		
+        //Close Streams and Sockets
+		is.close();
+		os.close();
+		csocket.close();
 	}
 
 }
