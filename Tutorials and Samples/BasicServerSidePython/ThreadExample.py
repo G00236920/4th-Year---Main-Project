@@ -2,6 +2,7 @@
 
 import threading
 import time
+import MariaDBConnection
 
 exitFlag = 0
 
@@ -25,7 +26,7 @@ def print_time(threadName, counter, delay):
       counter -= 1
 
 # Create new threads
-thread1 = myThread(1, "Thread-1", 1)
+thread1 = myThread(MariaDBConnection.startServer)
 thread2 = myThread(2, "Thread-2", 2)
 
 # Start new Threads

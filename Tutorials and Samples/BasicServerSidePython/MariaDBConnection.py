@@ -5,34 +5,31 @@ import xml.etree.cElementTree as etree
 
 from io import StringIO
 
-def startServer(port,xml_data):
-    print ("Starting server, listing to port %d" % port)
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(("", port))
-    s.listen(5)
+def startServer():
+    # get the hostname
+    host = socket.gethostname()
+    port = 5004  # initiate port no above 1024
 
+    server_socket = socket.socket()  # get instance
+    # look closely. The bind() function takes tuple as argument
+    server_socket.bind((host, port))  # bind host address and port together
+
+    # configure how many client the server can listen simultaneously
+    server_socket.listen(2)
+    conn, address = server_socket.accept()  # accept new connection
+    print("Connection from: " + str(address))
     while True:
-        client, address = s.accept()
-        print ("Accepted connection from remote client at " + str(address))
+        # receive data stream. it won't accept data packet greater than 1024 bytes
+        data = conn.recv(1024).decode()
+        #writeToDB needs to to get data. So data will need to broke into playerName/playerscore
+        if not data:
+            # if data is not received break
+            break
+        print("from connected user: " + str(data))
+        data = input(' -> ')
+        conn.send(data.encode())  # send data to the client
 
-        client.send(xml_data) #first time, XML gets sent
-
-        while True:
-
-            data = client.recv(1024)
-
-            keyword = data.split("$",1)[0] #split only first "$"
-            if keyword == "get": #client wants to get data
-                client.send(xml_data)
-            elif keyword == "send": #client wants to send data
-                received_data =  data.split("$",1)[1]
-                #received_data can be used for further processing
-            else:
-                break
-
-        client.close()
-
-    s.close()
+    conn.close()  # close the connection
 
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
