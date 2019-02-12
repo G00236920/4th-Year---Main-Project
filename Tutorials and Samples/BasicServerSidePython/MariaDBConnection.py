@@ -4,6 +4,36 @@ import socket
 import xml.etree.cElementTree as etree
 
 from io import StringIO
+
+def startServer(port,xml_data):
+    print ("Starting server, listing to port %d" % port)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("", port))
+    s.listen(5)
+
+    while True:
+        client, address = s.accept()
+        print ("Accepted connection from remote client at " + str(address))
+
+        client.send(xml_data) #first time, XML gets sent
+
+        while True:
+
+            data = client.recv(1024)
+
+            keyword = data.split("$",1)[0] #split only first "$"
+            if keyword == "get": #client wants to get data
+                client.send(xml_data)
+            elif keyword == "send": #client wants to send data
+                received_data =  data.split("$",1)[1]
+                #received_data can be used for further processing
+            else:
+                break
+
+        client.close()
+
+    s.close()
+
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = "localhost"
