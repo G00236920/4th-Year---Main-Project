@@ -217,9 +217,10 @@ GameObject:
   - component: {fileID: 111668483}
   - component: {fileID: 111668482}
   - component: {fileID: 111668481}
+  - component: {fileID: 111668488}
   - component: {fileID: 111668487}
   m_Layer: 5
-  m_Name: MainPanel
+  m_Name: LobbyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,10 +436,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 111668480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2d2d41bd7a33945a0ba93c4e318bff, type: 3}
+  m_Script: {fileID: 11500000, guid: f693dd0d63ab12645a8d3207e2ee5d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 155310, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
+  lobbyManager: {fileID: 0}
+--- !u!114 &111668488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111668480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0312403f252434c912587ebde8fb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyManager: {fileID: 111668482}
+  lobbyServerList: {fileID: 0}
+  lobbyPanel: {fileID: 109693837}
+  ipInput: {fileID: 1380253571}
+  matchNameInput: {fileID: 0}
 --- !u!1 &300335066
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -229.5, y: 283}
+  m_AnchoredPosition: {x: -2330, y: 1641}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &487070218
@@ -1263,7 +1280,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1999703433}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1340,8 +1357,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1093.0048, y: -50}
-  m_SizeDelta: {x: 2186.0095, y: 100}
+  m_AnchoredPosition: {x: 1131.5682, y: -50}
+  m_SizeDelta: {x: 2263.1365, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &838231816
 MonoBehaviour:
@@ -1915,7 +1932,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1400394118}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2454,8 +2471,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400394119}
-  - component: {fileID: 1400394118}
   - component: {fileID: 1400394117}
+  - component: {fileID: 1400394118}
   m_Layer: 0
   m_Name: MatchMakingController
   m_TagString: Untagged
@@ -2487,10 +2504,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1400394116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2d2d41bd7a33945a0ba93c4e318bff, type: 3}
+  m_Script: {fileID: 11500000, guid: f693dd0d63ab12645a8d3207e2ee5d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 155310, guid: c0978251ff7b10d4fb954a4b56acd9f0, type: 2}
+  lobbyManager: {fileID: 111668482}
 --- !u!4 &1400394119
 Transform:
   m_ObjectHideFlags: 0

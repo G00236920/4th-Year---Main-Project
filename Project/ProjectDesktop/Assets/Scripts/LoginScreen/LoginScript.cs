@@ -19,7 +19,7 @@ public class LoginScript : MonoBehaviour {
     private string username;
     private string password;
 
-    public void ButtonClicked()
+    public void Connect()
     {
         //Get input from username Field
         username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
