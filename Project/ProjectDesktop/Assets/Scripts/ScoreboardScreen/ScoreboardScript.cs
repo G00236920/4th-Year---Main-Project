@@ -10,11 +10,32 @@ using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScoreboardScript : MonoBehaviour {
+public class ScoreboardScript : MonoBehaviour
+{
+    const int PORT_NO1 = 5004;
+    const int PORT_NO2 = 5005;// not being used yet
+    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
+
 
     public void ButtonClicked()
     {
-        CreateXml();
+        CreateXml();// works creates xml file
+        try
+        {
+            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
+
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            client.Connect(serverAddress);
+
+            // send(client);
+
+        }// not working yet
+        catch (Exception)
+        {
+            Debug.Log("Failed to Connect to Server");
+        }
+
+
 
     } //ButtonClicked 
 
@@ -47,10 +68,7 @@ public class ScoreboardScript : MonoBehaviour {
 public class Player
 {
     public string Username { get; set; }
-    
+
     public int Score { get; set; }
 
-   
-    
 }
-
