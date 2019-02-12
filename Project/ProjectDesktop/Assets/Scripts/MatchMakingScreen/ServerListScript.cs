@@ -8,8 +8,8 @@ public class ServerListScript : MonoBehaviour {
     public GameObject ServerPanel;
 
 	public void CancelClicked(){
+		ServerPanel.gameObject.SetActive (false);
         MainPanel.gameObject.SetActive (true);
-        ServerPanel.gameObject.SetActive (false);
 	}
 
 	public void RefreshClicked(){

@@ -16,22 +16,15 @@ namespace Prototype.NetworkLobby
 
 		public LobbyManager lobbyManager;
 
-		public void ButtonClicked() {
+		public GameObject mainPanel;
+		public GameObject serverPanel;
 
-			try
-			{
-				IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
+		public void findGame() {
 
-				Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-				client.Connect(serverAddress);
-				
-				getResponse(client);
-							
-			}
-			catch (Exception)
-			{
-				Debug.Log("Failed to Connect to Server");
-			}
+			connectToServer();
+			
+			mainPanel.SetActive(false);
+			serverPanel.SetActive(true);
 
 		}
 		
@@ -76,6 +69,23 @@ namespace Prototype.NetworkLobby
 			client.Send(toSendBytes);
 
 			client.Close();
+		}
+
+		void connectToServer(){
+			try
+			{
+				IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
+
+				Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+				client.Connect(serverAddress);
+				
+				getResponse(client);
+							
+			}
+			catch (Exception)
+			{
+				Debug.Log("Failed to Connect to Server");
+			}
 		}
 	}
 }
