@@ -2843,6 +2843,7 @@ MonoBehaviour:
   lobbyManager: {fileID: 111668482}
   mainPanel: {fileID: 2052559572}
   serverPanel: {fileID: 1605047898}
+  backButton: {fileID: 0}
 --- !u!4 &1400394119
 Transform:
   m_ObjectHideFlags: 0

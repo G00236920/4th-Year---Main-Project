@@ -6,10 +6,29 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 [System.Serializable]
-public class User  {
+public class User : MonoBehaviour {
 
-   public string username;
-   public string password;
+   private static User _instance;
+
+   public string username { get; set; }
+   public string password { get; set; }
+
+   public static User Instance
+   {
+      get { return _instance; }
+   }
+
+   private void Awake()
+   {
+      if (_instance != null && _instance != this)
+      {
+         Destroy(this.gameObject);
+         return;
+      }
+
+      _instance = this;
+      DontDestroyOnLoad(this.gameObject);
+   }
 }
 
 
