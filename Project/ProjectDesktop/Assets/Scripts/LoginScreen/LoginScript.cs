@@ -57,7 +57,8 @@ public class LoginScript : MonoBehaviour {
                 string userToJson = JsonUtility.ToJson(userLogin);
 
                 Send(client, userToJson);
-                
+
+                PlayerDetails.Instance.setUsername(userLogin.username);
                 LoadNextScene();
             } else {
                 ShowError("Username is Already Taken");
@@ -87,6 +88,8 @@ public class LoginScript : MonoBehaviour {
         bool success = getResponse(client);
 
         if(success){
+
+            PlayerDetails.Instance.setUsername(userLogin.username);
             LoadNextScene();
         } else{
             ShowError("Invalid Login Details");
