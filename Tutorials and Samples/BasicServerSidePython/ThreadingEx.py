@@ -9,18 +9,16 @@ print_lock = threading.Lock()
 
 
 def exampleJob(worker):
-    lock.acquire() # thread blocks at this line until it can obtain lock
-    
+      
     time.sleep(.5) # pretend to do some work.
     if(worker == 0):
-        #MariaDBConnection.startServer
+        MariaDBConnection.startServer
         print("Thread 1 Start")
         
     elif(worker == 1):
         #thread 2 start
         print("Thread 2 Start")
 
-    lock.release()
 
 # The threader thread pulls an worker from the queue and processes it
 def threader():
