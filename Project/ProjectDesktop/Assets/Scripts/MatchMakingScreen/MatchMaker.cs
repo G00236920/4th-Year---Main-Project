@@ -61,8 +61,7 @@ namespace Prototype.NetworkLobby
 
 		void send(Socket client) {
 
-			Debug.Log(PlayerDetails.Instance.getUsername());
-			byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes("text");
+			byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(PlayerDetails.Instance.getUsername());
 			client.Send(toSendBytes);
 
 			client.Close();
