@@ -13,9 +13,7 @@ namespace Prototype.NetworkLobby
 		const int PORT_NO2 = 5003;
 		private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
 		private List<Server> ServerList;
-
 		public LobbyManager lobbyManager;
-
 		public GameObject mainPanel;
 		public GameObject serverPanel;
 
@@ -63,9 +61,8 @@ namespace Prototype.NetworkLobby
 
 		void send(Socket client) {
 
-			string str = "text";
-
-			byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(str);
+			Debug.Log(PlayerDetails.Instance.getUsername());
+			byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes("text");
 			client.Send(toSendBytes);
 
 			client.Close();
