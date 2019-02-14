@@ -19,18 +19,17 @@ public class LoginScript : MonoBehaviour {
     private string username;
     private string password;
 
-    public void Connect() {
-
+    public void ButtonClicked()
+    {
         //Get input from username Field
-        User.Instance.username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
+        username =  GameObject.Find ("UsernameField").GetComponent<InputField>().text;
         //Get password from password field
-        User.Instance.password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
-
+        password = GameObject.Find ("PasswordField").GetComponent<InputField>().text;
         //Connect
         ConnectToServer();
     }
 
-    public void CreateUser() {
+    public void CreateUser(){
 
         Socket client = connect(PORT_NO_CREATE);
 
@@ -49,16 +48,17 @@ public class LoginScript : MonoBehaviour {
             bool success = getResponse(client);
 
             if(success){
+                
+                User userLogin = new User();
 
-                User.Instance.username = username;
-                User.Instance.password = password1; 
+                userLogin.username = username;
+                userLogin.password = password1;
 
-                string userToJson = JsonUtility.ToJson(User.Instance);
+                string userToJson = JsonUtility.ToJson(userLogin);
 
                 Send(client, userToJson);
                 
                 LoadNextScene();
-                
             } else {
                 ShowError("Username is Already Taken");
             }
@@ -75,9 +75,12 @@ public class LoginScript : MonoBehaviour {
 
         Socket client = connect(PORT_NO_LOGIN);
 
-        string userToJson = JsonUtility.ToJson(User.Instance);
+        User userLogin = new User();
 
-        Debug.Log(userToJson);
+        userLogin.username = username;
+        userLogin.password = password;
+
+        string userToJson = JsonUtility.ToJson(userLogin);
 
         Send(client, userToJson);
 
