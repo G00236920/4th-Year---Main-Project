@@ -88,7 +88,7 @@ func addToList(conn net.Conn) {
 
 	fmt.Println(message)
 
-	db.AddOne("stan", ip)
+	db.AddOne(message, ip)
 
 	// Close the connection when you're done with it.
 	conn.Close()
