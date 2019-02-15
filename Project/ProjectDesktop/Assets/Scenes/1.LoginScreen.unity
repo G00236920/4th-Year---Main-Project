@@ -2282,9 +2282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b498bb04425604d8c682f976c5abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPanel: {fileID: 2087649382}
-  createPanel: {fileID: 1187086621}
-  errorPanel: {fileID: 762646849}
+  mainPanel: {fileID: 0}
+  createPanel: {fileID: 0}
+  errorPanel: {fileID: 0}
 --- !u!1 &1312510649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961291844}
-  - component: {fileID: 1961291845}
+  - component: {fileID: 1961291848}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -3169,7 +3169,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1961291845
+--- !u!114 &1961291848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1961291843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28239ef6c3b276f4f80057cddff74a52, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9eda6bfa8193b44a93d232346df1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1989133946

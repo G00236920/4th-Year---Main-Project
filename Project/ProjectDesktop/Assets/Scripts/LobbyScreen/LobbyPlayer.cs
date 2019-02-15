@@ -14,7 +14,6 @@ namespace Prototype.NetworkLobby
         static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
-
         public Button colorButton;
         public InputField nameInput;
         public Button readyButton;
@@ -41,6 +40,10 @@ namespace Prototype.NetworkLobby
         //static Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
+        void Start()
+        {
+            nameInput.interactable = false;
+        }
 
         public override void OnClientEnterLobby()
         {
@@ -116,8 +119,10 @@ namespace Prototype.NetworkLobby
             readyButton.interactable = true;
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
-            if (playerName == "")
+            if (playerName == ""){
                 CmdNameChanged(PlayerDetails.Instance.getUsername());
+                PlayerDetails.Instance.setPos(LobbyPlayerList._instance.playerListContentTransform.childCount-1);
+            }
 
             //we switch from simple name display to name input
             colorButton.interactable = true;
@@ -172,7 +177,7 @@ namespace Prototype.NetworkLobby
                 textComponent.color = Color.white;
                 readyButton.interactable = isLocalPlayer;
                 colorButton.interactable = isLocalPlayer;
-                nameInput.interactable = isLocalPlayer;
+                nameInput.interactable = false;
             }
         }
 
