@@ -64,12 +64,12 @@ public class ScoreboardScript : MonoBehaviour
 
     private static void CreateXml()
     {
-        var players = new List<Player>() {
-    new Player() { Username = "Ray", Score = 10 },
-    new Player() { Username = "John", Score = 20 },
-    new Player() { Username = "Mike", Score = 30},
-    new Player() { Username = "Flan", Score = 200},
-    new Player() { Username = "Kevin", Score = 40}
+        var users = new List<Users>() {
+    new Users() { Username = "Ray", Score = 10 },
+    new Users() { Username = "John", Score = 20 },
+    new Users() { Username = "Mike", Score = 30},
+    new Users() { Username = "Flan", Score = 200},
+    new Users() { Username = "Kevin", Score = 40}
     };// player
 
         // SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
@@ -77,10 +77,10 @@ public class ScoreboardScript : MonoBehaviour
           new XDeclaration("1.0", "utf-8", "yes"),
               // This is the root of the document
               new XElement("Scores",
-              from ply in players
+              from usr in users
               select
-                  new XElement("Scores", new XAttribute("UserName", ply.Username),
-                  new XElement("Score", ply.Score)
+                  new XElement("Scores", new XAttribute("UserName", usr.Username),
+                  new XElement("Score", usr.Score)
 
                  )));
 
@@ -88,7 +88,7 @@ public class ScoreboardScript : MonoBehaviour
 
     }
 }
-public class Player
+public class Users
 {
     public string Username { get; set; }
 
