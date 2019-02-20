@@ -1,31 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Net;
+using System.Runtime.Serialization;
+using System;
 
-public class ServerList : MonoBehaviour {
+[System.Serializable()]
+public class ServerList {
+    
+	public List<Server> list;
+	
+}
 
-	public GameObject MainPanel;
-    public GameObject ServerPanel;
-	private static ServerList _instance;
-    public static ServerList Instance { get { return _instance; } }
-	public List <Server> listOfServers = new List<Server>();
+[Serializable]
+public class Server  {
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        } else {
-            _instance = this;
-        }
-    }
-
-	public List<Server> getList(){
-		return listOfServers;
-	}
-
-	public void setList(List<Server> list){
-		listOfServers = list;
-	}
-
+	public string Ipaddress {set; get;}
+	public string Username {set; get;}
+	
 }

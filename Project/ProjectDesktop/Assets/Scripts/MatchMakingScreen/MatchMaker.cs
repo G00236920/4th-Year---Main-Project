@@ -1,9 +1,11 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using System;
 
 namespace Prototype.NetworkLobby
 {
@@ -12,7 +14,6 @@ namespace Prototype.NetworkLobby
 		const int PORT_NO1 = 5002;
 		const int PORT_NO2 = 5003;
 		private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");
-		private List<Server> ServerList;
 		public LobbyManager lobbyManager;
 		public GameObject mainPanel;
 		public GameObject serverPanel;
@@ -28,8 +29,7 @@ namespace Prototype.NetworkLobby
 		
 		public void Host() {
 
-			try
-			{
+			try {
 				IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);
 
 				Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -40,8 +40,7 @@ namespace Prototype.NetworkLobby
 				lobbyManager.StartHost();
 			
 			}
-			catch (Exception)
-			{
+			catch (Exception) {
 				Debug.Log("Failed to Connect to Server");
 			}
 			
@@ -54,7 +53,16 @@ namespace Prototype.NetworkLobby
 			
 			string messageString = System.Text.Encoding.ASCII.GetString(messageBytes,0,messageInt);
 
-			Debug.Log(messageString);
+			try {
+				
+				messageString = fixJson(messageString);
+				ServerList result = JsonUtility.FromJson<ServerList>(messageString);
+				ServerGUI.Instance.setList(result.list);
+
+			}
+			catch (Exception) {
+				Debug.Log("Could Not get List of Servers ");
+			}
 
 			client.Close();
 		}
@@ -82,6 +90,12 @@ namespace Prototype.NetworkLobby
 			{
 				Debug.Log("Failed to Connect to Server");
 			}
+		}
+
+		string fixJson(string value)
+		{
+			value = "{\"list\":" + value + "}";
+			return value;
 		}
 	}
 }
