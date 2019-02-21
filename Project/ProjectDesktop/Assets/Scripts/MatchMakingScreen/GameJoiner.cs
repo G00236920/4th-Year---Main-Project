@@ -7,27 +7,18 @@ using Prototype.NetworkLobby;
 public class GameJoiner : MonoBehaviour {
 
 	public string Ipaddress;
-	public LobbyManager lobbyManager;
-	public RectTransform lobbyPanel;
+	public LobbyMainMenu lobbyMenu;
 
 	// Use this for initialization
 	void Start () {
-		lobbyManager = transform.root.GetComponent<LobbyManager>();
+		lobbyMenu = transform.root.GetComponent<LobbyMainMenu>();
 	}
 
 	public void OnClickJoin()
 	{
+			
+			lobbyMenu.OnClickJoin(Ipaddress);
 
-		lobbyManager.ChangeTo(lobbyPanel);
-
-		lobbyManager.networkAddress = Ipaddress;
-		lobbyManager.StartClient();
-
-		lobbyManager.backDelegate = lobbyManager.StopClientClbk;
-		lobbyManager.DisplayIsConnecting();
-
-		lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
-	
 	}
 
 }

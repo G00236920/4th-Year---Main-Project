@@ -145,7 +145,7 @@ RectTransform:
   m_Children:
   - {fileID: 1540161532}
   m_Father: {fileID: 111668486}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -415,11 +415,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 487070217}
+  - {fileID: 1605047899}
   - {fileID: 2052559573}
   - {fileID: 109693837}
   - {fileID: 912308764}
   - {fileID: 943212453}
-  - {fileID: 1605047899}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2020,7 +2020,7 @@ RectTransform:
   m_Children:
   - {fileID: 1621439521}
   m_Father: {fileID: 111668486}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2108,7 +2108,7 @@ RectTransform:
   m_Children:
   - {fileID: 989125037}
   m_Father: {fileID: 111668486}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3683,7 +3683,7 @@ RectTransform:
   m_Children:
   - {fileID: 286195759}
   m_Father: {fileID: 111668486}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4292,7 +4292,7 @@ RectTransform:
   m_Children:
   - {fileID: 576362831}
   m_Father: {fileID: 111668486}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4459,7 +4459,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 111668488}
         m_MethodName: OnClickJoin
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

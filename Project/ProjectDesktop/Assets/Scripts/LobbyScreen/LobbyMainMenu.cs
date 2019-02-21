@@ -23,11 +23,17 @@ namespace Prototype.NetworkLobby
             
         }
 
-        public void OnClickJoin()
+        public void OnClickJoin(string ip)
         {
             lobbyManager.ChangeTo(lobbyPanel);
+            
+            if(ip != null){
+                lobbyManager.networkAddress = ip;
+            }
+            else{
+                lobbyManager.networkAddress = ipInput.text;
+            }
 
-            lobbyManager.networkAddress = ipInput.text;
             lobbyManager.StartClient();
 
             lobbyManager.backDelegate = lobbyManager.StopClientClbk;
@@ -64,7 +70,7 @@ namespace Prototype.NetworkLobby
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                OnClickJoin();
+                OnClickJoin(null);
             }
         }
 
