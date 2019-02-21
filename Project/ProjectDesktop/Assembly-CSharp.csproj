@@ -72,8 +72,8 @@
      <Compile Include="Assets\Scripts\LoginScreen\LoginScript.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\User.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\MatchMaker.cs" />
-     <Compile Include="Assets\Scripts\MatchMakingScreen\Server.cs" />
-     <Compile Include="Assets\Scripts\MatchMakingScreen\ServerListScript.cs" />
+     <Compile Include="Assets\Scripts\MatchMakingScreen\ServerGUI.cs" />
+     <Compile Include="Assets\Scripts\MatchMakingScreen\ServerList.cs" />
      <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
      <None Include="Assets\AssetStoreContent\Oculus Hands\LICENSE.txt" />
      <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
