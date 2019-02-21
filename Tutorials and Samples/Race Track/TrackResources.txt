@@ -1,0 +1,28 @@
+Procedural track resources
+
+Free Unity assets store resources:
+
+https://assetstore.unity.com/packages/tools/utilities/procedural-toolkit-16508
+
+https://assetstore.unity.com/packages/essentials/tutorial-projects/procedural-examples-5141
+
+Code examples:
+
+https://github.com/knapeczadam/Unity-Procedural-Examples-Updated
+
+https://github.com/Syomus/ProceduralToolkit
+
+Forums:
+
+http://pcg.wikidot.com/
+
+https://forum.unity.com/threads/waypoints-and-constant-variable-speed-problems.32954/#post-213942
+
+Race track video using sketch-up
+
+https://www.youtube.com/watch?v=--jOxp3omx0
+
+Sketchup
+
+https://www.sketchup.com/
+
