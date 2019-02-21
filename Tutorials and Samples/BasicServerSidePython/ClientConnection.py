@@ -1,6 +1,10 @@
 #python 3.5  other versions can't use mysql.connector without getting error
 import socketserver
 import socket
+import time
+import datetime
+ 
+
 
 from threading import Thread
 
@@ -10,6 +14,17 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
         print ("{} wrote:".format(self.client_address[0]))
         print (self.data)
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        print (st)
+
+        from xml.etree import ElementTree as ET
+        tree = ET.XML(self.data)
+        
+        with open("filename", "w") as f:
+            f.write(ET.tostring(tree))
+
+
         self.request.sendall(self.data.upper())
 
 def listenToPort1():   
@@ -27,4 +42,4 @@ if __name__ == "__main__":
     HOST2, PORT2 = '0.0.0.0', 5006
 
     Thread( target = listenToPort1 ).start()
-    Thread( target = listenToPort2 ).start()
+    Thread( target = listenToPort2 ).start() 
