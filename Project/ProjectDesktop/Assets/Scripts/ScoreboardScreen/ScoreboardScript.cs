@@ -85,7 +85,7 @@ public class ScoreboardScript : MonoBehaviour
     };// Users
 
         XDocument xdoc = new XDocument(
-    new XDeclaration("1.0", "utf-8", "yes"),
+    new XDeclaration("1.0", "utf-8 ", "yes"),
         // This is the root of the document
         new XElement("ScoreList",
         from usr in users
@@ -95,8 +95,8 @@ public class ScoreboardScript : MonoBehaviour
 
             )));
         xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
-        String doc = xdoc.ToString();
-
+        string doc = xdoc.ToString();
+        Debug.Log(doc);
         String SERVER_IP = "52.18.149.174";
         Int32 Port = 5005;
 
@@ -111,7 +111,7 @@ public class ScoreboardScript : MonoBehaviour
 
         if (netStream.CanWrite)
         {
-            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
+            Byte[] sendBytes = Encoding.UTF32.GetBytes(doc);
             netStream.Write(sendBytes, 0, sendBytes.Length);
         }
         else
@@ -136,7 +136,10 @@ public class Users
     public int Score { get; set; }
 
 }
-
+public class Utf8StringWriter : StringWriter
+{
+    public override Encoding Encoding { get { return Encoding.UTF8; } }
+}
 
 /*var users = new List<Users>() {
 new Users() { Username = "Ray", Score = 10 },
