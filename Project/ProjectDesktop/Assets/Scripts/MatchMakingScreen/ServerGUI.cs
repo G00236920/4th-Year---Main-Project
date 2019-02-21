@@ -10,16 +10,21 @@ public class ServerGUI : MonoBehaviour {
     public GameObject ServerPanel;
     public GameObject ScrollArea;
     public GameObject ServerObject;
+    public GameObject MatchController;
+
 	private static ServerGUI _instance;
     public static ServerGUI Instance { get { return _instance; } }
 	private static List<Server> list;
+
 
     private void Awake()
     {
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
-        } else {
+        } 
+        else 
+        {
             _instance = this;
         }
     }
@@ -31,7 +36,7 @@ public class ServerGUI : MonoBehaviour {
 	}
 
 	public void RefreshClicked(){
-		
+       MatchController.GetComponent<Prototype.NetworkLobby.MatchMaker>().findGame();
 	}
 
 	public void setList(List<Server> l){
@@ -44,13 +49,13 @@ public class ServerGUI : MonoBehaviour {
             GameObject child = Instantiate(ServerObject, new Vector3(0, posY, 0), Quaternion.identity);
             posY -= 108;
             child.transform.SetParent(ScrollArea.transform, false);
-            Debug.Log(server.Username);
             child.transform.Find("PlayerName").gameObject.GetComponent<Text>().text = server.Username;
+            child.transform.GetComponent<GameJoiner>().Ipaddress = server.Ipaddress;
         }
 	}
 
 	public List<Server> getList(){
 		return list;
 	}
-    
+
 }

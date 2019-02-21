@@ -71,6 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224384505102099468}
+  - component: {fileID: 114076799864373114}
   m_Layer: 5
   m_Name: ServerObject
   m_TagString: Untagged
@@ -78,6 +79,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114076799864373114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807882843390820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdbaf6702b1f77a479ff7eb105f87a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ipaddress: 
+  lobbyManager: {fileID: 0}
+  lobbyPanel: {fileID: 0}
 --- !u!114 &114103250553267882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +131,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114986139527946664}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114076799864373114}
+        m_MethodName: OnClickJoin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114244676708802134

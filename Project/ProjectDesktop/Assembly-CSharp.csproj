@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\LobbyScreen\LobbyTopPanel.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\LoginScript.cs" />
      <Compile Include="Assets\Scripts\LoginScreen\User.cs" />
+     <Compile Include="Assets\Scripts\MatchMakingScreen\GameJoiner.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\MatchMaker.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\Server.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\ServerGUI.cs" />

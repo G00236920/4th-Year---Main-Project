@@ -3352,6 +3352,7 @@ MonoBehaviour:
   ScrollArea: {fileID: 1282013678}
   ServerObject: {fileID: 1807882843390820, guid: 699cbbb20a6a93740b5166f29255a1f0,
     type: 2}
+  MatchController: {fileID: 1400394116}
 --- !u!114 &1400394118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4087,8 +4088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -92.3, y: 106.5}
-  m_SizeDelta: {x: 1756.7, y: 667}
+  m_AnchoredPosition: {x: -176.5, y: 106.5}
+  m_SizeDelta: {x: 1588.4, y: 667}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1939598317
 MonoBehaviour:
@@ -4456,7 +4457,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 111668488}
         m_MethodName: OnClickJoin
         m_Mode: 1
         m_Arguments:
