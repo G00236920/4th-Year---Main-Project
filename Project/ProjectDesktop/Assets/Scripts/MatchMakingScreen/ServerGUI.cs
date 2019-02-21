@@ -2,6 +2,7 @@ using System.Xml.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerGUI : MonoBehaviour {
 
@@ -38,11 +39,13 @@ public class ServerGUI : MonoBehaviour {
 
         int posY = 0;
 
-        foreach (Server s in list)
+        foreach (Server server in l)
         {
             GameObject child = Instantiate(ServerObject, new Vector3(0, posY, 0), Quaternion.identity);
             posY -= 108;
             child.transform.SetParent(ScrollArea.transform, false);
+            Debug.Log(server.Username);
+            child.transform.Find("PlayerName").gameObject.GetComponent<Text>().text = server.Username;
         }
 	}
 

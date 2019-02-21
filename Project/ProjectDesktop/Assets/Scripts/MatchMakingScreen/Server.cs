@@ -8,8 +8,8 @@ using System;
 [Serializable]
 public class Server  {
 
-	public string Ipaddress {set; get;}
-	public string Username {set; get;}
+	public string Ipaddress;
+	public string Username;
 	
 }
 
