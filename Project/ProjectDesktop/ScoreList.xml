@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ScoreList>
+  <Player UserName="Ray" Score="10" />
+  <Player UserName="John" Score="20" />
+  <Player UserName="Mike" Score="30" />
+  <Player UserName="Flan" Score="200" />
+  <Player UserName="Kevin" Score="40" />
+  <Player UserName="Sam" Score="80" />
+</ScoreList>
