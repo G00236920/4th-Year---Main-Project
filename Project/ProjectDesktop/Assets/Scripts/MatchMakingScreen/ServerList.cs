@@ -10,11 +10,3 @@ public class ServerList {
 	public List<Server> list;
 	
 }
-
-[Serializable]
-public class Server  {
-
-	public string Ipaddress {set; get;}
-	public string Username {set; get;}
-	
-}
