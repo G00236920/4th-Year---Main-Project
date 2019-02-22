@@ -84,8 +84,8 @@ public class ScoreboardScript : MonoBehaviour
 
     };// Users
 
-        XDocument xdoc = new XDocument(
-    new XDeclaration("1.0", "utf-8 ", "yes"),
+        XDocument xdoc1 = new XDocument(
+    new XDeclaration("1.0", "utf-8 ", " "),
         // This is the root of the document
         new XElement("ScoreList",
         from usr in users
@@ -94,11 +94,14 @@ public class ScoreboardScript : MonoBehaviour
             new XAttribute("Score",usr.Score)
 
             )));
-        xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
-        string doc = xdoc.ToString();
+        // String xdoc2 = xdoc1.Declaration.ToString() + Environment.NewLine + xdoc1.ToString();// changes declaration on xml but still keeps utf16 declaration not good
+        // xdoc2.Save("ScoreList.xml"); // creates file in project/desktopProject
+        xdoc1.Save("ScoreList.xml"); // creates file in project/desktopProject
+        string doc = xdoc1.ToString(); // converts xml to string
+        //string doc = xdoc2.ToString(); // converts xml to string
         Debug.Log(doc);
-        String SERVER_IP = "52.18.149.174";
-        Int32 Port = 5005;
+        String SERVER_IP = "52.18.149.174"; // address of server
+        Int32 Port = 5005; // open port on server
 
         Debug.Log("Connected 3");
         // Use this for initialization
@@ -111,7 +114,7 @@ public class ScoreboardScript : MonoBehaviour
 
         if (netStream.CanWrite)
         {
-            Byte[] sendBytes = Encoding.UTF32.GetBytes(doc);
+            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
             netStream.Write(sendBytes, 0, sendBytes.Length);
         }
         else
