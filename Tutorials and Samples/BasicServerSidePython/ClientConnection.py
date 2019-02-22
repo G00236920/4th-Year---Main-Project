@@ -5,7 +5,7 @@ import time
 import datetime
  
 
-
+from xml.etree import ElementTree as ET
 from threading import Thread
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
@@ -17,15 +17,31 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         ts = time.time()
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
         print (st)
-
-        from xml.etree import ElementTree as ET
-        tree = ET.XML(self.data)
-        
-        with open("filename", "w") as f:
-            f.write(ET.tostring(tree))
-
+        print ("________________________________________________")
+        print("Gets Here 1")
 
         self.request.sendall(self.data.upper())
+        print("Gets Here 2")
+
+        #newstr = oldstr.replace("M", "")
+        text = str(self.data)
+        text1= text.replace(' encoding="utf-16" standalone="no"?', "")
+        parseXML= text1.replace("b'", "")
+        #parseXML = self.data[55:]
+        print (parseXML)
+        print("Gets Here 3************************************")
+        text_file = open("Output.txt", "w")
+        text_file.write(parseXML)
+        text_file.close()
+        #text = str(parseXML)
+       # ElementTree.fromstring(self.data.encode('utf-16-be'))
+        tree = ET.fromstring(parseXML)
+
+
+        #tree.write(open('person.xml', 'w'), encoding='UTF-8')
+        print("Gets Here 4")
+        with open("filename.xml", "w") as f:
+            f.write(ET.tostring(tree))
 
 def listenToPort1():   
     print("Listening on 5005.......")
