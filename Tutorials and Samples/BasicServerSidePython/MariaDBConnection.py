@@ -47,36 +47,23 @@ def main():
    # readXML()
     readDB()
 
-def readXML():
-    from xml.dom import minidom
-
+def readXML(tree):
+    
     playerNames = []
     playerScore = []
    
-    # parse an xml file by name
-    mydoc = minidom.parse('items.xml')
+    for player in tree.findall('Player'):
+            score = player.get('Score')
+            name = player.get('UserName')
+            playerNames.append(name )
+            playerScore.append (score)
 
-    results = mydoc.getElementsByTagName('player')
-
-
-    # all item attributes
-    print('\nAll Player names:')  
-    for elem in results:  
-        print(elem.attributes['name'].value)
-        playerNames.append(elem.attributes['name'].value)
-       
-
-    # all Players results 
-    print('\nAll Players results:')  
-    for elem in results:  
-        print(elem.firstChild.data)
-        playerScore.append(elem.firstChild.data)
-        
 
     print(playerNames ,playerScore )
     writeToDB(playerNames,playerScore)
 
 def writeToDB(playerNames,playerScore):
+    print("writeToDB ")
     from mysql.connector.cursor import MySQLCursorPrepared
     print(playerNames ,playerScore )
     try:
