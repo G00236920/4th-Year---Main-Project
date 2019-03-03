@@ -3,7 +3,7 @@ import socketserver
 import socket
 import time
 import datetime
- 
+import xml.dom.minidom as Dom
 
 from xml.etree import ElementTree as ET
 from threading import Thread
@@ -24,22 +24,29 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         print("Gets Here 2")
 
         #newstr = oldstr.replace("M", "")
-        text = str(self.data)
-        text1= text.replace(' encoding="utf-16" standalone="no"?', "")
-        parseXML= text1.replace("b'", "")
+        self.data.decode("utf-8").encode("windows-1252").decode("utf-8")
+        self.data = str(self.data)
+        #print (text)
+       # text2= text.replace('\r\n', "")
+        #self.data= self.data.replace('<[^<]+>', "")
+        #parseXML= text1.replace("b'", "")
         #parseXML = self.data[55:]
-        print (parseXML)
+        #print (parseXML)
         print("Gets Here 3************************************")
-        text_file = open("Output.txt", "w")
-        text_file.write(parseXML)
+        text_file = open("Output.xml", "w")
+        text_file.write(self.data)
         text_file.close()
+        print("Gets Here 4************************************")
+        
+        #print (parseXML)
         #text = str(parseXML)
        # ElementTree.fromstring(self.data.encode('utf-16-be'))
-        tree = ET.fromstring(parseXML)
+        #parser = ET.XMLParser(recover=True)
+        tree = ET.fromstring(self.data)
 
 
         #tree.write(open('person.xml', 'w'), encoding='UTF-8')
-        print("Gets Here 4")
+        print("Gets Here 5")
         with open("filename.xml", "w") as f:
             f.write(ET.tostring(tree))
 
