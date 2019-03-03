@@ -75,12 +75,12 @@ public class ScoreboardScript : MonoBehaviour
     public static void SendTest()
     {
         List<Users> users = new List<Users>() {
-    new Users() { Username = "Ray", Score = 10 },
-    new Users() { Username = "John", Score = 20 },
-    new Users() { Username = "Mike", Score = 30},
-    new Users() { Username = "Flan", Score = 200},
-    new Users() { Username = "Kevin", Score = 40},
-     new Users() { Username = "Sam", Score = 80}
+     new Users() { Username = "Ray", Score = 10}
+    ,new Users() { Username = "John", Score = 20}
+    ,new Users() { Username = "Mike", Score = 30}
+    ,new Users() { Username = "Flan", Score = 200}
+    ,new Users() { Username = "Kevin", Score = 40}
+    ,new Users() { Username = "Sam", Score = 80}
 
     };// Users
 
@@ -101,8 +101,9 @@ public class ScoreboardScript : MonoBehaviour
         //string doc = xdoc2.ToString(); // converts xml to string
         Debug.Log(doc);
         String SERVER_IP = "52.18.149.174"; // address of server
+       // String local_ip = ""; // local address for testing 
         Int32 Port = 5005; // open port on server
-
+        //Int32 Port2 = 5006;
         Debug.Log("Connected 3");
         // Use this for initialization
 
@@ -116,7 +117,7 @@ public class ScoreboardScript : MonoBehaviour
         {
             Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
             netStream.Write(sendBytes, 0, sendBytes.Length);
-        }
+        }// if
         else
         {
             Debug.Log("You cannot write data to this stream.");
@@ -125,69 +126,21 @@ public class ScoreboardScript : MonoBehaviour
             // Closing the tcpClient instance does not close the network stream.
             netStream.Close();
             return;
-        }
+        }// else
 
 
-
-    }//here
-}
+        
+    }//SendTest
+}// ScoreBoard
 
 public class Users
 {
     public string Username { get; set; }
 
     public int Score { get; set; }
-
-}
-public class Utf8StringWriter : StringWriter
-{
-    public override Encoding Encoding { get { return Encoding.UTF8; } }
-}
-
-/*var users = new List<Users>() {
-new Users() { Username = "Ray", Score = 10 },
-new Users() { Username = "John", Score = 20 },
-new Users() { Username = "Mike", Score = 30},
-new Users() { Username = "Flan", Score = 200},
-new Users() { Username = "Kevin", Score = 40}
-};// player
-/*
-private static string SendScores()
-{
-var users = new List<Users>() {
-new Users() { Username = "Ray", Score = 10 },
-new Users() { Username = "John", Score = 20 },
-new Users() { Username = "Mike", Score = 30},
-new Users() { Username = "Flan", Score = 200},
-new Users() { Username = "Kevin", Score = 40}
-};// player
-
-// SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-XDocument xdoc = new XDocument(
-    new XDeclaration("1.0", "utf-8", "yes"),
-        // This is the root of the document
-        new XElement("Scores",
-        from usr in users
-        select
-            new XElement("Scores", new XAttribute("UserName", usr.Username),
-            new XElement("Score", usr.Score)
-
-            )));
+    
+}//Users
 
 
-    xdoc.Save("Scores.xml"); // creates file in project/desktopProject
-
-}// SendScores
-
-
-
-
-public class Users
-{
-public string Username { get; set; }
-
-public int Score { get; set; }
-
-} // Users*/
 
 
