@@ -75,15 +75,13 @@ def writeToDB(playerNames,playerScore):
                             (playerNames[2],playerScore[2]) ,
                             (playerNames[3],playerScore[3]) 
                             ]
-        sql_insert_query = " INSERT INTO results (Player, Score) VALUES (%s,%s) "
+        sql_insert_query = " INSERT INTO results (Player, Score, TotalScore) VALUES (%s,%s,null) ON DUPLICATE KEY UPDATE TotalScore = 1; "
         myCursor = con.cursor()
-        print("Error Checking 1")
-        #used executemany to insert 3 rows
         myCursor.executemany(sql_insert_query, records_to_insert)
-        print("Error Checking 2")
+        
         con.commit()
         
-        print (myCursor.rowcount, "Record inserted successfully into python_users table")
+        print (myCursor.rowcount, "Record inserted successfully into scoreboard results table")
     except mysql.connector.Error as error :
         print("Failed inserting record into python_users table {}".format(error))
     
