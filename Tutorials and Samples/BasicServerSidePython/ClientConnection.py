@@ -28,11 +28,6 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         tree = ET.fromstring(xmlString)
 
         Maria.readXML(tree)
-        print("Child.Test")
-        for player in tree.findall('Player'):
-            score = player.get('Score')
-            name = player.get('UserName')
-            print("Player Name: ",name," Score: ", score)
 
 
 

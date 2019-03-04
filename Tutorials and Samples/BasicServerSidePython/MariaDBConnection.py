@@ -61,6 +61,7 @@ def readXML(tree):
 
     print(playerNames ,playerScore )
     writeToDB(playerNames,playerScore)
+    
 
 def writeToDB(playerNames,playerScore):
     print("writeToDB ")
@@ -68,12 +69,13 @@ def writeToDB(playerNames,playerScore):
     print(playerNames ,playerScore )
     try:
         #MariaDB Connection
-        con = mysql.connector.connect(port=5006,user='root',password='password',host='localhost',database='pythontest')
-        
+        con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
         records_to_insert = [ (playerNames[0],playerScore[0]) ,
-                            (playerNames[1],playerScore[1])
+                            (playerNames[1],playerScore[1]),
+                            (playerNames[2],playerScore[2]) ,
+                            (playerNames[3],playerScore[3]) 
                             ]
-        sql_insert_query = " INSERT INTO test (playerName, score) VALUES (%s,%s) "
+        sql_insert_query = " INSERT INTO results (Player, Score) VALUES (%s,%s) "
         myCursor = con.cursor()
         print("Error Checking 1")
         #used executemany to insert 3 rows
@@ -84,6 +86,7 @@ def writeToDB(playerNames,playerScore):
         print (myCursor.rowcount, "Record inserted successfully into python_users table")
     except mysql.connector.Error as error :
         print("Failed inserting record into python_users table {}".format(error))
+    
     myCursor.close()
     con.close()
 
