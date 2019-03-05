@@ -9,6 +9,12 @@ using System.Collections;
 
 namespace Prototype.NetworkLobby
 {
+
+    //This class was taken from the unity asset store and does not require editing at the moment
+    //This allows the players to join a lobby system, meaning each player can see the name and details of other players
+    //as they wait to start the game.
+    //When editing this code please comment the edited sections immediately.
+
     public class LobbyManager : NetworkLobbyManager 
     {
         static short MsgKicked = MsgType.Highest + 1;

@@ -7,8 +7,11 @@ using System.Linq;
 
 namespace Prototype.NetworkLobby
 {
-    //Player entry in the lobby. Handle selecting color/setting name & getting ready for the game
-    //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
+    //Code also taken from the asset store, Using the UNet lobby Manager.
+    //this simply hold the lobby player object that shows colors and icons for the player.
+    //Player entry in the lobby. Handle selecting color/setting name & getting ready for the game.
+    //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes).
+
     public class LobbyPlayer : NetworkLobbyPlayer
     {
         static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
