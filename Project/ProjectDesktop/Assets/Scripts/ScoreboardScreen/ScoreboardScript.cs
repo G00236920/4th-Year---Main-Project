@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 
 public class ScoreboardScript : MonoBehaviour
 {
+    //ports used for connecting to our python server
     const int PORT_NO1 = 5004;
     const int PORT_NO2 = 5005;
 

@@ -16,7 +16,8 @@ public class GameJoiner : MonoBehaviour {
 
 	public void OnClickJoin()
 	{
-			
+			//This method is called when the user clicks to join a hosted game
+			//sends the ipaddress as a parameter
 			lobbyMenu.OnClickJoin(Ipaddress);
 
 	}
