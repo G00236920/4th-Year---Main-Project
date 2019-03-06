@@ -8,6 +8,12 @@ namespace Prototype.NetworkLobby
     //List of players in the lobby
     public class LobbyPlayerList : MonoBehaviour
     {
+
+        //Class to show the list of players still connected to the game.
+        //Must be rerendered each frame, as players may join or leave,
+        //the players also have the option of clicking the start buttons
+        //to avoid frustration, this should be seen in real time to the host and other players
+
         public static LobbyPlayerList _instance = null;
 
         public RectTransform playerListContentTransform;

@@ -9,6 +9,12 @@ using System.Collections;
 
 namespace Prototype.NetworkLobby
 {
+
+    //This class was taken from the unity asset store and does not require editing at the moment
+    //This allows the players to join a lobby system, meaning each player can see the name and details of other players
+    //as they wait to start the game.
+    //When editing this code please comment the edited sections immediately.
+
     public class LobbyManager : NetworkLobbyManager 
     {
         static short MsgKicked = MsgType.Highest + 1;
@@ -34,9 +40,6 @@ namespace Prototype.NetworkLobby
         protected RectTransform currentPanel;
 
         public Button backButton;
-
-        public Text statusInfo;
-        public Text hostInfo;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -151,8 +154,7 @@ namespace Prototype.NetworkLobby
 
         public void SetServerInfo(string status, string host)
         {
-            statusInfo.text = status;
-            hostInfo.text = host;
+            
         }
 
 

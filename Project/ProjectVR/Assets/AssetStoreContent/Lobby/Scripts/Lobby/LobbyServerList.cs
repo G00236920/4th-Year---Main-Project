@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
+
+    //Class not used within the game
+    //came with the Unet lobby manager and left it here in case some code could be reused later.
+    
     public class LobbyServerList : MonoBehaviour
     {
         public LobbyManager lobbyManager;
