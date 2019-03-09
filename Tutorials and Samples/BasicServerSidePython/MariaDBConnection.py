@@ -59,7 +59,7 @@ def readXML(tree):
             playerScore.append (score)
 
 
-    print(playerNames ,playerScore )
+    #print(playerNames ,playerScore )
     writeToDB(playerNames,playerScore)
     
 
@@ -75,7 +75,7 @@ def writeToDB(playerNames,playerScore):
                             (playerNames[2],playerScore[2]) ,
                             (playerNames[3],playerScore[3]) 
                             ]
-        sql_insert_query = " INSERT INTO results (Player, Score, TotalScore) VALUES (%s,%s,null) ON DUPLICATE KEY UPDATE TotalScore = 1; "
+        sql_insert_query = " INSERT INTO results (Player, Score) VALUES (%s,%s) ON DUPLICATE KEY UPDATE Score = VALUES(Score) + Score ; "
         myCursor = con.cursor()
         myCursor.executemany(sql_insert_query, records_to_insert)
         
@@ -87,22 +87,23 @@ def writeToDB(playerNames,playerScore):
     
     myCursor.close()
     con.close()
+    readDB()
 
 def readDB():
     playerNames = []
     playerScore = []
-    con = mysql.connector.connect(port=5006,user='root',password='password',host='localhost',database='pythontest')
+    con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
 
     cursor = con.cursor()
-    query = ("SELECT playerName , score FROM test")
+    query = ("SELECT Player , Score FROM results")
 
     cursor.execute(query)
 
-    for (playerName,score) in cursor:
-        playerNames.append(playerName)
-        playerScore.append(score)
+    for (Player,Score) in cursor:
+        playerNames.append(Player)
+        playerScore.append(Score)
     print(playerNames ,playerScore )
-    writeToXML(playerNames ,playerScore )
+    
 
 def writeToXML(playerNames ,playerScore ):
     import xml.etree.ElementTree as ET

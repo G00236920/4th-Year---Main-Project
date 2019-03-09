@@ -21,9 +21,9 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
         xmlBytes = self.data.decode("utf-8")
         xmlString = str( xmlBytes )
-        text_file = open("Output.xml", "w")
-        text_file.write(xmlString)
-        text_file.close()
+        #text_file = open("Output.xml", "w")
+       # text_file.write(xmlString)
+        #text_file.close()
         
         tree = ET.fromstring(xmlString)
 
