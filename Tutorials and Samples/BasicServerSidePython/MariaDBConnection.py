@@ -2,7 +2,8 @@
 import mysql.connector
 import socket
 import xml.etree.cElementTree as etree
-
+import xml.etree.ElementTree as ET
+from mysql.connector.cursor import MySQLCursorPrepared
 from io import StringIO
 
 def startServer():
@@ -65,7 +66,7 @@ def readXML(tree):
 
 def writeToDB(playerNames,playerScore):
     print("writeToDB ")
-    from mysql.connector.cursor import MySQLCursorPrepared
+    
     print(playerNames ,playerScore )
     try:
         #MariaDB Connection
@@ -80,14 +81,50 @@ def writeToDB(playerNames,playerScore):
         myCursor.executemany(sql_insert_query, records_to_insert)
         
         con.commit()
+       
         
         print (myCursor.rowcount, "Record inserted successfully into scoreboard results table")
+        
     except mysql.connector.Error as error :
-        print("Failed inserting record into python_users table {}".format(error))
+        print("Failed inserting record into results table {}".format(error))
     
+    
+
     myCursor.close()
+
     con.close()
-    readDB()
+    getPlayersInfoFromDB(playerNames)
+    #readDB()
+
+def getPlayersInfoFromDB(playerNames):
+    playerScore = []
+    print(playerNames)
+    try:
+        #MariaDB Connection
+        con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
+        records_to_select = [ (playerNames[0]) ,
+                            (playerNames[1]),
+                            (playerNames[2]) ,
+                            (playerNames[3]) 
+                            ]
+        sql_select_query = " SELECT * FROM results WHERE  Player = %s ; "
+        
+        myCursor = con.cursor()
+        myCursor.executemany(sql_select_query, records_to_select)
+        
+        result = myCursor.fetchone()
+
+        
+        print (myCursor.rowcount, "Record  successfully retrived results table")
+        
+    except mysql.connector.Error as error :
+         print("Failed Selecting record from results table {}".format(error))
+    
+    
+
+    myCursor.close()
+
+    con.close()
 
 def readDB():
     playerNames = []
@@ -95,18 +132,22 @@ def readDB():
     con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
 
     cursor = con.cursor()
-    query = ("SELECT Player , Score FROM results")
+    query = ("SELECT Player , Score FROM results ORDER BY Score DESC")
 
     cursor.execute(query)
-
+    print ("cursor")
+    print (cursor)
+    print ("cursor")
     for (Player,Score) in cursor:
         playerNames.append(Player)
         playerScore.append(Score)
-    print(playerNames ,playerScore )
+
+    res = "\n".join("{} {}".format(x, y) for x, y in zip(playerNames, playerScore))
+    print(res)
     
 
 def writeToXML(playerNames ,playerScore ):
-    import xml.etree.ElementTree as ET
+    
 
 
     usrconfig = ET.Element("data")
