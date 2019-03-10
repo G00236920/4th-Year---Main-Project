@@ -1,2 +1,2 @@
 <?xml version='1.0' encoding='utf-8'?>
-<usrconfig><name>John</name><name>playerNames[0]</name><name>playerNames[2]</name><name>Ray</name><name>TestPlayer1</name><name>TestPlayer2</name><name>TestPlayer3</name><name>TestPlayer4</name></usrconfig>
+<results><Player>Ray</Player><Score>1051</Score><Rank>4</Rank><Player>John</Player><Score>2101</Score><Rank>3</Rank><Player>Mike</Player><Score>3151</Score><Rank>2</Rank><Player>Flan</Player><Score>21001</Score><Rank>1</Rank></results>

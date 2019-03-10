@@ -38,6 +38,7 @@ def startServer():
     conn.close()  # close the connection
 
 def main():
+    print("main DEF***********************************")
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = "localhost"
     port = 5006
@@ -49,7 +50,7 @@ def main():
     readDB()
 
 def readXML(tree):
-    
+    print("readXML DEF***********************************")
     playerNames = []
     playerScore = []
    
@@ -65,7 +66,7 @@ def readXML(tree):
     
 
 def writeToDB(playerNames,playerScore):
-    print("writeToDB ")
+    print("writeToDB DEF***********************************")
     
     print(playerNames ,playerScore )
     try:
@@ -93,10 +94,45 @@ def writeToDB(playerNames,playerScore):
     myCursor.close()
 
     con.close()
+    rankDB(playerNames)
     getPlayersInfoFromDB(playerNames)
     #readDB()
+def rankDB(playerNames):
+    playerRank = []
+    print("Rank DB DEF***********************************")
+    
+    con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
+
+    cursor = con.cursor(buffered=True)
+    cursor.execute ("SELECT Player, Score ,RANK() OVER (ORDER BY Score DESC) world_rank FROM results ;")
+    rank = cursor.fetchall() 
+
+    index = [x for x, y in enumerate(rank) if y[0] == playerNames[0]]
+    index = int("".join(map(str, index)))
+    playerRank.append(rank[index])
+
+    index = [x for x, y in enumerate(rank) if y[0] == playerNames[1]]
+    index = int("".join(map(str, index)))
+    playerRank.append(rank[index])
+
+    index = [x for x, y in enumerate(rank) if y[0] == playerNames[2]]
+    index = int("".join(map(str, index)))
+    playerRank.append(rank[index])
+
+    index = [x for x, y in enumerate(rank) if y[0] == playerNames[3]]
+    index = int("".join(map(str, index)))
+    playerRank.append(rank[index])
+
+
+    
+    print(playerRank)
+    writeToXML(playerRank)
+    
+    cursor.close()
+    con.close()
 
 def getPlayersInfoFromDB(playerNames):
+    print("getPlayersInfoFromDB DEF***********************************")
     playerScore = []
     print(playerNames)
     try:
@@ -107,14 +143,25 @@ def getPlayersInfoFromDB(playerNames):
                             (playerNames[2]) ,
                             (playerNames[3]) 
                             ]
-        sql_select_query = " SELECT * FROM results WHERE  Player = %s ; "
+        sql_select_query = " SELECT Score FROM results WHERE  Player = %s ; "
         
-        myCursor = con.cursor()
-        myCursor.executemany(sql_select_query, records_to_select)
+        myCursor = con.cursor(buffered=True)
+        myCursor.execute(sql_select_query, (records_to_select[0], ))
+        record = myCursor.fetchone()
+        print(record)
         
-        result = myCursor.fetchone()
+        myCursor.execute(sql_select_query, (records_to_select[1], ))
+        record = myCursor.fetchone()
+        print(record)
+        
+        myCursor.execute(sql_select_query, (records_to_select[2], ))
+        record = myCursor.fetchone()
+        print(record)
+        
+        myCursor.execute(sql_select_query, (records_to_select[3], ))
+        record = myCursor.fetchone()
+        print(record)
 
-        
         print (myCursor.rowcount, "Record  successfully retrived results table")
         
     except mysql.connector.Error as error :
@@ -127,6 +174,7 @@ def getPlayersInfoFromDB(playerNames):
     con.close()
 
 def readDB():
+    print("readDB DEF***********************************")
     playerNames = []
     playerScore = []
     con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
@@ -146,22 +194,30 @@ def readDB():
     print(res)
     
 
-def writeToXML(playerNames ,playerScore ):
-    
+def writeToXML(playerRank):
+    print("writeToXML Method")
 
-
+    print(playerRank[0][0])
     usrconfig = ET.Element("data")
     usrconfig = ET.SubElement(usrconfig,"results")
-    for name in range(len( playerNames)):
-            usr = ET.SubElement(usrconfig,"name")
-            usr.text = str(playerNames[name])
+    types = "Player", "Score","Rank"
+    for name in range(len( playerRank)):
+            
+            for i in range(3):
+                usr = ET.SubElement(usrconfig,types[i])
+                usr.text = str(playerRank[name][i])
+                
+
+
     tree = ET.ElementTree(usrconfig)
+    print(tree)
     tree.write("details.xml",encoding='utf-8', xml_declaration=True)
 
     
 
 
 def mariaConn():
+    print("mariaConn DEF***********************************")
     #MariaDB Connection
     con = mysql.connector.connect(port=5006,user='root',password='password',host='localhost',database='pythontest')
 
