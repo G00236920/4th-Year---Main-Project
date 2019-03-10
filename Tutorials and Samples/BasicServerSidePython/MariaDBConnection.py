@@ -5,6 +5,7 @@ import xml.etree.cElementTree as etree
 import xml.etree.ElementTree as ET
 from mysql.connector.cursor import MySQLCursorPrepared
 from io import StringIO
+import time
 
 def startServer():
     # get the hostname
@@ -209,10 +210,11 @@ def writeToXML(playerRank):
                 
 
 
-    tree = ET.ElementTree(usrconfig)
-    print(tree)
-    tree.write("details.xml",encoding='utf-8', xml_declaration=True)
+    XMLtree = ET.ElementTree(usrconfig)
+    
 
+    XMLtree.write("details.xml",encoding='utf-8', xml_declaration=True)
+    return (XMLtree) 
     
 
 

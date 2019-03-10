@@ -26,10 +26,24 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         #text_file.close()
         
         tree = ET.fromstring(xmlString)
-
+        
         Maria.readXML(tree)
+        
+        try:
+                returnPort = 1000 #Dont know what port you want it returned on 
+                command = XMLtree
 
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.connect((self.client_address[0], returnPort))
 
+                s.send(command)
+
+                time.sleep(2)
+                resp = s.recv(3000)
+
+                print (resp)
+        except:
+            print("Failed  Returning Data")
 
 
 def currentTime():
