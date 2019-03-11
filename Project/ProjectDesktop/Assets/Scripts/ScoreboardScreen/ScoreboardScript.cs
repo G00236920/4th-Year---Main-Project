@@ -21,56 +21,9 @@ public class ScoreboardScript : MonoBehaviour
     public void ButtonClicked()
     {
         SendTest();
-        
-      // Connect to a remote device.  
-      /* try
-       {
-           // Establish the remote endpoint for the socket.  
-           // The name of the    
-           IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO1);
-
-           // Create a TCP/IP socket.  
-           Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-           // Connect to the remote endpoint.  
-           client.BeginConnect(serverAddress, new AsyncCallback(ConnectCallback), client);
-
-           Debug.Log("Connected 1");
-           Debug.Log(users);
-           //SendMessage(this.objectToByteArray(users));
-
-           // Release the socket.  
-           client.Shutdown(SocketShutdown.Both);
-           client.Close();
-       }
-       catch (Exception e)
-       {
-           Console.WriteLine(e.ToString());
-       }
-   }
+        //Receive();
 
 
-
-
-   private static void ConnectCallback(IAsyncResult ar)
-   {
-       try
-       {
-           // Retrieve the socket from the state object.  
-           Socket client = (Socket)ar.AsyncState;
-
-           // Complete the connection.  
-           client.EndConnect(ar);
-
-           Debug.Log("Connected 2");
-
-           Console.WriteLine("Socket connected to {0}", client.RemoteEndPoint.ToString());
-
-       }
-       catch (Exception e)
-       {
-           Console.WriteLine(e.ToString());
-       }*/
     }
     public static void SendTest()
     {
@@ -94,12 +47,12 @@ public class ScoreboardScript : MonoBehaviour
             new XAttribute("Score",usr.Score)
 
             )));
-        // String xdoc2 = xdoc1.Declaration.ToString() + Environment.NewLine + xdoc1.ToString();// changes declaration on xml but still keeps utf16 declaration not good
-        // xdoc2.Save("ScoreList.xml"); // creates file in project/desktopProject
+       
         xdoc1.Save("ScoreList.xml"); // creates file in project/desktopProject
         string doc = xdoc1.ToString(); // converts xml to string
-        //string doc = xdoc2.ToString(); // converts xml to string
+       
         Debug.Log(doc);
+
         String SERVER_IP = "52.18.149.174"; // address of server
        // String local_ip = ""; // local address for testing 
         Int32 Port = 5005; // open port on server
@@ -131,6 +84,79 @@ public class ScoreboardScript : MonoBehaviour
 
         
     }//SendTest
+
+    public static void Receive()
+    {
+        TcpListener server = null;
+        try
+        {
+            // Set the TcpListener on port 13000.
+            Int32 port = 5006;
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+
+            // TcpListener server = new TcpListener(port);
+            server = new TcpListener(localAddr, port);
+
+            // Start listening for client requests.
+            server.Start();
+
+            // Buffer for reading data
+            Byte[] bytes = new Byte[256];
+            String data = null;
+
+            // Enter the listening loop.
+            while (true)
+            {
+                Console.Write("Waiting for a connection... ");
+
+                // Perform a blocking call to accept requests.
+                // You could also user server.AcceptSocket() here.
+                TcpClient client = server.AcceptTcpClient();
+                Console.WriteLine("Connected!");
+
+                data = null;
+
+                // Get a stream object for reading and writing
+                NetworkStream stream = client.GetStream();
+
+                int i;
+
+                // Loop to receive all the data sent by the client.
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    // Translate data bytes to a ASCII string.
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
+
+                    // Process the data sent by the client.
+                    data = data.ToUpper();
+
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: {0}", data);
+                }
+
+                // Shutdown and end connection
+                client.Close();
+            }
+        }
+        catch (SocketException e)
+        {
+            Console.WriteLine("SocketException: {0}", e);
+        }
+        finally
+        {
+            // Stop listening for new clients.
+            server.Stop();
+        }
+
+
+        Console.WriteLine("\nHit enter to continue...");
+        Console.Read();
+    }
+
 }// ScoreBoard
 
 public class Users
