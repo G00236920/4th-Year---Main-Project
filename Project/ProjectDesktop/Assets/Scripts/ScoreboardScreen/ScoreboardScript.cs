@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using UnityEngine;
-
 public class ScoreboardScript : MonoBehaviour
 {
     const int PORT_NO1 = 5005;
@@ -21,7 +17,7 @@ public class ScoreboardScript : MonoBehaviour
     public void ButtonClicked()
     {
         SendTest();
-        //Receive();
+       
 
 
     }
@@ -82,11 +78,16 @@ public class ScoreboardScript : MonoBehaviour
         }// else
 
 
+        Debug.Log("Connected 5");
         
+
+        //Receive();
     }//SendTest
 
-    public static void Receive()
+   /* 
+    public  static void Receive()
     {
+        Debug.Log(" In receive");
         TcpListener server = null;
         try
         {
@@ -155,8 +156,9 @@ public class ScoreboardScript : MonoBehaviour
 
         Console.WriteLine("\nHit enter to continue...");
         Console.Read();
+        
     }
-
+    */
 }// ScoreBoard
 
 public class Users
