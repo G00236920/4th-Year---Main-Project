@@ -22,28 +22,42 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         xmlBytes = self.data.decode("utf-8")
         xmlString = str( xmlBytes )
         #text_file = open("Output.xml", "w")
-       # text_file.write(xmlString)
+        #text_file.write(xmlString)
         #text_file.close()
         
         tree = ET.fromstring(xmlString)
         
         Maria.readXML(tree)
         
-        try:
-                returnPort = 1000 #Dont know what port you want it returned on 
-                command = XMLtree
 
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.connect((self.client_address[0], returnPort))
+        print("into try")
+        returnPort = 5555 
+        print("over port")
+        command = " Results Temp "
+        b = command.encode('utf-8')
+        print("*****************************Tries to return*****************************")
+        self.request.sendall(b)
+        print("*****************************Tries to return end*****************************")
+        print(command)
+        ipadd = "192.168.0.80"
 
-                s.send(command)
+        print("over command")
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print("over s = socket")
+        print("Connecting to ip" , self.client_address[0])
+        print("Connecting to port" , returnPort)
+        s.connect((self.client_address[0], returnPort))
 
-                time.sleep(2)
-                resp = s.recv(3000)
+        print("over s.connect")
+        s.send(command)
+        print("over s.send")
+        #print ("gets here")
+        #time.sleep(2)
+        resp = s.recv(1024)
 
-                print (resp)
-        except:
-            print("Failed  Returning Data")
+        print (resp)
+
+        print("Failed  Returning Data")
 
 
 def currentTime():

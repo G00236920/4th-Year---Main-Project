@@ -214,9 +214,10 @@ def writeToXML(playerRank):
     
 
     XMLtree.write("details.xml",encoding='utf-8', xml_declaration=True)
-    return (XMLtree) 
+    retrunDef (XMLtree) 
     
-
+def retrunDef(XMLtree):
+    return (XMLtree) 
 
 def mariaConn():
     print("mariaConn DEF***********************************")
