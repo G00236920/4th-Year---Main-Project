@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -66,6 +67,46 @@ public class ScoreboardScript : MonoBehaviour
         {
             Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
             netStream.Write(sendBytes, 0, sendBytes.Length);
+
+            StreamReader streamReader;
+            NetworkStream networkStream;
+
+            TcpListener tcpListener = new TcpListener(5555);
+            tcpListener.Start();
+
+            Debug.Log("The Server has started on port 5555");
+            Debug.Log(" test 1");
+            Socket serverSocket = tcpListener.AcceptSocket();
+            Debug.Log(" test 1");
+            try
+            {
+                Debug.Log("Client connected");
+                networkStream = new NetworkStream(serverSocket);
+
+                streamReader = new StreamReader(networkStream);
+                var buffer = new List<byte>();
+
+                while (serverSocket.Available > 0)
+                {
+                    var currByte  = new Byte[1];
+                    var byteCounter = serverSocket.Receive(currByte, currByte.Length, SocketFlags.None);
+                    
+                    if(byteCounter.Equals(1))
+                    {
+                        buffer.Add(currByte[0]);
+                    }
+                }
+                Debug.Log(buffer.ToArray());
+
+                 serverSocket.Close();
+               // Console.Read();
+            }
+
+            catch (Exception ex)
+            {
+               // Console.WriteLine(ex);
+            }
+
         }// if
         else
         {
