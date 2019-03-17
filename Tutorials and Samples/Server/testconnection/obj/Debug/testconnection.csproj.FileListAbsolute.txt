@@ -1,0 +1,12 @@
+C:\Users\Ray\Desktop\testconnection\testconnection\bin\Debug\testconnection.exe.config
+C:\Users\Ray\Desktop\testconnection\testconnection\bin\Debug\testconnection.exe
+C:\Users\Ray\Desktop\testconnection\testconnection\bin\Debug\testconnection.pdb
+C:\Users\Ray\Desktop\testconnection\testconnection\obj\Debug\testconnection.csprojResolveAssemblyReference.cache
+C:\Users\Ray\Desktop\testconnection\testconnection\obj\Debug\testconnection.exe
+C:\Users\Ray\Desktop\testconnection\testconnection\obj\Debug\testconnection.pdb
+C:\Users\Ray\Desktop\Server\testconnection\bin\Debug\testconnection.exe.config
+C:\Users\Ray\Desktop\Server\testconnection\obj\Debug\testconnection.exe
+C:\Users\Ray\Desktop\Server\testconnection\obj\Debug\testconnection.pdb
+C:\Users\Ray\Desktop\Server\testconnection\bin\Debug\testconnection.exe
+C:\Users\Ray\Desktop\Server\testconnection\bin\Debug\testconnection.pdb
+C:\Users\Ray\Desktop\Server\testconnection\obj\Debug\testconnection.csprojResolveAssemblyReference.cache

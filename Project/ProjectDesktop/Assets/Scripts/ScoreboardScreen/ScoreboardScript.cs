@@ -1,113 +1,215 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class ScoreboardScript : MonoBehaviour
 {
-    //ports used for connecting to our python server
-    const int PORT_NO1 = 5004;
-    const int PORT_NO2 = 5005;
+    const int PORT_NO1 = 5005;
+    const int PORT_NO2 = 5006;
 
     private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");// ip of vm
-    //private IPAddress SERVER_IP = IPAddress.Parse("192.168.0.103"); 
-
+                                                                   //private IPAddress SERVER_IP = IPAddress.Parse("127.0.0.1"); 
 
     public void ButtonClicked()
     {
-        CreateXml();// works creates xml file
+        SendTest();
+       
 
-        // Connect to a remote device.  
+
+    }
+    public static void SendTest()
+    {
+        List<Users> users = new List<Users>() {
+     new Users() { Username = "Ray", Score = 10}
+    ,new Users() { Username = "John", Score = 20}
+    ,new Users() { Username = "Mike", Score = 30}
+    ,new Users() { Username = "Flan", Score = 200}
+    ,new Users() { Username = "Kevin", Score = 40}
+    ,new Users() { Username = "Sam", Score = 80}
+
+    };// Users
+
+        XDocument xdoc1 = new XDocument(
+    new XDeclaration("1.0", "utf-8 ", " "),
+        // This is the root of the document
+        new XElement("ScoreList",
+        from usr in users
+        select
+            new XElement("Player", new XAttribute("UserName", usr.Username),
+            new XAttribute("Score",usr.Score)
+
+            )));
+       
+        xdoc1.Save("ScoreList.xml"); // creates file in project/desktopProject
+        string doc = xdoc1.ToString(); // converts xml to string
+       
+        Debug.Log(doc);
+
+        String SERVER_IP = "52.18.149.174"; // address of server
+       // String local_ip = ""; // local address for testing 
+        Int32 Port = 5005; // open port on server
+        //Int32 Port2 = 5006;
+        Debug.Log("Connected 3");
+        // Use this for initialization
+
+        Debug.Log("Connected 4");
+        TcpClient tcpClient = new TcpClient(SERVER_IP, Port);
+
+        // Uses the GetStream public method to return the NetworkStream.
+        NetworkStream netStream = tcpClient.GetStream();
+
+        if (netStream.CanWrite)
+        {
+            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
+            netStream.Write(sendBytes, 0, sendBytes.Length);
+
+            StreamReader streamReader;
+            NetworkStream networkStream;
+
+            TcpListener tcpListener = new TcpListener(5555);
+            tcpListener.Start();
+
+            Debug.Log("The Server has started on port 5555");
+            Debug.Log(" test 1");
+            Socket serverSocket = tcpListener.AcceptSocket();
+            Debug.Log(" test 1");
+            try
+            {
+                Debug.Log("Client connected");
+                networkStream = new NetworkStream(serverSocket);
+
+                streamReader = new StreamReader(networkStream);
+                var buffer = new List<byte>();
+
+                while (serverSocket.Available > 0)
+                {
+                    var currByte  = new Byte[1];
+                    var byteCounter = serverSocket.Receive(currByte, currByte.Length, SocketFlags.None);
+                    
+                    if(byteCounter.Equals(1))
+                    {
+                        buffer.Add(currByte[0]);
+                    }
+                }
+                Debug.Log(buffer.ToArray());
+
+                 serverSocket.Close();
+               // Console.Read();
+            }
+
+            catch (Exception ex)
+            {
+               // Console.WriteLine(ex);
+            }
+
+        }// if
+        else
+        {
+            Debug.Log("You cannot write data to this stream.");
+            tcpClient.Close();
+
+            // Closing the tcpClient instance does not close the network stream.
+            netStream.Close();
+            return;
+        }// else
+
+
+        Debug.Log("Connected 5");
+        
+
+        //Receive();
+    }//SendTest
+
+   /* 
+    public  static void Receive()
+    {
+        Debug.Log(" In receive");
+        TcpListener server = null;
         try
         {
-            // Establish the remote endpoint for the socket.  
-            // The name of the    
-            IPEndPoint serverAddress = new IPEndPoint(SERVER_IP, PORT_NO2);// ip of vm on port 5005
+            // Set the TcpListener on port 13000.
+            Int32 port = 5006;
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
 
-            // Create a TCP/IP socket.  
-            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            // TcpListener server = new TcpListener(port);
+            server = new TcpListener(localAddr, port);
 
-            // Connect to the remote endpoint.  
-            client.BeginConnect(serverAddress, new AsyncCallback(ConnectCallback), client);
+            // Start listening for client requests.
+            server.Start();
 
-            Debug.Log("Connected");
+            // Buffer for reading data
+            Byte[] bytes = new Byte[256];
+            String data = null;
 
-            // Release the socket.  
-            client.Shutdown(SocketShutdown.Both);
-            client.Close();
-        }// try
-        catch (Exception e)
+            // Enter the listening loop.
+            while (true)
+            {
+                Console.Write("Waiting for a connection... ");
+
+                // Perform a blocking call to accept requests.
+                // You could also user server.AcceptSocket() here.
+                TcpClient client = server.AcceptTcpClient();
+                Console.WriteLine("Connected!");
+
+                data = null;
+
+                // Get a stream object for reading and writing
+                NetworkStream stream = client.GetStream();
+
+                int i;
+
+                // Loop to receive all the data sent by the client.
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    // Translate data bytes to a ASCII string.
+                    data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                    Console.WriteLine("Received: {0}", data);
+
+                    // Process the data sent by the client.
+                    data = data.ToUpper();
+
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
+
+                    // Send back a response.
+                    stream.Write(msg, 0, msg.Length);
+                    Console.WriteLine("Sent: {0}", data);
+                }
+
+                // Shutdown and end connection
+                client.Close();
+            }
+        }
+        catch (SocketException e)
         {
-            Console.WriteLine(e.ToString());
-        }// catch
-
-    } //ButtonClicked 
-
-    private static void ConnectCallback(IAsyncResult ar)
-    {
-        try
+            Console.WriteLine("SocketException: {0}", e);
+        }
+        finally
         {
-            // Retrieve the socket from the state object.  
-            Socket client = (Socket)ar.AsyncState;
-
-            // Complete the connection.  
-            client.EndConnect(ar);
-
-            Debug.Log("Connected");
-
-            Console.WriteLine("Socket connected to {0}", client.RemoteEndPoint.ToString());
-
-        }// try
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }// catch
-    }// ConnectCallback
+            // Stop listening for new clients.
+            server.Stop();
+        }
 
 
-
-
-    private static void CreateXml()
-    {
-        var users = new List<Users>() {
-        new Users() { Username = "Ray", Score = 10 },
-        new Users() { Username = "John", Score = 20 },
-        new Users() { Username = "Mike", Score = 30},
-        new Users() { Username = "Flan", Score = 200},
-        new Users() { Username = "Kevin", Score = 40}
-        };// player
-
-        // SceneManager.LoadScene("2.Lobby", LoadSceneMode.Single);
-        XDocument xdoc = new XDocument(
-            new XDeclaration("1.0", "utf-8", "yes"),
-                // This is the root of the document
-                new XElement("Scores",
-                from usr in users
-                select
-                    new XElement("Scores", new XAttribute("UserName", usr.Username),
-                    new XElement("Score", usr.Score)
-
-                    )));
-
-        xdoc.Save("Scores.xml"); // creates file in project/desktopProject
-
-    }// CreateXml
-
-}// ScoreboardScript
-
+        Console.WriteLine("\nHit enter to continue...");
+        Console.Read();
+        
+    }
+    */
+}// ScoreBoard
 
 public class Users
 {
     public string Username { get; set; }
 
     public int Score { get; set; }
+    
+}//Users
 
-} // Users
+
+
+
