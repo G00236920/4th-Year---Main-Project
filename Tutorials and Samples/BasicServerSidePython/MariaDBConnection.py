@@ -7,7 +7,7 @@ from xml.etree.ElementTree import tostring
 from mysql.connector.cursor import MySQLCursorPrepared
 from io import StringIO
 import time
-
+from io import BytesIO
   
 
 def startServer():
@@ -212,14 +212,17 @@ def writeToXML(playerRank):
                 usr = ET.SubElement(usrconfig,types[i])
                 usr.text = str(playerRank[name][i])
 
-    XMLtree = ET.ElementTree(usrconfig)
-    print("xml_str 123")
-    xml_str = ET.tostring(XMLtree.getroot())
-    print(xml_str)
-    XMLtree.write("details.xml",encoding='utf-8', xml_declaration=True)
-      
+    XMLtree = ET.ElementTree(usrconfig )
+    
+    f = BytesIO()
+    print("getsHere 1")
+    XMLtree.write(f ,encoding='utf-8', xml_declaration=True)
+    print("getsHere 2")
+    print(f.getvalue())
+    xml_bytes = f.getvalue()
+
     global  xmlRETURNTHIS
-    xmlRETURNTHIS = xml_str
+    xmlRETURNTHIS = xml_bytes
     returnDef()
    
 
