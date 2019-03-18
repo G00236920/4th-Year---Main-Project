@@ -217,7 +217,7 @@ def writeToXML(playerRank):
     xml_str = ET.tostring(XMLtree.getroot())
     print(xml_str)
     XMLtree.write("details.xml",encoding='utf-8', xml_declaration=True)
-    
+      
     global  xmlRETURNTHIS
     xmlRETURNTHIS = xml_str
     returnDef()
