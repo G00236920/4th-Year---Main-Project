@@ -20,61 +20,13 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         testReturn = self.data 
         xmlBytes = self.data.decode("utf-8")
         xmlString = str( xmlBytes )
-        
         tree = ET.fromstring(xmlString)
         
-        # returnXML =  property(Maria.readXML(tree))
         Maria.readXML(tree)
         returnXML = Maria.returnDef()
 
-        #x = bytearray(returnXML)
-
         self.request.sendall(returnXML)
-        #self.request.sendall(x)
-
         print(returnXML)
-
-        print("returnXML^^^^")
-
-       
-        print("Returned")
-        '''
-        try:
-            shutdown(SHUT_RDWR)
-            close()
-        except Exception:
-            pass
-
-        
-         text_file = open("Output.xml", "w")
-         text_file.write(xmlString)
-         text_file.close()
-        
-        
-        returnPort = 5555 
-        command = " Results Temp "
-        b = command.encode('utf-8')
-        print(b)
-        print(command)
-         
-        print("over command")
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print("Connecting to ip" , self.client_address[0])
-        print("Connecting to port" , returnPort)
-        s.connect((self.client_address[0], returnPort))
-
-        print("over s.connect")
-        s.send(command)
-        print("over s.send")
-        #print ("gets here")
-        #time.sleep(2)
-        resp = s.recv(1024)
-
-        print (resp)
-
-        print("Failed  Returning Data")
-        '''
-
 
 def currentTime():
     ts = time.time()
