@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using UnityEngine;
 public class ScoreboardScript : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class ScoreboardScript : MonoBehaviour
         Int32 Port = 5005;
 
 
-        // Use this for initialization
+
 
 
         TcpClient tcpClient = new TcpClient(SERVER_IP, Port);
@@ -69,18 +70,26 @@ public class ScoreboardScript : MonoBehaviour
             netStream.Write(sendBytes, 0, sendBytes.Length);
             Debug.Log("sent");
 
+            StreamReader sr = new StreamReader(tcpClient.GetStream(), Encoding.ASCII);// receives data from server
+            string received = sr.ReadToEnd(); // converts to string 
 
-
-            // StreamWriter sw = new StreamWriter(tcpClient.GetStream(), Encoding.ASCII);
-            StreamReader sr = new StreamReader(tcpClient.GetStream(), Encoding.ASCII);
-            string received = sr.ReadToEnd();
             XmlDocument xm = new XmlDocument();
-            xm.LoadXml(received);
-            xm.Save("newList.xml");
+            //XmlDeclaration xmldecl;
+            //xmldecl = xm.CreateXmlDeclaration("1.0", "utf-8", "yes");
+            //XmlElement root = xm.DocumentElement;
+
+            xm.LoadXml(received); // converts to xml
             Debug.Log(received);
+            //xm.InsertBefore(xmldecl, root);
 
-
+            xm.Save("newList.xml");
+            
+            string doc2 = xm.ToString();
+            Debug.Log(doc2);
+            
         }
+
+
         else
         {
             Debug.Log("You cannot write data to this stream.");
