@@ -3,9 +3,12 @@ import mysql.connector
 import socket
 import xml.etree.cElementTree as etree
 import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import tostring
 from mysql.connector.cursor import MySQLCursorPrepared
 from io import StringIO
 import time
+
+  
 
 def startServer():
     # get the hostname
@@ -96,7 +99,7 @@ def writeToDB(playerNames,playerScore):
 
     con.close()
     rankDB(playerNames)
-    getPlayersInfoFromDB(playerNames)
+    
     #readDB()
 def rankDB(playerNames):
     playerRank = []
@@ -127,12 +130,12 @@ def rankDB(playerNames):
 
     
     print(playerRank)
-    writeToXML(playerRank)
     
     cursor.close()
     con.close()
+    getPlayersInfoFromDB(playerNames,playerRank)
 
-def getPlayersInfoFromDB(playerNames):
+def getPlayersInfoFromDB(playerNames,playerRank):
     print("getPlayersInfoFromDB DEF***********************************")
     playerScore = []
     print(playerNames)
@@ -173,6 +176,7 @@ def getPlayersInfoFromDB(playerNames):
     myCursor.close()
 
     con.close()
+    writeToXML(playerRank)
 
 def readDB():
     print("readDB DEF***********************************")
@@ -207,17 +211,23 @@ def writeToXML(playerRank):
             for i in range(3):
                 usr = ET.SubElement(usrconfig,types[i])
                 usr.text = str(playerRank[name][i])
-                
-
 
     XMLtree = ET.ElementTree(usrconfig)
-    
-
+    print("xml_str 123")
+    xml_str = ET.tostring(XMLtree.getroot())
+    print(xml_str)
     XMLtree.write("details.xml",encoding='utf-8', xml_declaration=True)
-    retrunDef (XMLtree) 
     
-def retrunDef(XMLtree):
-    return (XMLtree) 
+    global  xmlRETURNTHIS
+    xmlRETURNTHIS = xml_str
+    returnDef()
+   
+
+    
+def returnDef():
+
+    global  xmlRETURNTHIS
+    return xmlRETURNTHIS
 
 def mariaConn():
     print("mariaConn DEF***********************************")

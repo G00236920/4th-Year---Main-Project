@@ -1,6 +1,7 @@
 #python 3.5  other versions can't use mysql.connector without getting error
 import socketserver
 import socket
+from socket import SHUT_RDWR
 import time
 import datetime
 import xml.dom.minidom as Dom
@@ -16,34 +17,48 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
         print ("{} wrote:".format(self.client_address[0]))
         currentTime()
-        
-        self.request.sendall(self.data.upper())
-
+        testReturn = self.data 
         xmlBytes = self.data.decode("utf-8")
         xmlString = str( xmlBytes )
-        #text_file = open("Output.xml", "w")
-        #text_file.write(xmlString)
-        #text_file.close()
         
         tree = ET.fromstring(xmlString)
         
+        # returnXML =  property(Maria.readXML(tree))
         Maria.readXML(tree)
-        
+        returnXML = Maria.returnDef()
 
-        print("into try")
+        #x = bytearray(returnXML)
+
+        self.request.sendall(returnXML)
+        #self.request.sendall(x)
+
+        print(returnXML)
+
+        print("returnXML^^^^")
+
+       
+        print("Returned")
+        '''
+        try:
+            shutdown(SHUT_RDWR)
+            close()
+        except Exception:
+            pass
+
+        
+         text_file = open("Output.xml", "w")
+         text_file.write(xmlString)
+         text_file.close()
+        
+        
         returnPort = 5555 
-        print("over port")
         command = " Results Temp "
         b = command.encode('utf-8')
-        print("*****************************Tries to return*****************************")
-        self.request.sendall(b)
-        print("*****************************Tries to return end*****************************")
+        print(b)
         print(command)
-        ipadd = "192.168.0.80"
-
+         
         print("over command")
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print("over s = socket")
         print("Connecting to ip" , self.client_address[0])
         print("Connecting to port" , returnPort)
         s.connect((self.client_address[0], returnPort))
@@ -58,6 +73,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         print (resp)
 
         print("Failed  Returning Data")
+        '''
 
 
 def currentTime():
