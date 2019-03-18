@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrackController : MonoBehaviour {
 
+	public GameObject Track;
 	public GameObject straight;
 	public GameObject up;
 	public GameObject down;
@@ -20,6 +21,7 @@ public class TrackController : MonoBehaviour {
 		int l = 0;
 		
 		GameObject lastpiece = Instantiate(straight, new Vector3(0, 0, 0),  Quaternion.identity);
+		lastpiece.transform.parent = Track.transform;
 		
 		for(int i = 0; i < 100; i++){
 
@@ -60,6 +62,7 @@ public class TrackController : MonoBehaviour {
 			}
 
 			lastpiece = currentPiece;
+			lastpiece.transform.parent = Track.transform;
 		}
 
 	}
