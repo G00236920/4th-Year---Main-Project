@@ -5,7 +5,7 @@ from socket import SHUT_RDWR
 import time
 import datetime
 import xml.dom.minidom as Dom
-import MariaDBConnection as Maria
+import ScoreboardDB as Maria
 
 from xml.etree import ElementTree as ET
 from threading import Thread
