@@ -9,7 +9,7 @@ public class PlayerUnit : NetworkBehaviour
 {
 
     //Variables to be used to control the physics of the vehicle
-    public float MovePower { get; set;}
+    public float MovePower { get; set; }
     public bool IsGrounded { get; set; }
     public Rigidbody Rig { get; set; }
     public float WheelRotation { get; set; }

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class TrackController : MonoBehaviour {
+public class TrackController : NetworkBehaviour {
 
 	public GameObject Track;
 	public GameObject straight;
@@ -16,12 +17,28 @@ public class TrackController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		if (isServer)
+        {
+			Debug.Log("Server");
+	 		CmdSpawnTrack();
+        }
+
+	}
 		
+	
+	[Command]
+    public void CmdSpawnTrack()
+    {
 		int r = 0; 
 		int l = 0;
 		
 		GameObject lastpiece = Instantiate(straight, new Vector3(0, 0, 0),  Quaternion.identity);
 		lastpiece.transform.parent = Track.transform;
+		Track.SetActive(false);
+		NetworkTransformChild ct = Track.AddComponent<NetworkTransformChild>();
+		ct.target = lastpiece.transform;
+		Track.SetActive(true);
 		
 		for(int i = 0; i < 100; i++){
 
@@ -63,6 +80,10 @@ public class TrackController : MonoBehaviour {
 
 			lastpiece = currentPiece;
 			lastpiece.transform.parent = Track.transform;
+			Track.SetActive(false);
+			ct = Track.AddComponent<NetworkTransformChild>();
+			ct.target = lastpiece.transform;
+			Track.SetActive(true);
 		}
 
 	}

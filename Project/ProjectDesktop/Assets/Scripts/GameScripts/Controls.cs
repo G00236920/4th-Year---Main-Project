@@ -47,7 +47,7 @@ public class Controls : NetworkBehaviour
         if (Input.GetKey(KeyCode.W) && player.IsGrounded)
         {
             //Set the move power to this value
-            player.MovePower = 160;
+            player.MovePower = 60;
             //Move the vehicle by adding force in the forward direction
             player.MoveVehicle(transform.forward * player.MovePower);
 
@@ -87,7 +87,7 @@ public class Controls : NetworkBehaviour
         if (Input.GetKeyUp(KeyCode.A))
         {
             //Set the vehicle power to this value
-            player.MovePower = 160;
+            player.MovePower = 60;
             //set the boolean to false, no longer turning
             player.Turning = false;
             //set the rotation to 0, stop the rotation
@@ -138,7 +138,7 @@ public class Controls : NetworkBehaviour
         if (Input.GetKeyUp(KeyCode.D))
         {
             //Set the power back to this value
-            player.MovePower = 160;
+            player.MovePower = 60;
             //Set the value to false, we are no longer turning
             player.Turning = false;
             //Stop the rotation
