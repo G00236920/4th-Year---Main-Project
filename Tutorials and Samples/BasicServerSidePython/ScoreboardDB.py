@@ -118,7 +118,7 @@ def writeToXML(playerRank):
 
     XMLtree = ET.ElementTree(usrconfig )
     f = BytesIO()
-    XMLtree.write(f ,encoding='utf-8', xml_declaration=True)
+    XMLtree.write(f ,encoding='utf-8', xml_declaration=True, standalone="yes" )
     xml_bytes = f.getvalue()
 
     global  xmlRETURNTHIS
