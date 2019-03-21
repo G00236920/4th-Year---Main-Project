@@ -4,9 +4,14 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Kart: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 2}
-  - Bike: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348, type: 2}
-  - Ball: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 2}
+  - Kart: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 3}
+  - Bike: {fileID: 1752363321412236, guid: 94f3ace79c7f8ab4a89b529147588348, type: 3}
+  - Ball: {fileID: 1926729227547470, guid: b9c40dabed03028418b453eccb86e2ba, type: 3}
+  - straight: {fileID: 1343614218006018, guid: 49399f866bdacc242911736c704ea128, type: 3}
+  - up: {fileID: 6250871622277938711, guid: 252e87a035dfc09478f16502122f5996, type: 3}
+  - down: {fileID: 4756250854963722743, guid: ef6952a9964f7cc4190f18da2be11d5b, type: 3}
+  - left: {fileID: 2663804464020034214, guid: 456359a32f7cbef41b63ca59e79aa4df, type: 3}
+  - right: {fileID: 3060571529415665946, guid: 51b3283978a92e74582fc90557fb9542, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

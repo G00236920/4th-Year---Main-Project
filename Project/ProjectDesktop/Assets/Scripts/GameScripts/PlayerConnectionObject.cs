@@ -10,6 +10,11 @@ public class PlayerConnectionObject : NetworkBehaviour
     public GameObject Kart;
     public GameObject Bike;
     public GameObject Ball;
+    public GameObject straight;
+    public GameObject up;
+    public GameObject down;
+    public GameObject left;
+    public GameObject right;
 
     //This players Vehicle
     private GameObject myPlayerUnit;
@@ -26,6 +31,17 @@ public class PlayerConnectionObject : NetworkBehaviour
         SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
         SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
         SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
+        
+        if (isServer)
+        {
+            if (connectionToClient.isReady)
+            {
+                CmdSpawnTrack();
+            }
+            else {
+                StartCoroutine(WaitForTrack());
+            }
+        }
 
         //If the Player is not the local User
         if (!isLocalPlayer)
@@ -133,9 +149,82 @@ public class PlayerConnectionObject : NetworkBehaviour
         {
             yield return new WaitForSeconds(0.25f);
         }
-
         CmdSpawnMyKart();
+    }
+
+    IEnumerator WaitForTrack()
+    {
+        while (!connectionToClient.isReady)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+        CmdSpawnTrack();
+    }
+		
+	
+	[Command]
+    public void CmdSpawnTrack()
+    {
+		
+        GameObject currentPiece = straight;
+		GameObject lastpiece = Instantiate(currentPiece, new Vector3(0, 0, 0),  Quaternion.identity);
+
+        //propagate the object to all clients
+        NetworkServer.Spawn(lastpiece);
+
+        int r = 0;
+        int l = 0;
+        
+		for(int i = 0; i < 100; i++){
+
+			switch(Random.Range(0, 5)){
+				case 1:
+                    currentPiece = up;
+				break;
+				case 2:
+                    currentPiece = down;
+				break;
+				case 3:
+                    if(r == 0){
+                        currentPiece = right;
+                        r = 1;
+                        l = 0;
+                    }
+                    else{
+                        i--;
+                    }
+				break;
+				case 4:
+                    if(l == 0){
+                        currentPiece = left;
+                        l = 1;
+                        r = 0;
+                    }
+                    else{
+                        i--;
+                    }
+				break;
+				default:
+                    currentPiece = straight;
+				break;
+			}
+
+            lastpiece = CmdSpawnPiece(currentPiece, lastpiece);
+
+		}
+    }
+
+    public GameObject CmdSpawnPiece(GameObject currentPiece, GameObject lastpiece){
+
+
+        GameObject go = Instantiate(currentPiece, lastpiece.transform.GetChild(2).position, lastpiece.transform.GetChild(2).rotation);
+
+        //propagate the object to all clients
+        NetworkServer.Spawn(go);
+
+        return go;
 
     }
+
 
 }

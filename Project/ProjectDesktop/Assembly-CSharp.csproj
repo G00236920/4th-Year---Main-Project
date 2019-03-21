@@ -77,7 +77,6 @@
      <Compile Include="Assets\Scripts\MatchMakingScreen\ServerGUI.cs" />
      <Compile Include="Assets\Scripts\MatchMakingScreen\ServerList.cs" />
      <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
-     <Compile Include="Assets\Scripts\TrackScripts\TrackController.cs" />
      <None Include="Assets\AssetStoreContent\Oculus Hands\LICENSE.txt" />
      <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
