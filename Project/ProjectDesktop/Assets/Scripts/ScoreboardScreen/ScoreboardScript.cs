@@ -83,7 +83,9 @@ public class ScoreboardScript : MonoBehaviour
             //xm.InsertBefore(xmldecl, root);
 
             xm.Save("newList.xml");
-            
+
+           
+
             string doc2 = xm.ToString();
             Debug.Log(doc2);
             
@@ -107,7 +109,38 @@ public class ScoreboardScript : MonoBehaviour
 
 
 }// ScoreBoard
-
+/*
+public static Object ObjectToXML(string xml, Type objectType)
+{
+    StringReader strReader = null;
+    XmlSerializer serializer = null;
+    XmlTextReader xmlReader = null;
+    Object obj = null;
+    try
+    {
+        strReader = new StringReader(xml);
+        serializer = new XmlSerializer(objectType);
+        xmlReader = new XmlTextReader(strReader);
+        obj = serializer.Deserialize(xmlReader);
+    }
+    catch (Exception exp)
+    {
+        //Handle Exception Code
+    }
+    finally
+    {
+        if (xmlReader != null)
+        {
+            xmlReader.Close();
+        }
+        if (strReader != null)
+        {
+            strReader.Close();
+        }
+    }
+    return obj;
+}
+*/
 public class Users
 {
     public string Username { get; set; }
