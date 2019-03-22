@@ -29,8 +29,6 @@ public class PlayerConnectionObject : NetworkBehaviour
         SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
         SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
         SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
-        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
-        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
         
         if (isServer)
         {
@@ -96,7 +94,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         if (connectionToClient.isReady)
         {
             //creates the object on the server
-            GameObject go = Instantiate(Kart);
+            GameObject go = Instantiate(Kart, SpawnPoints[PlayerDetails.Instance.getPos()-1], Quaternion.identity);
             
             myPlayerUnit = go;
 
