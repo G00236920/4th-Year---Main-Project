@@ -25,10 +25,10 @@ public class PlayerConnectionObject : NetworkBehaviour
     void Start()
     {
         //Collection of Spawn Points, Depending on how many people are playing
-        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
-        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
-        SpawnPoints.Add(new Vector3(-3.11f, 1.13f, 1.9f));
-        SpawnPoints.Add(new Vector3(0.54f, 1.13f, 1.9f));
+        SpawnPoints.Add(new Vector3(-4.61f, 0.91f, 1.9f));
+        SpawnPoints.Add(new Vector3(4.9f, 0.91f, 1.9f));
+        SpawnPoints.Add(new Vector3(-4.61f, 0.91f, 8.44f));
+        SpawnPoints.Add(new Vector3(4.9f, 0.91f, 8.44f));
         
         if (isServer)
         {
@@ -55,7 +55,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         //Spawn the Kart for the player
         //In the VR version of the game this will be a bike
         //In the mobile version this will be a Ball
-        CmdSpawnMyKart();
+        CmdSpawnMyKart(SpawnPoints[PlayerDetails.Instance.getPos()-1]);
 
     }
 
@@ -83,18 +83,18 @@ public class PlayerConnectionObject : NetworkBehaviour
         //Destroy the Unit 
         CmdDestroyMyUnit();
         //Respawn the kart
-        CmdSpawnMyKart();
+        CmdSpawnMyKart(SpawnPoints[PlayerDetails.Instance.getPos()-1]);
     }
 
     //Commands - only executed on the server
     [Command]
-    public void CmdSpawnMyKart()
+    public void CmdSpawnMyKart(Vector3 pos)
     {
 
         if (connectionToClient.isReady)
         {
             //creates the object on the server
-            GameObject go = Instantiate(Kart, SpawnPoints[PlayerDetails.Instance.getPos()-1], Quaternion.identity);
+            GameObject go = Instantiate(Kart, pos, Quaternion.identity);
             
             myPlayerUnit = go;
 
@@ -147,7 +147,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         {
             yield return new WaitForSeconds(0.25f);
         }
-        CmdSpawnMyKart();
+        CmdSpawnMyKart(SpawnPoints[PlayerDetails.Instance.getPos()-1]);
     }
 
     IEnumerator WaitForTrack()
