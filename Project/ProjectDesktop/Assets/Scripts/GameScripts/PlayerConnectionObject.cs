@@ -58,6 +58,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         //Spawn the Kart for the player
         //In the VR version of the game this will be a bike
         //In the mobile version this will be a Ball
+        PlayerDetails.Instance.setSpawnPos(SpawnPoints[PlayerDetails.Instance.getPos()-1], new Quaternion(0f, 0f , 0f, 1));
         CmdSpawnMyKart(SpawnPoints[PlayerDetails.Instance.getPos()-1]);
 
     }
@@ -86,7 +87,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         //Destroy the Unit 
         CmdDestroyMyUnit();
         //Respawn the kart
-        CmdSpawnMyKart(SpawnPoints[PlayerDetails.Instance.getPos()-1]);
+        CmdSpawnMyKart(PlayerDetails.Instance.getSpawnPos());
     }
 
     //Commands - only executed on the server

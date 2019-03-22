@@ -121,6 +121,11 @@ public class PlayerUnit : NetworkBehaviour
         IsGrounded = false;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        PlayerDetails.Instance.setSpawnPos(collision.transform.position, collision.transform.rotation);
+    }
+
     private void ResetWheels() {
 
         //if the vehicle is not currently turning

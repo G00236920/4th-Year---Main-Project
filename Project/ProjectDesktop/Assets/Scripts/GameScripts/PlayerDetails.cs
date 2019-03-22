@@ -11,6 +11,8 @@ public class PlayerDetails : MonoBehaviour {
     private static PlayerDetails _instance;
     private static string username;
     private static int startPosition;
+    private static Vector3 spawnPos;
+    private static Quaternion rot;
 
     //The only instance of the class object
     public static PlayerDetails Instance { get { return _instance; } }
@@ -27,7 +29,7 @@ public class PlayerDetails : MonoBehaviour {
         DontDestroyOnLoad (this.gameObject);
     }
 
-    //Getters and setters  
+    //Getters and setters
     public void setUsername (string u) {
         username = u;
     }
@@ -43,5 +45,18 @@ public class PlayerDetails : MonoBehaviour {
 
     public int getPos () {
         return startPosition;
+    }
+
+    public void setSpawnPos (Vector3 pos, Quaternion r) {
+        spawnPos = pos;
+        rot = r;
+    }
+
+    public Vector3 getSpawnPos () {
+        return spawnPos;
+    }
+
+    public Quaternion getRot () {
+        return rot;
     }
 }
