@@ -14,14 +14,14 @@ namespace Prototype.NetworkLobby
         //the players also have the option of clicking the start buttons
         //to avoid frustration, this should be seen in real time to the host and other players
 
-        public static LobbyPlayerList _instance = null;
+        public static LobbyPlayerList _instance {get; set;}
 
         public RectTransform playerListContentTransform;
         public GameObject warningDirectPlayServer;
         public Transform addButtonRow;
 
         protected VerticalLayoutGroup _layout;
-        protected List<LobbyPlayer> _players = new List<LobbyPlayer>();
+        private List<LobbyPlayer> _players = new List<LobbyPlayer>();
 
         public void OnEnable()
         {
@@ -71,6 +71,10 @@ namespace Prototype.NetworkLobby
                 p.OnPlayerListChanged(i);
                 ++i;
             }
+        }
+
+        public List<LobbyPlayer> getPlayers(){
+            return _players;
         }
     }
 }

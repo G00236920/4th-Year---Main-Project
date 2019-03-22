@@ -18,6 +18,12 @@ public class PlayerUnit : NetworkBehaviour
 
     private void Start()
     {
+        if (hasAuthority)
+        {
+            TextMesh textObject = GameObject.Find("playerName").GetComponent<TextMesh>();
+            textObject.text = PlayerDetails.Instance.getUsername();
+        }
+
         //Get the rigidbody component from the Player character
         Rig = this.GetComponentInChildren<Rigidbody>();
     }
@@ -34,6 +40,7 @@ public class PlayerUnit : NetworkBehaviour
         }
         if (hasAuthority)
         {
+
             //Activate the camera for the current
             ActivateCameraForCurrentPlayer();
         }

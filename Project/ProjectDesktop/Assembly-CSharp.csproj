@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameScripts\Controls.cs" />
+     <Compile Include="Assets\Scripts\GameScripts\EndCondition.cs" />
      <Compile Include="Assets\Scripts\GameScripts\PlayerConnectionObject.cs" />
      <Compile Include="Assets\Scripts\GameScripts\PlayerDetails.cs" />
      <Compile Include="Assets\Scripts\GameScripts\PlayerUnit.cs" />

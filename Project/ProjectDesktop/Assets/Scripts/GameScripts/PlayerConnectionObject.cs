@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class PlayerConnectionObject : NetworkBehaviour
 {
-
     //Vehicles used by Players
     public GameObject Kart;
     public GameObject Bike;
@@ -15,9 +14,8 @@ public class PlayerConnectionObject : NetworkBehaviour
     public GameObject down;
     public GameObject left;
     public GameObject right;
-    public GameObject start;
+    public GameObject startPos;
     public GameObject finish;
-
 
     //This players Vehicle
     private GameObject myPlayerUnit;
@@ -33,6 +31,14 @@ public class PlayerConnectionObject : NetworkBehaviour
         SpawnPoints.Add(new Vector3(-4.61f, 0.91f, 8.44f));
         SpawnPoints.Add(new Vector3(4.9f, 0.91f, 8.44f));
         
+
+        //If the Player is not the local User
+        if (!isLocalPlayer)
+        {
+            //Exit without running the Script
+            return;
+        }
+
         if (isServer)
         {
             if (connectionToClient.isReady)
@@ -42,13 +48,6 @@ public class PlayerConnectionObject : NetworkBehaviour
             else {
                 StartCoroutine(WaitForTrack());
             }
-        }
-
-        //If the Player is not the local User
-        if (!isLocalPlayer)
-        {
-            //Exit without running the Script
-            return;
         }
 
         //Disable the main camera, this will allow the players camera to be activated
@@ -168,67 +167,59 @@ public class PlayerConnectionObject : NetworkBehaviour
     public void CmdSpawnTrack()
     {
 		
-        GameObject currentPiece = start;
-		GameObject lastpiece = Instantiate(currentPiece, new Vector3(0, 0, 0),  Quaternion.identity);
-
-        //propagate the object to all clients
-        NetworkServer.Spawn(lastpiece);
+		GameObject lastpiece = null;
+        lastpiece =  CmdSpawnPiece(startPos, null);
 
         int r = 0;
         int l = 0;
         
-		for(int i = 0; i < 100; i++){
+		for(int i = 0; i < 10; i++){
 
 			switch(Random.Range(0, 5)){
 				case 1:
-                    currentPiece = up;
+                    lastpiece = CmdSpawnPiece(up, lastpiece);
 				break;
 				case 2:
-                    currentPiece = down;
+                    lastpiece = CmdSpawnPiece(down, lastpiece);
 				break;
 				case 3:
                     if(r == 0){
-                        currentPiece = right;
+                        lastpiece = CmdSpawnPiece(right, lastpiece);
                         r = 1;
                         l = 0;
-                    }
-                    else{
-                        i--;
                     }
 				break;
 				case 4:
                     if(l == 0){
-                        currentPiece = left;
+                        lastpiece = CmdSpawnPiece(left, lastpiece);
                         l = 1;
                         r = 0;
                     }
-                    else{
-                        i--;
-                    }
 				break;
 				default:
-                    currentPiece = straight;
+                    lastpiece = CmdSpawnPiece(straight, lastpiece);
 				break;
 			}
 
-            lastpiece = CmdSpawnPiece(currentPiece, lastpiece);
-
 		}
 
-        currentPiece = finish;
-        lastpiece = CmdSpawnPiece(currentPiece, lastpiece);
+        lastpiece = CmdSpawnPiece(finish, lastpiece);
     }
 
     public GameObject CmdSpawnPiece(GameObject currentPiece, GameObject lastpiece){
-
-
-        GameObject go = Instantiate(currentPiece, lastpiece.transform.GetChild(2).position, lastpiece.transform.GetChild(2).rotation);
-
+        GameObject go = null;
+        
+        if(lastpiece == null){
+            go = Instantiate(currentPiece, new Vector3(0f,0f,0f), new Quaternion(0,0,0,0));
+        }
+        else{
+            go = Instantiate(currentPiece, lastpiece.transform.GetChild(2).position, lastpiece.transform.GetChild(2).rotation);
+        }
+        
         //propagate the object to all clients
         NetworkServer.Spawn(go);
 
         return go;
-
     }
 
 
