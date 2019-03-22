@@ -37,6 +37,7 @@ public class PlayerDetails : MonoBehaviour {
     }
 
     public void setPos (int pos) {
+        Debug.Log("player " +pos);
         startPosition = pos;
     }
 

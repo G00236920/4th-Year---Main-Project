@@ -12,20 +12,18 @@ namespace Prototype.NetworkLobby
         public LobbyManager lobbyManager;
         public RectTransform lobbyServerList;
         public RectTransform lobbyPanel;
-
         public InputField ipInput;
         public InputField matchNameInput;
 
 
         public void OnEnable()
         {
-            //show the top panel.
+            //show the top panel
             lobbyManager.topPanel.ToggleVisibility(true);
             //Remove all listeners
             ipInput.onEndEdit.RemoveAllListeners();
             //add a listener when the user interacts with the IP box
-            ipInput.onEndEdit.AddListener(onEndEditIP);
-            
+            ipInput.onEndEdit.AddListener(onEndEditIP); 
         }
 
         public void OnClickJoin(string ip)
