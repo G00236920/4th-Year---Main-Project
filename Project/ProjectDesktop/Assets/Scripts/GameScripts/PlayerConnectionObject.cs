@@ -15,6 +15,9 @@ public class PlayerConnectionObject : NetworkBehaviour
     public GameObject down;
     public GameObject left;
     public GameObject right;
+    public GameObject start;
+    public GameObject finish;
+
 
     //This players Vehicle
     private GameObject myPlayerUnit;
@@ -164,7 +167,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     public void CmdSpawnTrack()
     {
 		
-        GameObject currentPiece = straight;
+        GameObject currentPiece = start;
 		GameObject lastpiece = Instantiate(currentPiece, new Vector3(0, 0, 0),  Quaternion.identity);
 
         //propagate the object to all clients
@@ -210,6 +213,9 @@ public class PlayerConnectionObject : NetworkBehaviour
             lastpiece = CmdSpawnPiece(currentPiece, lastpiece);
 
 		}
+
+        currentPiece = finish;
+        lastpiece = CmdSpawnPiece(currentPiece, lastpiece);
     }
 
     public GameObject CmdSpawnPiece(GameObject currentPiece, GameObject lastpiece){

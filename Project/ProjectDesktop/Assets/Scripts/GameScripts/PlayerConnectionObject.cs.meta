@@ -12,6 +12,9 @@ MonoImporter:
   - down: {fileID: 4756250854963722743, guid: ef6952a9964f7cc4190f18da2be11d5b, type: 3}
   - left: {fileID: 2663804464020034214, guid: 456359a32f7cbef41b63ca59e79aa4df, type: 3}
   - right: {fileID: 3060571529415665946, guid: 51b3283978a92e74582fc90557fb9542, type: 3}
+  - start: {fileID: 8953665437887173205, guid: 30d04d1bd7a5afc4aa03c46229ed3224, type: 3}
+  - finish: {fileID: 2847089085974884230, guid: d571c6aa80366034794db779e8f47eaa,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
