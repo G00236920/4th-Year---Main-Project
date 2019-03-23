@@ -9,7 +9,7 @@ public class PlayerUnit : NetworkBehaviour
 {
 
     //Variables to be used to control the physics of the vehicle
-    public float MovePower { get; set;}
+    public float MovePower { get; set; }
     public bool IsGrounded { get; set; }
     public Rigidbody Rig { get; set; }
     public float WheelRotation { get; set; }
@@ -34,6 +34,7 @@ public class PlayerUnit : NetworkBehaviour
         }
         if (hasAuthority)
         {
+
             //Activate the camera for the current
             ActivateCameraForCurrentPlayer();
         }
@@ -119,6 +120,11 @@ public class PlayerUnit : NetworkBehaviour
         //Once the vehicle leaves the ground or another object,
         //Set this to false to prevent a secondary jump
         IsGrounded = false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        PlayerDetails.Instance.setSpawnPos(collision.transform.position, collision.transform.rotation);
     }
 
     private void ResetWheels() {
