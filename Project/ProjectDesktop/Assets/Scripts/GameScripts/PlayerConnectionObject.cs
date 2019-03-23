@@ -121,10 +121,10 @@ public class PlayerConnectionObject : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSpawnMyBike()
+    public void CmdSpawnMyBike(Vector3 pos)
     {
         //creates the object on the server
-        GameObject go = Instantiate(Bike);
+        GameObject go = Instantiate(Bike, pos, Quaternion.identity);
 
         myPlayerUnit = go;
 
