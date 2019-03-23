@@ -11,10 +11,10 @@ using System.Xml.Serialization;
 using UnityEngine;
 public class ScoreboardScript : MonoBehaviour
 {
-    const int PORT_NO1 = 5005;
-    const int PORT_NO2 = 5006;
+    //const int PORT_NO1 = 5005;
+    //const int PORT_NO2 = 5006;
 
-    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");// ip of vm
+    //private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");// ip of vm
                                                                    //private IPAddress SERVER_IP = IPAddress.Parse("127.0.0.1"); 
 
     public void ButtonClicked()
@@ -31,14 +31,12 @@ public class ScoreboardScript : MonoBehaviour
     new Users() { Username = "Mike", Score = 30},
     new Users() { Username = "Flan", Score = 200},
     new Users() { Username = "Kevin", Score = 40},
+    new Users() { Username = "boss", Score = 100000},
     new Users() { Username = "Sam", Score = 80}
 
     };// Users
 
-       // for (int i = 0; i < users.Count; i++)
-        //{
-        //    Debug.Log(users[i]);
-        //}
+       
         XDocument xdoc = new XDocument(
     new XDeclaration("1.0", "utf-8", "yes"),
         // This is the root of the document
@@ -50,15 +48,12 @@ public class ScoreboardScript : MonoBehaviour
 
             )));
         xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
-        String doc = xdoc.ToString();
+        String doc = xdoc.ToString(); // converts doc to string
         Debug.Log(doc);
-        String SERVER_IP = "52.18.149.174";
-        Int32 Port = 5005;
+        String SERVER_IP = "52.18.149.174";// addresss of server
+        Int32 Port = 5005;// port server is listening on
 
-
-
-
-
+       
         TcpClient tcpClient = new TcpClient(SERVER_IP, Port);
         Debug.Log("Connected 1");
         // Uses the GetStream public method to return the NetworkStream.
@@ -66,8 +61,8 @@ public class ScoreboardScript : MonoBehaviour
         Debug.Log("Connected 2");
         if (netStream.CanWrite)
         {
-            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
-            netStream.Write(sendBytes, 0, sendBytes.Length);
+            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);// converts doc to byte array
+            netStream.Write(sendBytes, 0, sendBytes.Length);// sends to server
             Debug.Log("sent");
 
             StreamReader sr = new StreamReader(tcpClient.GetStream(), Encoding.ASCII);// receives data from server
@@ -79,17 +74,34 @@ public class ScoreboardScript : MonoBehaviour
             //XmlElement root = xm.DocumentElement;
 
             xm.LoadXml(received); // converts to xml
-            Debug.Log(received);
+            Debug.Log(xm);
             //xm.InsertBefore(xmldecl, root);
 
-            xm.Save("newList.xml");
-
-           
-
-            string doc2 = xm.ToString();
+            xm.Save("newList.xml");// saves xml file 
+          string doc2 = xm.ToString();
             Debug.Log(doc2);
-            
-        }
+            Debug.Log("1!!");
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("results"));
+            Debug.Log("2!!");
+            StringReader stringReader = new StringReader(doc2);
+            stringReader.Read(); // skip BOM
+            Debug.Log("3!!");
+            List<Users> Users = (List<Users>)serializer.Deserialize(stringReader);
+            Debug.Log("object!!");
+            Debug.Log(Users.ToString());
+            Debug.Log("object^^");
+            Debug.Log("1!!");
+            /* XmlSerializer serializer = new XmlSerializer(typeof(List<Users>));
+           Debug.Log("2!!");
+           using (FileStream stream = File.OpenRead("ScoreList.xml"))
+           {
+               Debug.Log("3!!");
+               List<Users> dezerializedList = (List<Users>)serializer.Deserialize(stream);
+               Debug.Log("4!!");
+               Debug.Log(dezerializedList);
+           }*/
+
+        }// if
 
 
         else
@@ -109,38 +121,7 @@ public class ScoreboardScript : MonoBehaviour
 
 
 }// ScoreBoard
-/*
-public static Object ObjectToXML(string xml, Type objectType)
-{
-    StringReader strReader = null;
-    XmlSerializer serializer = null;
-    XmlTextReader xmlReader = null;
-    Object obj = null;
-    try
-    {
-        strReader = new StringReader(xml);
-        serializer = new XmlSerializer(objectType);
-        xmlReader = new XmlTextReader(strReader);
-        obj = serializer.Deserialize(xmlReader);
-    }
-    catch (Exception exp)
-    {
-        //Handle Exception Code
-    }
-    finally
-    {
-        if (xmlReader != null)
-        {
-            xmlReader.Close();
-        }
-        if (strReader != null)
-        {
-            strReader.Close();
-        }
-    }
-    return obj;
-}
-*/
+
 public class Users
 {
     public string Username { get; set; }

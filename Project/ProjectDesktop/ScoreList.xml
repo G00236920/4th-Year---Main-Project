@@ -5,5 +5,6 @@
   <Player UserName="Mike" Score="30" />
   <Player UserName="Flan" Score="200" />
   <Player UserName="Kevin" Score="40" />
+  <Player UserName="boss" Score="100000" />
   <Player UserName="Sam" Score="80" />
 </ScoreList>
