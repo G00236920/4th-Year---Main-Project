@@ -75,8 +75,12 @@ public class PlayerConnectionObject : NetworkBehaviour
         }
 
         //if the User presses the button that allows the user to respawn
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R) )
         {
+            Respawn();
+        }
+
+        if(myPlayerUnit && myPlayerUnit.transform.position.y < -20){
             Respawn();
         }
 
@@ -87,6 +91,11 @@ public class PlayerConnectionObject : NetworkBehaviour
         CmdDestroyMyUnit();
         //Respawn the kart
         CmdSpawnMyKart(PlayerDetails.Instance.getSpawnPos());
+    }
+
+    [Command]
+    public void CmdDestroyUnit(GameObject player) {
+        Destroy(player);
     }
 
     //Commands - only executed on the server

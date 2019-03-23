@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EndCondition : MonoBehaviour
+public class EndCondition : NetworkBehaviour
 {
 
     /// <summary>
@@ -12,9 +13,12 @@ public class EndCondition : MonoBehaviour
     /// <param name="other">The Collision data associated with this collision.</param>
     void OnCollisionEnter(Collision other)
     {
-        other.gameObject.transform.GetChild(0).parent = null;
-        string playername = other.transform.Find("playerName").GetComponent<TextMesh>().text;
-        Destroy(other.gameObject);
-
+        if(other.transform.Find("Camera")){
+            other.transform.Find("Camera").parent = null;
+        }
+        
+        NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<PlayerConnectionObject>().CmdDestroyUnit(other.gameObject);
+        
     }
+
 }
