@@ -12,36 +12,46 @@ from io import BytesIO
 def readXML(tree):
     playerNames = []
     playerScore = []
-   
+   # takes the xml passed from the Client Connection file and passses UserName & Score
+   # in to the lists one called playerNames and the other called playerScore
     for player in tree.findall('Player'):
             score = player.get('Score')
             name = player.get('UserName')
             playerNames.append(name )
             playerScore.append (score)
+    # calls the writeToDB & passes playerNames,playerScore
     writeToDB(playerNames,playerScore)
     
 def writeToDB(playerNames,playerScore):
     try:
-        #MariaDB Connection
+        # connects to the mariaDB using the login info below 
         con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
+        # records_to_insert is a list of tuples of the players info 
         records_to_insert = [ (playerNames[0],playerScore[0]) ,
                             (playerNames[1],playerScore[1]),
                             (playerNames[2],playerScore[2]) ,
                             (playerNames[3],playerScore[3]) 
                             ]
+        # The sql query to run with %s used instead of the variables (playerNames ,playerScore )
+        # Query also checks if the player name exists in the DB that the score should be added to there exisiting score
+        # If the playerName doesnt exist it adds it to the DB 
         sql_insert_query = " INSERT INTO results (Player, Score) VALUES (%s,%s) ON DUPLICATE KEY UPDATE Score = VALUES(Score) + Score ; "
+        # Connects to DB 
         myCursor = con.cursor()
+        # Executes the SQL query with the player info 
         myCursor.executemany(sql_insert_query, records_to_insert)
-        
+        # Commits the sql query. If not used changes to DB won't be saved.  
         con.commit()
  
        # print (myCursor.rowcount, "Record inserted successfully into scoreboard results table")
         
     except mysql.connector.Error as error :
+        #Prints if the DB doesnt connect and prints the error 
         print("Failed inserting record into results table {}".format(error))
-
+    #Closes the connection
     myCursor.close()
     con.close()
+    #Calls the rankDB and passes the list playerNames
     rankDB(playerNames)
     
 def rankDB(playerNames):

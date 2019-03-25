@@ -1,7 +1,2 @@
 <?xml version='1.0' encoding='utf-8'?>
-<ScoreList>
-<Player  Name ="Ray" Score = "3121"  Rank = 4  />
-<Player><Name>John</Name><Score>6241</Score><Rank>3</Rank></Player>
-<Player><Name>Mike</Name><Score>9361</Score><Rank>2</Rank></Player>
-<Player><Name>Flan</Name><Score>62401</Score><Rank>1</Rank></Player>
-</ScoreList>
+<ScoreList><Player><Name>Ray</Name><Score>3131</Score><Rank>4</Rank></Player><Player><Name>John</Name><Score>6261</Score><Rank>3</Rank></Player><Player><Name>Mike</Name><Score>9391</Score><Rank>2</Rank></Player><Player><Name>Flan</Name><Score>62601</Score><Rank>1</Rank></Player></ScoreList>
