@@ -114,9 +114,9 @@ def writeToXML(playerRank):
     for j in range(len( playerRank)):
         usr = ET.SubElement(root,"Player")
         for i in range(3):
-            info = ET.SubElement(root,types[i])
+            info = ET.SubElement(usr,types[i])
             info.text = str(playerRank[j][i])
-            usr.append(info)
+            #usr.append(info)
         
 
     XMLtree = ET.ElementTree(root )    
