@@ -107,24 +107,29 @@ def getPlayersInfoFromDB(playerNames,playerRank):
     writeToXML(playerRank)
 
 def writeToXML(playerRank):
-    usrconfig = ET.Element("data")
-    usrconfig = ET.SubElement(usrconfig,"results")
-    types = "Player", "Score","Rank"
-    for name in range(len( playerRank)):
-            
-            for i in range(3):
-                usr = ET.SubElement(usrconfig,types[i])
-                usr.text = str(playerRank[name][i])
 
-    XMLtree = ET.ElementTree(usrconfig )
+    root = ET.Element("ScoreList")
+    root = ET.SubElement(root,"ScoreList")
+    types = "Name", "Score","Rank"
+    for j in range(len( playerRank)):
+        usr = ET.SubElement(root,"Player")
+        for i in range(3):
+            info = ET.SubElement(root,types[i])
+            info.text = str(playerRank[j][i])
+            usr.append(info)
+        
+
+    XMLtree = ET.ElementTree(root )    
     f = BytesIO()
-    XMLtree.write(f ,encoding='utf-8', xml_declaration=True, standalone="yes" )
+    #XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
+    XMLtree.write("f" ,encoding='utf-8', xml_declaration=True )
     xml_bytes = f.getvalue()
 
     global  xmlRETURNTHIS
     xmlRETURNTHIS = xml_bytes
     returnDef()
-    
+
+
 def returnDef():
 
     global  xmlRETURNTHIS

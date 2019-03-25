@@ -145,7 +145,7 @@ def getPlayersInfoFromDB(playerNames,playerRank):
         records_to_select = [ (playerNames[0]) ,
                             (playerNames[1]),
                             (playerNames[2]) ,
-                            (playerNames[3]) 
+                            (playerNames[3]) # stick in a loop
                             ]
         sql_select_query = " SELECT Score FROM results WHERE  Player = %s ; "
         
