@@ -120,7 +120,7 @@ def writeToXML(playerRank):
 
     root = ET.Element("ScoreList")
     root = ET.SubElement(root,"ScoreList")
-    types = "Name", "Score","Rank"
+    types = "UserName", "Score","Rank"
     for j in range(len( playerRank)):
         usr = ET.SubElement(root,"Player")
         for i in range(3):
@@ -128,15 +128,18 @@ def writeToXML(playerRank):
             info.text = str(playerRank[j][i])
             #usr.append(info)
         
-
+    #Creteas an XML element
     XMLtree = ET.ElementTree(root )    
-    f = BytesIO()
-    XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
-    #XMLtree.write("f" ,encoding='utf-8', xml_declaration=True )
-    xml_bytes = f.getvalue()
-
+    #Creates f as a BytesIO()
+    #f = BytesIO()
+    #writes to f instead of a file so it can add the heading  
+    #XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
+    xmlstr = ElementTree.tostring(et, encoding='utf8', method='xml')##Test code need to change fix TypeError: a bytes-like object is required, not 'ElementTree'
+    #xml_bytes = f.getvalue()
     global  xmlRETURNTHIS
-    xmlRETURNTHIS = xml_bytes
+    #xmlRETURNTHIS = xml_bytes
+    xmlRETURNTHIS = XMLtree
+
     returnDef()
 
 
