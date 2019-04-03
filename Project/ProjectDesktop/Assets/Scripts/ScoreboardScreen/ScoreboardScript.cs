@@ -38,7 +38,7 @@ public class ScoreboardScript : MonoBehaviour
 
        
         XDocument xdoc = new XDocument(
-    new XDeclaration("1.0", "utf-8", "yes"),
+        new XDeclaration("1.0", "utf-8", "yes"),
         // This is the root of the document
         new XElement("ScoreList",
         from usr in users
@@ -72,25 +72,25 @@ public class ScoreboardScript : MonoBehaviour
             //XmlDeclaration xmldecl;
             //xmldecl = xm.CreateXmlDeclaration("1.0", "utf-8", "yes");
             //XmlElement root = xm.DocumentElement;
-
-            xm.LoadXml(received); // converts to xml
+            Debug.Log(received);
+            //xm.LoadXml(received); // converts to xml
             Debug.Log(xm);
             //xm.InsertBefore(xmldecl, root);
-
+            Debug.Log(sr);
             xm.Save("newList.xml");// saves xml file 
-          string doc2 = xm.ToString();
-            Debug.Log(doc2);
+            string doc2 = xm.ToString();
+            //Debug.Log(doc2.ToString());
             Debug.Log("1!!");
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("results"));
+            //XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("Player"));
             Debug.Log("2!!");
-            StringReader stringReader = new StringReader(doc2);
-            stringReader.Read(); // skip BOM
+            //StringReader stringReader = new StringReader(doc2);
+           // stringReader.Read(); // skip BOM
             Debug.Log("3!!");
-            List<Users> Users = (List<Users>)serializer.Deserialize(stringReader);
-            Debug.Log("object!!");
-            Debug.Log(Users.ToString());
-            Debug.Log("object^^");
-            Debug.Log("1!!");
+            //List<Users> Users = (List<Users>)serializer.Deserialize(stringReader);
+           // Debug.Log("object!!");
+           // Debug.Log(Users.ToString());
+           // Debug.Log("object^^");
+           // Debug.Log("1!!");
             /* XmlSerializer serializer = new XmlSerializer(typeof(List<Users>));
            Debug.Log("2!!");
            using (FileStream stream = File.OpenRead("ScoreList.xml"))

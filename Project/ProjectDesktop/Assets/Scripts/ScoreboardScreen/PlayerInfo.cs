@@ -21,8 +21,9 @@ public class PlayerInfo : MonoBehaviour
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(new StringReader(xmlData));
 
-        string xmlPathPattern = "//ScoreList/Player";
+        string xmlPathPattern = "//newList/Player";
         XmlNodeList myNodeList = xmlDoc.SelectNodes(xmlPathPattern);
+            
 
 
 
