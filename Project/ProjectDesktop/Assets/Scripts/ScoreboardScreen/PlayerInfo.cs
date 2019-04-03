@@ -18,13 +18,21 @@ public class PlayerInfo : MonoBehaviour
 
     void parseXmlFile(string xmlData)
     {
+        string totVal = "";
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(new StringReader(xmlData));
 
-        string xmlPathPattern = "//ScoreList/Player";
+        string xmlPathPattern = "//newList/Player";
         XmlNodeList myNodeList = xmlDoc.SelectNodes(xmlPathPattern);
+        foreach (XmlNode node in myNodeList)
+        {
+            XmlNode UserName = node.FirstChild;
+            XmlNode Score = UserName.NextSibling;
+            XmlNode Rank = Score.NextSibling;
 
 
-
+            totVal += " " + UserName.InnerXml + " " + Score.InnerXml + " " + Rank.InnerXml;
+            uiText.text = totVal;
+        }
     }
 }

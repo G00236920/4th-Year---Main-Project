@@ -38,7 +38,7 @@ public class ScoreboardScript : MonoBehaviour
 
        
         XDocument xdoc = new XDocument(
-    new XDeclaration("1.0", "utf-8", "yes"),
+        new XDeclaration("1.0", "utf-8", "yes"),
         // This is the root of the document
         new XElement("ScoreList",
         from usr in users

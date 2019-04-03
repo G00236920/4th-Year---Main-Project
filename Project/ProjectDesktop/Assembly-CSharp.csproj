@@ -78,6 +78,7 @@
      <Compile Include="Assets\Scripts\ScoreboardScreen\ScoreboardScript.cs" />
      <None Include="Assets\AssetStoreContent\Oculus Hands\LICENSE.txt" />
      <None Include="Assets\Fonts\OpenSans\FontLicense.txt" />
+     <None Include="Assets\Scripts\ScoreboardScreen\newList.xml" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/jono-/Desktop/4th-Year---Main-Project/Project/ProjectDesktop/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
