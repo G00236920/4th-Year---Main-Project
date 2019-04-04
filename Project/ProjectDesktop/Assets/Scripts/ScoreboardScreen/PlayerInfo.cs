@@ -24,15 +24,14 @@ public class PlayerInfo : MonoBehaviour
 
         string xmlPathPattern = "//newList/Player";
         XmlNodeList myNodeList = xmlDoc.SelectNodes(xmlPathPattern);
-<<<<<<< HEAD
             
-=======
+
         foreach (XmlNode node in myNodeList)
         {
             XmlNode UserName = node.FirstChild;
             XmlNode Score = UserName.NextSibling;
             XmlNode Rank = Score.NextSibling;
->>>>>>> 9f6f62e76e04e25b0d733608af7a4b1f269b22d0
+ 
 
 
             totVal += " " + UserName.InnerXml + " " + Score.InnerXml + " " + Rank.InnerXml;

@@ -47,7 +47,10 @@ public class ScoreboardScript : MonoBehaviour
             new XAttribute("Score", usr.Score)
 
             )));
-        xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
+        // xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
+        Debug.Log("xdoc below");
+        Debug.Log(xdoc);
+        Debug.Log("string below");
         String doc = xdoc.ToString(); // converts doc to string
         Debug.Log(doc);
         String SERVER_IP = "52.18.149.174";// addresss of server
@@ -72,13 +75,15 @@ public class ScoreboardScript : MonoBehaviour
             //XmlDeclaration xmldecl;
             //xmldecl = xm.CreateXmlDeclaration("1.0", "utf-8", "yes");
             //XmlElement root = xm.DocumentElement;
+            Debug.Log("received below");
             Debug.Log(received);
             //xm.LoadXml(received); // converts to xml
+            Debug.Log("xm below");
             Debug.Log(xm);
             //xm.InsertBefore(xmldecl, root);
-            Debug.Log(sr);
-            xm.Save("newList.xml");// saves xml file 
-            string doc2 = xm.ToString();
+           // Debug.Log(sr);
+            //xm.Save("newList.xml");// saves xml file 
+            //string doc2 = xm.ToString();
             //Debug.Log(doc2.ToString());
             Debug.Log("1!!");
             //XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("Player"));
