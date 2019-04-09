@@ -56,13 +56,16 @@ def writeToDB(playerNames,playerScore):
     
 def rankDB(playerNames):
     playerRank = []
-    
+    #creates a MySQLConnection with the port, userName, password, host and Db name stored in it. 
     con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
 
+    #passes the sql connection to myCursor 
     cursor = con.cursor(buffered=True)
+    # passes this query to the DB and stores results in rank 
     cursor.execute ("SELECT Player, Score ,RANK() OVER (ORDER BY Score DESC) world_rank FROM results ;")
     rank = cursor.fetchall() 
 
+    #adds the players rank to the playerRank list. 
     index = [x for x, y in enumerate(rank) if y[0] == playerNames[0]]
     index = int("".join(map(str, index)))
     playerRank.append(rank[index])
@@ -80,21 +83,30 @@ def rankDB(playerNames):
     playerRank.append(rank[index])
     
     cursor.close()
+    #closes the connection
     con.close()
+    #Calls the def getPlayersInfoFromDB and passes playerNames,playerRank
     getPlayersInfoFromDB(playerNames,playerRank)
 
 def getPlayersInfoFromDB(playerNames,playerRank):
+    #create empty list called playerScore
     playerScore = []
+    #try's to connect to DB and retrieve records
     try:
+        #creates a MySQLConnection with the port, userName, password, host and Db name stored in it. 
         con = mysql.connector.connect(port=5004,user='root',password='password',host='localhost',database='scoreboard')
+        #List of playerNames 
         records_to_select = [ (playerNames[0]) ,
                             (playerNames[1]),
                             (playerNames[2]) ,
                             (playerNames[3]) 
                             ]
+        #Sql query to run                    
         sql_select_query = " SELECT Score FROM results WHERE  Player = %s ; "
         
+        #passes the sql connection to myCursor  
         myCursor = con.cursor(buffered=True)
+        #excutes the sql query with the players name added to it. 
         myCursor.execute(sql_select_query, (records_to_select[0], ))
         record = myCursor.fetchone()
         
@@ -107,20 +119,23 @@ def getPlayersInfoFromDB(playerNames,playerRank):
         myCursor.execute(sql_select_query, (records_to_select[3], ))
         record = myCursor.fetchone()
         #print (myCursor.rowcount, "Record  successfully retrived results table")
-        
+    #if theres an error goes here and prints to console 
     except mysql.connector.Error as error :
          print("Failed Selecting record from results table {}".format(error))
-    
+    #closes myCursor
     myCursor.close()
-
+    #closes the connection
     con.close()
+    #callls writetoXML def and passes the playerRank list
     writeToXML(playerRank)
 
 def writeToXML(playerRank):
-
+    #sets the root element to ScoreList
     root = ET.Element("ScoreList")
     root = ET.SubElement(root,"ScoreList")
+    #list of strings
     types = "UserName", "Score","Rank"
+    #for loop that adds the players UserName, Score, Rank as childern of the player
     for j in range(len( playerRank)):
         usr = ET.SubElement(root,"Player")
         for i in range(3):
@@ -131,20 +146,21 @@ def writeToXML(playerRank):
     #Creteas an XML element
     XMLtree = ET.ElementTree(root )    
     #Creates f as a BytesIO()
-    #f = BytesIO()
+    f = BytesIO()
     #writes to f instead of a file so it can add the heading  
-    #XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
-    xmlstr = ElementTree.tostring(et, encoding='utf8', method='xml')##Test code need to change fix TypeError: a bytes-like object is required, not 'ElementTree'
-    #xml_bytes = f.getvalue()
+    XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
+    #xmlstr = ElementTree.tostring(et, encoding='utf8', method='xml')##Test code need to change fix TypeError: a bytes-like object is required, not 'ElementTree'
+    xml_bytes = f.getvalue()
+    #creates  global xmlRETURNTHIS used to store xml_bytes(Used as issue with returning a variable after going through multiple definitions)
     global  xmlRETURNTHIS
-    #xmlRETURNTHIS = xml_bytes
-    xmlRETURNTHIS = XMLtree
+    xmlRETURNTHIS = xml_bytes
+    #xmlRETURNTHIS = XMLtree
 
-    returnDef()
+    #returnDef()
 
 
 def returnDef():
-
+    #created global as issue with returning from a def called mutiple times 
     global  xmlRETURNTHIS
     return xmlRETURNTHIS
 
