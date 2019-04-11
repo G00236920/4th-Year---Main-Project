@@ -77,34 +77,63 @@ public class ScoreboardScript : MonoBehaviour
             //XmlElement root = xm.DocumentElement;
             Debug.Log("received below");
             Debug.Log(received);
-            //xm.LoadXml(received); // converts to xml
+            xm.LoadXml(received); // converts to xml
             Debug.Log("xm below");
             Debug.Log(xm);
-            //xm.InsertBefore(xmldecl, root);
-           // Debug.Log(sr);
-            //xm.Save("newList.xml");// saves xml file 
+
+            xm.Save("newList.xml");// saves xml file 
+            //https://www.google.com/search?ei=BEavXPTbN8PhxgOMz4n4Ag&q=write+xml+file+unity+&oq=write+xml+file+unity+&gs_l=psy-ab.3..0i22i30.17146.23984..24516...0.0..0.117.1300.20j1......0....1..gws-wiz.......0i71j35i39j0i131j0j0i67j0i131i67j0i20i263._0tmMOCxygM#kpvalbx=1
+            /*
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("Player"));
+            FileStream stream = new FileStream(Application.dataPath + "scores.xml", FileMode.Create);
+            serializer.Serialize(stream, xm);
+            stream.Close();
+            Debug.Log(Application.dataPath);
+           */
             //string doc2 = xm.ToString();
             //Debug.Log(doc2.ToString());
             Debug.Log("1!!");
-            //XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("Player"));
+           // XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("Player"));
             Debug.Log("2!!");
             //StringReader stringReader = new StringReader(doc2);
            // stringReader.Read(); // skip BOM
             Debug.Log("3!!");
-            //List<Users> Users = (List<Users>)serializer.Deserialize(stringReader);
-           // Debug.Log("object!!");
-           // Debug.Log(Users.ToString());
+           // List<Users> Users = (List<Users>)serializer.Deserialize(stringReader);
+            //Debug.Log("object!!");
+            //Debug.Log(Users.ToString());
            // Debug.Log("object^^");
            // Debug.Log("1!!");
-            /* XmlSerializer serializer = new XmlSerializer(typeof(List<Users>));
-           Debug.Log("2!!");
-           using (FileStream stream = File.OpenRead("ScoreList.xml"))
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>),new XmlRootAttribute("ScoreList"));
+          
+           using (FileStream stream = File.OpenRead("newList.xml"))
            {
-               Debug.Log("3!!");
-               List<Users> dezerializedList = (List<Users>)serializer.Deserialize(stream);
-               Debug.Log("4!!");
-               Debug.Log(dezerializedList);
-           }*/
+                StreamReader reader = new StreamReader(stream);
+                string text = reader.ReadToEnd();
+                Debug.Log("AHHHHH " + text);
+
+
+                stream.Seek(0, SeekOrigin.Begin);//reset stream to start of  
+
+                Debug.Log("4!!");
+                List<Users> users2;
+
+                users2 = (List<Users>)serializer.Deserialize(stream); 
+                //List<Users> users2 = (List<Users>)serializer.Deserialize(stream);
+                //List<Product> productList = (List<Product>)serializer.Deserialize(stringReader);
+                Debug.Log(stream);
+                Debug.Log("5!!");
+              
+               
+                int size = users2.Count;
+               Debug.Log("Count " + size);
+               //Debug.Log(dezerializedList.ToString());
+                foreach ( Users user in  users2)
+                {
+                    Debug.Log(users2.ToString());
+                    Debug.Log("6!!");
+                }
+                Debug.Log("7!!");
+            }
 
         }// if
 
