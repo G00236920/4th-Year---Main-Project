@@ -134,10 +134,10 @@ def writeToXML(playerRank):
     root = ET.Element("ScoreList")
     root = ET.SubElement(root,"ScoreList")
     #list of strings
-    types = "UserName", "Score","Rank"
+    types = "Username", "Score","Rank"
     #for loop that adds the players UserName, Score, Rank as childern of the player
     for j in range(len( playerRank)):
-        usr = ET.SubElement(root,"Player")
+        usr = ET.SubElement(root,"Users")
         for i in range(3):
             info = ET.SubElement(usr,types[i])
             info.text = str(playerRank[j][i])
@@ -149,6 +149,7 @@ def writeToXML(playerRank):
     f = BytesIO()
     #writes to f instead of a file so it can add the heading  
     XMLtree.write(f ,encoding='utf-8', xml_declaration=True )
+    XMLtree.write("f.xml" ,encoding='utf-8', xml_declaration=True )
     #xmlstr = ElementTree.tostring(et, encoding='utf8', method='xml')##Test code need to change fix TypeError: a bytes-like object is required, not 'ElementTree'
     xml_bytes = f.getvalue()
     #creates  global xmlRETURNTHIS used to store xml_bytes(Used as issue with returning a variable after going through multiple definitions)
