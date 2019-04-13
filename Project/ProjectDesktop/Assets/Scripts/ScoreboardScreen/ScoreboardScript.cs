@@ -11,6 +11,8 @@ using System.Xml.Serialization;
 using UnityEngine;
 public class ScoreboardScript : MonoBehaviour
 {
+    
+
 
     public void ButtonClicked()
     {
@@ -36,6 +38,7 @@ public class ScoreboardScript : MonoBehaviour
             Debug.Log("Username : " + UserName.Username + " Score  : " + UserName.Score);
 
         }// prints object to cnsole for debug purposes
+        Debug.Log(users);
         int size = users.Count;
         Debug.Log("Count of first object : " + size);// prints count of object to console for debug purposes
 
@@ -83,7 +86,7 @@ public class ScoreboardScript : MonoBehaviour
 
             using (FileStream stream = File.OpenRead("newList.xml"))// opens file 
             {
-                StreamReader reader = new StreamReader(stream);// reads in file
+                //StreamReader reader = new StreamReader(stream);// reads in file
                 //string text = reader.ReadToEnd();//reads to end of file
 
 
@@ -97,6 +100,7 @@ public class ScoreboardScript : MonoBehaviour
 
                 foreach (Users UserName in users2)
                 {
+                    string Text = "     ";
                     Debug.Log("Username : " + UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score);
 
                 }// prints object to cnsole for debug purposes
@@ -123,7 +127,7 @@ public class ScoreboardScript : MonoBehaviour
 
 
 }// ScoreBoard
-
+ [Serializable]
 public class Users
 {
     public string Username { get; set; }
