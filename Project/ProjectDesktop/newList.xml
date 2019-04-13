@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ScoreList>
-  <Player>
-    <UserName>Ray</UserName>
-    <Score>3801</Score>
+  <Users>
+    <Username>Ray</Username>
+    <Score>3971</Score>
     <Rank>4</Rank>
-  </Player>
-  <Player>
-    <UserName>John</UserName>
-    <Score>7601</Score>
+  </Users>
+  <Users>
+    <Username>John</Username>
+    <Score>7941</Score>
     <Rank>3</Rank>
-  </Player>
-  <Player>
-    <UserName>Mike</UserName>
-    <Score>11401</Score>
+  </Users>
+  <Users>
+    <Username>Mike</Username>
+    <Score>11911</Score>
     <Rank>2</Rank>
-  </Player>
-  <Player>
-    <UserName>Flan</UserName>
-    <Score>76001</Score>
+  </Users>
+  <Users>
+    <Username>Flan</Username>
+    <Score>79401</Score>
     <Rank>1</Rank>
-  </Player>
+  </Users>
 </ScoreList>

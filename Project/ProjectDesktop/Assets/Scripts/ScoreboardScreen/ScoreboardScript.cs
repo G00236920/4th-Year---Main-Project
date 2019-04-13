@@ -126,10 +126,12 @@ public class ScoreboardScript : MonoBehaviour
                
                 int size = users2.Count;
                Debug.Log("Count " + size);
-               //Debug.Log(dezerializedList.ToString());
-                foreach ( Users user in  users2)
+               //Debug.Log("Users2 " + users2.Username.ToString());
+                foreach ( Users UserName in  users2)
                 {
-                    Debug.Log(users2.ToString());
+                    Debug.Log("Username :"+UserName.Username);
+                    Debug.Log("Rank :"+UserName.Rank);
+                    Debug.Log("Score  :"+UserName.Score);
                     Debug.Log("6!!");
                 }
                 Debug.Log("7!!");
