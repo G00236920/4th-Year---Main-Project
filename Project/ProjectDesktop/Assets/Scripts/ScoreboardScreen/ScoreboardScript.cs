@@ -9,36 +9,46 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UI;
 public class ScoreboardScript : MonoBehaviour
 {
+
+    public Text dets1Text;
+    //public Text dets2Text;
     
-
-
     public void ButtonClicked()
     {
         SendTest();
 
     }
 
-    public static void SendTest()
+    public  void SendTest()
     {
+        //RectTransform rectTransform;
+        //rectTransform = dets1Text.GetComponent<RectTransform>();
+        //rectTransform.localPosition = new Vector3(0, 0, 0);
+        //rectTransform.sizeDelta = new Vector2(600, 200);
+
         List<Users> users = new List<Users>() {
     new Users() { Username = "Ray", Score = 10 },
     new Users() { Username = "John", Score = 20 },
     new Users() { Username = "Mike", Score = 30},
     new Users() { Username = "Flan", Score = 200},
-    new Users() { Username = "Kevin", Score = 40},
-    new Users() { Username = "boss", Score = 100000},
-    new Users() { Username = "Sam", Score = 80}
+    new Users() { Username = "Kevin", Score = 40}
+    //new Users() { Username = "boss", Score = 100000},
+    // new Users() { Username = "Sam", Score = 80}
 
     };// Users
 
         foreach (Users UserName in users)
         {
-            Debug.Log("Username : " + UserName.Username + " Score  : " + UserName.Score);
-
+            Debug.Log(UserName.Username + "          " + UserName.Score);
+       
+            dets1Text.text += "    "+ UserName.Username + "       " + UserName.Score+ "\n";
+          
         }// prints object to cnsole for debug purposes
-        Debug.Log(users);
+
+        //Debug.Log(Username);
         int size = users.Count;
         Debug.Log("Count of first object : " + size);// prints count of object to console for debug purposes
 
@@ -100,9 +110,11 @@ public class ScoreboardScript : MonoBehaviour
 
                 foreach (Users UserName in users2)
                 {
-                    string Text = "     ";
+                   
                     Debug.Log("Username : " + UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score);
 
+                    //dets2Text.text += UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score;
+                    
                 }// prints object to cnsole for debug purposes
 
             }
