@@ -14,14 +14,19 @@ public class ScoreboardScript : MonoBehaviour
 {
 
     public Text dets1Text;
-    //public Text dets2Text;
+    public Text dets2Text;
     
     public void ButtonClicked()
+    {
+        //SendTest();
+
+    }
+
+    void Start ()
     {
         SendTest();
 
     }
-
     public  void SendTest()
     {
         //RectTransform rectTransform;
@@ -44,7 +49,7 @@ public class ScoreboardScript : MonoBehaviour
         {
             Debug.Log(UserName.Username + "          " + UserName.Score);
        
-            dets1Text.text += "    "+ UserName.Username + "       " + UserName.Score+ "\n";
+            dets1Text.text += "    " + UserName.Username + "       " + UserName.Score+ "\n";
           
         }// prints object to cnsole for debug purposes
 
@@ -113,7 +118,7 @@ public class ScoreboardScript : MonoBehaviour
                    
                     Debug.Log("Username : " + UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score);
 
-                    //dets2Text.text += UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score;
+                    dets2Text.text += UserName.Username + " Rank : " + UserName.Rank + " Score : " + UserName.Score + "\n";
                     
                 }// prints object to cnsole for debug purposes
 
