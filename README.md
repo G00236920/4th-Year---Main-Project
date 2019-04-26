@@ -2,6 +2,10 @@
 
 ## High level Overview of the back-end of the project
 ![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Overview.PNG "Logo Title Text 1")
+
+### Running The Application
+Open Unity and navigate to the file named project desktop. Once the project opens in Unity, highlight the LoginScreen.unity scene and then click on play. Alternatively you can go to the build settings where you can build an executable file on your machine. Once built you can run the file on your machine.
+
 ### Starting Screen
 When the program starts the user will be presented with a login screen.
 If the user has an account, they can login.
@@ -9,13 +13,13 @@ If they don't have an account, they may create an account.
 If they don't have an account and do not wish to create an account, they cannot continue and must exit.
 
 ### Login Back-end
-
+![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/LoginSystem.PNG "Login System")
 ### Account Creation screen
 Choosing to create an account will open a new screen.
-When creating an account, the User will input a Username and a password which must be confirmed also.
+When creating an account, the User will input a Username and a password which must also be confirmed.
 
 ### Account Creation Back-end
-
+![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/CreateAccountActual.PNG "New User")
 ### Match Making Screen
 When the user logs in, then will be presented with a screen that allows them to enter the IP address of the game they wish to join.
 They have an option to host and play a game.
@@ -24,7 +28,7 @@ There will be an option for the user to choose a match from a list of currently 
 Matches will be removed from this list as they are started.
 
 ### Match Making Back-end
-
+![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/redisMatch.PNG "Match Maker")
 ### Lobby Screen
 Once a user selects the server they want to join or choose to host a server, They will be entered into a lobby were they can see other players who will participate in the game.
 When all players have clicked "Join" or have exited the game, the game will start.
@@ -37,7 +41,7 @@ Each player will receive points for completing the race with the first place rec
 These scores will be stored and updated per game.
 
 ### Scoreboard Back-end
-
+![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/MariaDBPic.PNG "Scoreboard")
 
 ## High level Overview of the implementation of the project
 ![alt text](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/breakdown.PNG "Logo Title Text 1")
@@ -54,4 +58,4 @@ Users will be able to play using a PC or combination of PC and Oculus Rift.
 <a href="https://www.youtube.com/watch?v=k3aIN3uwrOE" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video2.PNG)</a>
 
 #### Final video of the Project
-<a href="" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video3.PNG)</a>
+<a href="https://www.youtube.com/watch?v=KTDnKlW1BTs" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video3.PNG)</a>
