@@ -159,7 +159,7 @@ public class PlayerConnectionObject : NetworkBehaviour
         int r = 0;
         int l = 0;
         
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 100; i++){
 
 			switch(Random.Range(0, 5)){
 				case 1:
