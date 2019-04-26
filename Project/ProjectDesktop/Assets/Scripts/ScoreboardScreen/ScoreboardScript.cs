@@ -7,35 +7,55 @@ using System.Net.Sockets;
 using System.Text;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 public class ScoreboardScript : MonoBehaviour
 {
-    const int PORT_NO1 = 5005;
-    const int PORT_NO2 = 5006;
 
-    private IPAddress SERVER_IP = IPAddress.Parse("52.18.149.174");// ip of vm
-                                                                   //private IPAddress SERVER_IP = IPAddress.Parse("127.0.0.1"); 
-
+    public Text dets1Text;
+    public Text dets2Text;
+    
     public void ButtonClicked()
     {
-        SendTest();
-       
+        //SendTest();
 
+
+    void Start ()
+    {
+        SendTest();
 
     }
-    public static void SendTest()
+    public  void SendTest()
     {
+        //RectTransform rectTransform;
+        //rectTransform = dets1Text.GetComponent<RectTransform>();
+        //rectTransform.localPosition = new Vector3(0, 0, 0);
+        //rectTransform.sizeDelta = new Vector2(600, 200);
+
         List<Users> users = new List<Users>() {
-     new Users() { Username = "Ray", Score = 10}
-    ,new Users() { Username = "John", Score = 20}
-    ,new Users() { Username = "Mike", Score = 30}
-    ,new Users() { Username = "Flan", Score = 200}
-    ,new Users() { Username = "Kevin", Score = 40}
-    ,new Users() { Username = "Sam", Score = 80}
+    new Users() { Username = "Ray", Score = 10 },
+    new Users() { Username = "John", Score = 20 },
+    new Users() { Username = "Mike", Score = 30},
+    new Users() { Username = "Flan", Score = 200},
+    new Users() { Username = "Kevin", Score = 40}
+    //new Users() { Username = "boss", Score = 100000},
+    // new Users() { Username = "Sam", Score = 80}
 
     };// Users
 
-        XDocument xdoc1 = new XDocument(
-    new XDeclaration("1.0", "utf-8 ", " "),
+        foreach (Users UserName in users)
+        {
+            Debug.Log(UserName.Username + "          " + UserName.Score);
+       
+            dets1Text.text += "    " + UserName.Username + "       " + UserName.Score+ "\n";
+          
+        }// prints object to cnsole for debug purposes
+
+        //Debug.Log(Username);
+        int size = users.Count;
+        Debug.Log("Count of first object : " + size);// prints count of object to console for debug purposes
+
+        XDocument xdoc = new XDocument(
+        new XDeclaration("1.0", "utf-8", "yes"),
         // This is the root of the document
         new XElement("ScoreList",
         from usr in users
@@ -43,21 +63,15 @@ public class ScoreboardScript : MonoBehaviour
             new XElement("Player", new XAttribute("UserName", usr.Username),
             new XAttribute("Score",usr.Score)
 
-            )));
-       
-        xdoc1.Save("ScoreList.xml"); // creates file in project/desktopProject
-        string doc = xdoc1.ToString(); // converts xml to string
-       
-        Debug.Log(doc);
+            )));// creates xml of object for sending to database
+        // xdoc.Save("ScoreList.xml"); // creates file in project/desktopProject
 
-        String SERVER_IP = "52.18.149.174"; // address of server
-       // String local_ip = ""; // local address for testing 
-        Int32 Port = 5005; // open port on server
-        //Int32 Port2 = 5006;
-        Debug.Log("Connected 3");
-        // Use this for initialization
+        String doc = xdoc.ToString(); // converts doc to string
 
-        Debug.Log("Connected 4");
+        String SERVER_IP = "52.18.149.174";// addresss of server
+        Int32 Port = 5005;// port server is listening on
+
+
         TcpClient tcpClient = new TcpClient(SERVER_IP, Port);
 
         // Uses the GetStream public method to return the NetworkStream.
@@ -65,46 +79,46 @@ public class ScoreboardScript : MonoBehaviour
 
         if (netStream.CanWrite)
         {
-            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);
-            netStream.Write(sendBytes, 0, sendBytes.Length);
+            Byte[] sendBytes = Encoding.UTF8.GetBytes(doc);// converts doc to byte array
+            netStream.Write(sendBytes, 0, sendBytes.Length);// sends to server
 
-            StreamReader streamReader;
-            NetworkStream networkStream;
 
-            TcpListener tcpListener = new TcpListener(5555);
-            tcpListener.Start();
+            StreamReader sr = new StreamReader(tcpClient.GetStream(), Encoding.ASCII);// receives data from server
+            string received = sr.ReadToEnd(); // converts to string 
 
-            Debug.Log("The Server has started on port 5555");
-            Debug.Log(" test 1");
-            Socket serverSocket = tcpListener.AcceptSocket();
-            Debug.Log(" test 1");
-            try
+            XmlDocument xm = new XmlDocument();
+
+            xm.LoadXml(received); // converts to xml
+
+            xm.Save("newList.xml");// saves xml file 
+                                   //https://www.google.com/search?ei=BEavXPTbN8PhxgOMz4n4Ag&q=write+xml+file+unity+&oq=write+xml+file+unity+&gs_l=psy-ab.3..0i22i30.17146.23984..24516...0.0..0.117.1300.20j1......0....1..gws-wiz.......0i71j35i39j0i131j0j0i67j0i131i67j0i20i263._0tmMOCxygM#kpvalbx=1
+
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Users>), new XmlRootAttribute("ScoreList"));
+
+            using (FileStream stream = File.OpenRead("newList.xml"))// opens file 
             {
-                Debug.Log("Client connected");
-                networkStream = new NetworkStream(serverSocket);
+                //StreamReader reader = new StreamReader(stream);// reads in file
+                //string text = reader.ReadToEnd();//reads to end of file
 
-                streamReader = new StreamReader(networkStream);
-                var buffer = new List<byte>();
 
-                while (serverSocket.Available > 0)
+
+                stream.Seek(0, SeekOrigin.Begin);//resets stream to start of file  
+
+                List<Users> users2 = (List<Users>)serializer.Deserialize(stream);// converts xml back to an object
+                Debug.Log("========================");
+                int size2 = users2.Count;
+                Debug.Log("Count of new object with rank : " + size2);
+
+                foreach (Users UserName in users2)
                 {
-                    var currByte  = new Byte[1];
-                    var byteCounter = serverSocket.Receive(currByte, currByte.Length, SocketFlags.None);
+                   
+                    Debug.Log("Username : " + UserName.Username + " Rank : " + UserName.Rank + " Score  : " + UserName.Score);
+
+                    dets2Text.text += UserName.Username + " Rank : " + UserName.Rank + " Score : " + UserName.Score + "\n";
                     
-                    if(byteCounter.Equals(1))
-                    {
-                        buffer.Add(currByte[0]);
-                    }
-                }
-                Debug.Log(buffer.ToArray());
+                }// prints object to cnsole for debug purposes
 
-                 serverSocket.Close();
-               // Console.Read();
-            }
-
-            catch (Exception ex)
-            {
-               // Console.WriteLine(ex);
             }
 
         }// if
@@ -201,7 +215,7 @@ public class ScoreboardScript : MonoBehaviour
     }
     */
 }// ScoreBoard
-
+ [Serializable]
 public class Users
 {
     public string Username { get; set; }

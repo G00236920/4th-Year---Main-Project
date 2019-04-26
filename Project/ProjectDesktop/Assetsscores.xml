@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ScoreList>
+  <Player>
+    <UserName>Ray</UserName>
+    <Score>3441</Score>
+    <Rank>4</Rank>
+  </Player>
+  <Player>
+    <UserName>John</UserName>
+    <Score>6881</Score>
+    <Rank>3</Rank>
+  </Player>
+  <Player>
+    <UserName>Mike</UserName>
+    <Score>10321</Score>
+    <Rank>2</Rank>
+  </Player>
+  <Player>
+    <UserName>Flan</UserName>
+    <Score>68801</Score>
+    <Rank>1</Rank>
+  </Player>
+</ScoreList>
