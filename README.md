@@ -47,8 +47,11 @@ Users will be able to play using a PC or combination of PC and Oculus Rift.
 
 ### Videos of the Project
 
+#### Early stages of the Project
 <a href="https://www.youtube.com/watch?v=S0ocfDS3oMQ&t" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video1.PNG)</a>
 
+#### Early meeting and demo of the Project
 <a href="https://www.youtube.com/watch?v=k3aIN3uwrOE" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video2.PNG)</a>
 
+#### Final video of the Project
 <a href="" rel="some text">![Video Demo of App](https://github.com/Michael-Kidd/4th-Year---Main-Project/blob/master/images/Video3.PNG)</a>
