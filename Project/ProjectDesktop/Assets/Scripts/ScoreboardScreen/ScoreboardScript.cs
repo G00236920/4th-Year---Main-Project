@@ -8,6 +8,9 @@ using System.Text;
 using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Xml;
+using System.Xml.Serialization;
+
 public class ScoreboardScript : MonoBehaviour
 {
 
@@ -17,13 +20,8 @@ public class ScoreboardScript : MonoBehaviour
     public void ButtonClicked()
     {
         //SendTest();
-
-
-    void Start ()
-    {
-        SendTest();
-
     }
+
     public  void SendTest()
     {
         //RectTransform rectTransform;
@@ -221,6 +219,8 @@ public class Users
     public string Username { get; set; }
 
     public int Score { get; set; }
+    
+    public int Rank { get; set; }
     
 }//Users
 
